@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0a0a0a;
+  --color-paper: #fafafa;
+  --color-accent: #d4f34a;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Helvetica, Arial, sans-serif;
+
+  --radius-card: 2rem;
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-ink);
+  }
+
+  /* Smooth horizontal carousel without a visible scrollbar */
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ---------- scroll reveal (opacity + translateY only) ---------- */
+
+[data-reveal] {
+  --reveal-y: 24px;
+  opacity: 0;
+  transform: translate3d(0, var(--reveal-y), 0);
+  transition-property: opacity, transform;
+  transition-duration: 900ms;
+  transition-timing-function: cubic-bezier(0.22, 0.7, 0.24, 1);
+  will-change: opacity, transform;
+}
+
+[data-reveal][data-shown="true"] {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ---------- hero logo marquee ---------- */
+
+.marquee-track {
+  animation: marquee 42s linear infinite;
+  will-change: transform;
+}
+
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+
+/* ---------- carousel progress, driven by scroll position (no JS) ---------- */
+
+@supports (animation-timeline: view()) {
+  .work-timeline {
+    view-timeline-name: --work;
+    view-timeline-axis: inline;
+  }
+
+  .work-progress {
+    animation: work-progress-grow linear both;
+    animation-timeline: --work;
+    transform-origin: left center;
+  }
+
+  @keyframes work-progress-grow {
+    from {
+      transform: scaleX(0.18);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+}
