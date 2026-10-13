@@ -18,7 +18,7 @@ export default function Industries() {
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-10">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:gap-12">
           <Reveal>
-            <Eyebrow n="05" label={industries.eyebrow} />
+            <Eyebrow n="06" label={industries.eyebrow} />
             <h2 className="mt-6 text-[clamp(2.1rem,5.6vw,4rem)] font-semibold leading-[0.95] tracking-[-0.035em]">
               <span className="block">{industries.heading[0]}</span>
               <span className="block">

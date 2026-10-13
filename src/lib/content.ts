@@ -36,7 +36,7 @@ export type Industry = {
 export const navLinks: NavLink[] = [
   { label: "Work", href: "#work" },
   { label: "Services", href: "#expertise", caret: true },
-  { label: "About", href: "#studio" },
+  { label: "About", href: "#clients" },
   { label: "Insights", href: "#process" },
   { label: "Contact", href: "#contact" },
 ];

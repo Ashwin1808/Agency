@@ -17,7 +17,7 @@ export default function Expertise() {
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-10">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
           <Reveal className="lg:col-span-5">
-            <Eyebrow n="03" label={expertise.eyebrow} />
+            <Eyebrow n="04" label={expertise.eyebrow} />
             <h2 className="mt-6 text-[clamp(2.1rem,5.6vw,4rem)] font-semibold leading-[0.95] tracking-[-0.035em]">
               {expertise.heading.map((line, i) => (
                 <span key={line} className="block">

@@ -101,7 +101,7 @@ export default function Clients() {
       <div className="relative mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-10">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-12">
           <Reveal>
-            <Eyebrow n="06" label={clients.eyebrow} />
+            <Eyebrow n="02" label={clients.eyebrow} />
             <h2 className="mt-6 text-[clamp(2.1rem,5.4vw,3.9rem)] font-semibold leading-[0.95] tracking-[-0.035em]">
               <span className="block">{clients.heading[0]}</span>
               <span className="block">

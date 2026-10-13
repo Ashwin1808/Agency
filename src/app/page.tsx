@@ -14,11 +14,11 @@ export default function Page() {
       <Nav />
       <main>
         <Hero />
+        <Clients />
         <Work />
         <Expertise />
         <Process />
         <Industries />
-        <Clients />
         <Cta />
       </main>
       <Footer />
