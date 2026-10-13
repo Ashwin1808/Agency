@@ -76,6 +76,12 @@
     transition: none !important;
   }
 
+  /* the work rail should sit still rather than drift on its own */
+  .work-marquee,
+  .work-progress {
+    animation: none !important;
+  }
+
   *,
   *::before,
   *::after {
@@ -97,26 +103,40 @@
   animation-play-state: paused;
 }
 
-/* ---------- carousel progress, driven by scroll position (no JS) ---------- */
+/* ---------- work carousel: continuous auto-scroll, no JS ---------- */
 
-@supports (animation-timeline: view()) {
-  .work-timeline {
-    view-timeline-name: --work;
-    view-timeline-axis: inline;
+@keyframes work-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
   }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
 
-  .work-progress {
-    animation: work-progress-grow linear both;
-    animation-timeline: --work;
-    transform-origin: left center;
+@keyframes work-progress-fill {
+  from {
+    transform: scaleX(0.04);
   }
+  to {
+    transform: scaleX(1);
+  }
+}
 
-  @keyframes work-progress-grow {
-    from {
-      transform: scaleX(0.18);
-    }
-    to {
-      transform: scaleX(1);
-    }
-  }
+.work-marquee {
+  animation: work-marquee 48s linear infinite;
+  will-change: transform;
+}
+
+.work-progress {
+  transform-origin: left center;
+  animation: work-progress-fill 48s linear infinite;
+}
+
+/* pause while the reader is hovering or keyboard-focused on the rail */
+.work-viewport:hover .work-marquee,
+.work-viewport:hover .work-progress,
+.work-viewport:focus-within .work-marquee,
+.work-viewport:focus-within .work-progress {
+  animation-play-state: paused;
 }
