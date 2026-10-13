@@ -86,7 +86,7 @@ export default function Clients() {
   return (
     <section
       id="clients"
-      className="relative overflow-hidden border-t border-black/[0.06] bg-[#f6f2e9] py-20 lg:py-28"
+      className="relative overflow-hidden border-t border-black/[0.06] bg-[#f6f2e9] py-24 lg:py-32"
     >
       {/* soft corner glow + arc */}
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">

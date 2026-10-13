@@ -67,7 +67,7 @@ export default function Work() {
   const last = work.cards[work.cards.length - 1].id;
 
   return (
-    <section id="work" className="relative overflow-hidden bg-ink py-20 text-paper lg:py-28">
+    <section id="work" className="relative overflow-hidden bg-ink py-24 text-paper lg:py-32">
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-10">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)_auto] lg:items-end lg:gap-8">
           <div>

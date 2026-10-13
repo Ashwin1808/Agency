@@ -13,7 +13,7 @@ const icons = {
 
 export default function Expertise() {
   return (
-    <section id="expertise" className="relative overflow-hidden bg-paper py-20 lg:py-28">
+    <section id="expertise" className="relative overflow-hidden bg-paper py-24 lg:py-32">
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-10">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
           <Reveal className="lg:col-span-5">

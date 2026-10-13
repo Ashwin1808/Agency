@@ -22,7 +22,7 @@ export default function Process() {
   return (
     <section
       id="process"
-      className="border-t border-black/[0.05] bg-[#f1f2f2] pb-20 lg:pb-28"
+      className="border-t border-black/[0.05] bg-[#f1f2f2] py-24 lg:py-32"
     >
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-10">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:gap-12">

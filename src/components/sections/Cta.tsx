@@ -8,7 +8,7 @@ export default function Cta() {
     <section id="contact" className="relative isolate overflow-hidden bg-ink">
       <StudioPhoto />
 
-      <div className="relative mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-10 lg:py-32">
+      <div className="relative mx-auto max-w-[1440px] px-5 py-24 sm:px-8 lg:px-10 lg:py-32">
         <div className="flex flex-col gap-14 lg:flex-row lg:items-center lg:justify-between lg:gap-16">
           <Reveal>
             <Eyebrow n="07" label={cta.eyebrow} dark />

@@ -20,7 +20,7 @@ const socialIcons = {
 export default function Footer() {
   return (
     <footer id="studio" className="border-t border-white/10 bg-ink text-white">
-      <div className="mx-auto flex max-w-[1440px] flex-col gap-8 px-5 py-10 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:gap-6 lg:px-10">
+      <div className="mx-auto flex max-w-[1440px] flex-col gap-8 px-5 py-12 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:gap-6 lg:px-10 lg:py-14">
         <div className="flex items-center gap-3">
           <Logo className="text-[21px] leading-none" />
           <span className="h-4 w-px bg-white/20" aria-hidden="true" />
