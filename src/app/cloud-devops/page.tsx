@@ -4,6 +4,7 @@ import { cta, hero, process, services, tools, work, why } from "@/lib/devops";
 import Logo from "@/components/marks/Logo";
 import Reveal from "@/components/Reveal";
 import { Gyroscope, SpaceBackdrop } from "@/components/marks/Space";
+import ToolLogo from "@/components/marks/ToolLogos";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -35,19 +36,6 @@ const serviceIcons = {
 } as const;
 
 const markIcons = { trend: Trend, lock: Lock, scale: Scale } as const;
-
-const toolIcons: Record<string, typeof CloudMark> = {
-  AWS: CloudMark,
-  Kubernetes: Container,
-  Docker: Container,
-  Terraform: Server,
-  "GitHub Actions": Scale,
-  "Argo CD": Scale,
-  Helm: Container,
-  Prometheus: Chart,
-  Grafana: Chart,
-  Trivy: Shield,
-};
 
 const whyIcons = [Sparkle, Shield, Container, Trend] as const;
 
@@ -89,6 +77,67 @@ function Console() {
   );
 }
 
+/** Compact pipeline rail that lives inside the header. */
+function HeaderRail() {
+  const stops = ["commit", "build", "scan", "ship", "reconcile"];
+  return (
+    <div className="header-rail hidden xl:block" aria-hidden="true">
+      <span className="rail-track" />
+      <span className="rail-packet" />
+      {stops.map((stop, i) => (
+        <span key={stop} className="header-node" style={{ left: `${10 + i * 20}%` }}>
+          <span
+            className="rail-node-dot absolute -inset-[1px] rounded-full"
+            style={{ "--i": i } as React.CSSProperties}
+          />
+          <span className="header-node-label">{stop}</span>
+        </span>
+      ))}
+    </div>
+  );
+}
+
+/** Centred commit-to-production flow with a packet travelling stage to stage. */
+function FlowLine() {
+  return (
+    <div
+      style={{ "--flow": "18s", "--flow-step": "4.5s" } as React.CSSProperties}
+      className="relative"
+    >
+      <span className="flow-track" aria-hidden="true" />
+      <span className="flow-packet" aria-hidden="true" />
+
+      <ol className="grid grid-cols-5">
+        {process.steps.map((step, i) => (
+          <li key={step.n} className="flex flex-col items-center px-2 text-center">
+            <span
+              className="flow-node"
+              style={{ "--i": i } as React.CSSProperties}
+            >
+              <span className="text-[10px] font-medium tabular-nums text-accent/85">
+                {step.n}
+              </span>
+            </span>
+            <span className="mt-5 text-[15px] font-semibold tracking-[-0.02em] text-white">
+              {step.label}
+            </span>
+            <span className="mt-2 max-w-[190px] text-[12px] leading-[1.55] text-white/40">
+              {step.note}
+            </span>
+          </li>
+        ))}
+      </ol>
+
+      <div className="mt-10 flex flex-wrap items-center justify-center gap-x-2.5 border-t border-white/[0.07] pt-4 font-mono text-[11.5px]">
+        <span className="text-white/30">$</span>
+        <span className="text-white/50">deploy --watch</span>
+        <span className="stage-readout text-accent" />
+        <span className="text-white/25">→ prod</span>
+      </div>
+    </div>
+  );
+}
+
 export default function CloudDevOpsPage() {
   return (
     <>
@@ -97,6 +146,10 @@ export default function CloudDevOpsPage() {
           <Link href="/" aria-label="nexly home">
             <Logo className="text-[21px] leading-none text-white" />
           </Link>
+          <div className="hidden flex-1 justify-center xl:flex">
+            <HeaderRail />
+          </div>
+
           <nav className="hidden items-center gap-7 lg:flex" aria-label="Section">
             {[
               ["Services", "#services"],
@@ -238,40 +291,24 @@ export default function CloudDevOpsPage() {
         <section id="process" className="relative scroll-mt-24 overflow-hidden">
           <div className="relative mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-10 lg:py-32">
             <Reveal>
-              <div className="grid gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16">
-                <div>
+              <div className="mx-auto max-w-[760px] text-center">
+                <div className="flex justify-center">
                   <Badge>{process.badge}</Badge>
-                  <h2 className="mt-6 max-w-[360px] text-[clamp(1.9rem,4.4vw,3.2rem)] font-semibold leading-[1] tracking-[-0.035em] text-white">
-                    {process.heading.map((line) => (
-                      <span key={line} className="block">
-                        {line}
-                      </span>
-                    ))}
-                  </h2>
-                  <p className="mt-6 max-w-[330px] text-[14px] leading-[1.7] text-white/50">
-                    {process.lede}
-                  </p>
                 </div>
+                <h2 className="mt-6 text-[clamp(1.9rem,4.4vw,3.2rem)] font-semibold leading-[1.02] tracking-[-0.035em] text-white">
+                  {process.heading.map((line) => (
+                    <span key={line} className="block">
+                      {line}
+                    </span>
+                  ))}
+                </h2>
+                <p className="mx-auto mt-5 max-w-[520px] text-[14px] leading-[1.7] text-white/50">
+                  {process.lede}
+                </p>
+              </div>
 
-                <div className="relative pt-3">
-                  <span className="timeline-line" aria-hidden="true" />
-                  <ol className="grid gap-y-10 sm:grid-cols-2 lg:grid-cols-5">
-                    {process.steps.map((step, i) => (
-                      <li key={step.n} className="flex flex-col items-center text-center">
-                        <span className="timeline-dot" style={{ animationDelay: `${i * 0.9}s` }} />
-                        <p className="mt-6 text-[11px] font-medium tabular-nums text-accent/85">
-                          {step.n}
-                        </p>
-                        <p className="mt-1.5 text-[15px] font-semibold tracking-[-0.015em] text-white">
-                          {step.label}
-                        </p>
-                        <p className="mt-1.5 max-w-[180px] text-[11.5px] leading-[1.5] text-white/40">
-                          {step.note}
-                        </p>
-                      </li>
-                    ))}
-                  </ol>
-                </div>
+              <div className="mt-16">
+                <FlowLine />
               </div>
             </Reveal>
           </div>
@@ -289,18 +326,20 @@ export default function CloudDevOpsPage() {
               </h2>
             </Reveal>
 
-            <ul className="mt-10 flex flex-wrap gap-2.5">
-              {tools.map((tool, i) => {
-                const Icon = toolIcons[tool] ?? Server;
-                return (
-                  <Reveal key={tool} delay={i * 35} distance={10}>
-                    <li className="space-chip">
-                      <Icon className="h-4 w-4 text-accent/80" strokeWidth={1.5} />
+            <ul className="mt-10 grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-5">
+              {tools.map((tool, i) => (
+                <Reveal key={tool} delay={i * 40} distance={12}>
+                  <li className="flex h-full items-center gap-3 rounded-[0.9rem] border border-white/[0.08] bg-white/[0.025] px-4 py-4 transition-colors duration-300 hover:border-accent/35 hover:bg-accent/[0.04]">
+                    <ToolLogo
+                      name={tool}
+                      className="h-6 w-6 shrink-0 text-white/70"
+                    />
+                    <span className="text-[12.5px] font-medium leading-tight text-white/70">
                       {tool}
-                    </li>
-                  </Reveal>
-                );
-              })}
+                    </span>
+                  </li>
+                </Reveal>
+              ))}
             </ul>
           </div>
         </section>
@@ -427,14 +466,86 @@ export default function CloudDevOpsPage() {
           </div>
 
           <footer className="relative border-t border-white/[0.06]">
-            <div className="mx-auto flex max-w-[1440px] flex-col gap-4 px-5 py-9 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-10">
-              <Logo className="text-[19px] leading-none text-white" />
-              <Link
-                href="/"
-                className="text-[11.5px] text-white/30 transition-colors hover:text-white/70"
-              >
-                nexly · Product Design Studio
-              </Link>
+            <div className="relative mx-auto max-w-[1440px] px-5 py-14 sm:px-8 lg:px-10 lg:py-20">
+              <div className="grid gap-12 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)] lg:gap-10">
+                <div>
+                  <div className="flex items-center gap-3">
+                    <Logo className="text-[21px] leading-none text-white" />
+                    <span className="footer-orbit" aria-hidden="true">
+                      <span className="footer-orbit-ring" />
+                      <span className="footer-orbit-ring footer-orbit-ring-2" />
+                      <span className="footer-orbit-dot" />
+                    </span>
+                  </div>
+                  <p className="mt-5 max-w-[280px] text-[13px] leading-[1.7] text-white/45">
+                    Infrastructure that gets out of the way, so the product stays the point.
+                  </p>
+                  <p className="mt-6 inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/[0.06] px-3 py-1.5 font-mono text-[10.5px] text-emerald-300/85">
+                    <span className="footer-signal h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                    cluster healthy · drift none
+                  </p>
+                </div>
+
+                <nav aria-label="Practice">
+                  <h3 className="text-[10.5px] font-medium uppercase tracking-[0.16em] text-white/30">
+                    Practice
+                  </h3>
+                  <ul className="mt-5 space-y-3">
+                    {["Cloud infrastructure", "CI/CD automation", "Containerization", "Observability"].map(
+                      (item) => (
+                        <li key={item}>
+                          <a href="#services" className="footer-link text-[13px]">
+                            {item}
+                          </a>
+                        </li>
+                      ),
+                    )}
+                  </ul>
+                </nav>
+
+                <nav aria-label="Stack">
+                  <h3 className="text-[10.5px] font-medium uppercase tracking-[0.16em] text-white/30">
+                    Stack
+                  </h3>
+                  <ul className="mt-5 space-y-3">
+                    {["AWS", "Kubernetes", "Terraform", "Argo CD"].map((item) => (
+                      <li key={item} className="flex items-center gap-2.5">
+                        <ToolLogo name={item} className="h-4 w-4 text-white/40" />
+                        <span className="text-[13px] text-white/45">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+
+                <nav aria-label="Studio">
+                  <h3 className="text-[10.5px] font-medium uppercase tracking-[0.16em] text-white/30">
+                    Studio
+                  </h3>
+                  <ul className="mt-5 space-y-3">
+                    {[
+                      ["Our work", "#work"],
+                      ["Process", "#process"],
+                      ["Why us", "#why"],
+                      ["Back to nexly", "/"],
+                    ].map(([label, href]) => (
+                      <li key={label}>
+                        <a href={href} className="footer-link text-[13px]">
+                          {label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+              </div>
+
+              <div className="mt-14 flex flex-col gap-4 border-t border-white/[0.06] pt-7 sm:flex-row sm:items-center sm:justify-between">
+                <p className="text-[11.5px] text-white/25">
+                  © {new Date().getFullYear()} nexly · Product Design Studio
+                </p>
+                <p className="font-mono text-[11px] text-white/25">
+                  built with care · shipped with CI/CD
+                </p>
+              </div>
             </div>
           </footer>
         </section>
