@@ -351,3 +351,12 @@ export function Plus(props: IconProps) {
   );
 }
 
+export function Quote(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="M9.5 6.5C7 8 5.5 10.3 5.5 13v4.5h5V12H8c0-1.8.7-3.3 2.2-4.6Z" />
+      <path d="M18.5 6.5C16 8 14.5 10.3 14.5 13v4.5h5V12H17c0-1.8.7-3.3 2.2-4.6Z" />
+    </Svg>
+  );
+}
+
