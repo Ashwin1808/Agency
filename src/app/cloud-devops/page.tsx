@@ -76,6 +76,177 @@ function Node({ label, tone, sub }: { label: string; tone: string; sub?: string 
   );
 }
 
+type ProjectData = (typeof projects)[number];
+
+function Chain({
+  steps,
+  tone,
+}: {
+  steps: { label: string; sub: string }[];
+  tone: string;
+}) {
+  return (
+    <ol className="flex flex-wrap items-stretch gap-2">
+      {steps.map((step, i) => (
+        <li key={step.label} className="flex items-center gap-2">
+          <div
+            className="min-w-0 rounded-lg border px-3 py-2.5"
+            style={{
+              borderColor: `${tone}33`,
+              background: `${tone}0d`,
+            }}
+          >
+            <p className="whitespace-nowrap text-[12px] font-semibold text-white">
+              {step.label}
+            </p>
+            <p className="mt-0.5 text-[10px] leading-tight text-white/45">{step.sub}</p>
+          </div>
+          {i < steps.length - 1 ? (
+            <ArrowRight className="h-3.5 w-3.5 shrink-0 text-white/25" />
+          ) : null}
+        </li>
+      ))}
+    </ol>
+  );
+}
+
+function Architecture({ project }: { project: ProjectData }) {
+  const tone = project.accent;
+  return (
+    <div className="space-y-6">
+      {/* application topology */}
+      <Panel className="p-6 lg:p-7">
+        <h4 className="text-[10.5px] font-medium uppercase tracking-[0.16em] text-white/35">
+          Application architecture
+        </h4>
+
+        <div className="mt-5 flex items-center gap-2">
+          {["User", "Internet"].map((step) => (
+            <span
+              key={step}
+              className="rounded-lg border border-white/10 bg-white/[0.03] px-3 py-2 text-[12px] font-medium text-white/70"
+            >
+              {step}
+            </span>
+          ))}
+        </div>
+
+        <div
+          className="mt-3 rounded-2xl border border-dashed p-4"
+          style={{ borderColor: `${tone}44`, background: `${tone}08` }}
+        >
+          <p className="text-[11.5px] font-semibold text-white/80">
+            {project.slug === "ridematch-ai" ? "AWS EC2 · Docker Compose" : "Application layer · Kubernetes"}
+          </p>
+          <div className="mt-3 grid gap-2 sm:grid-cols-3">
+            {project.services.map((s) => (
+              <div
+                key={s.name}
+                className="rounded-lg border border-white/[0.09] bg-white/[0.03] px-3 py-2.5"
+              >
+                <p className="text-[12.5px] font-semibold text-white">{s.name}</p>
+                <p className="mt-0.5 text-[10.5px] text-white/45">{s.tech}</p>
+                <p className="mt-1 font-mono text-[10px]" style={{ color: tone }}>
+                  :{s.port}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {"externals" in project && project.externals.length ? (
+            <div className="mt-3 grid gap-2 sm:grid-cols-2">
+              {project.externals.map((e) => (
+                <div
+                  key={e.name}
+                  className="rounded-lg border border-white/[0.07] bg-white/[0.015] px-3 py-2"
+                >
+                  <p className="text-[12px] font-medium text-white/75">{e.name}</p>
+                  <p className="text-[10px] text-white/40">{e.role}</p>
+                </div>
+              ))}
+            </div>
+          ) : null}
+        </div>
+      </Panel>
+
+      {/* ci chain */}
+      <Panel className="p-6 lg:p-7">
+        <h4 className="text-[10.5px] font-medium uppercase tracking-[0.16em] text-white/35">
+          CI/CD pipeline
+        </h4>
+        <div className="mt-5">
+          <Chain steps={project.ciChain} tone={tone} />
+        </div>
+
+        {"gitopsChain" in project && project.gitopsChain ? (
+          <>
+            <div className="mt-6 flex items-center gap-2 text-white/25">
+              <span className="h-px flex-1 bg-white/[0.08]" />
+              <ArrowRight className="h-3.5 w-3.5" />
+              <span className="h-px flex-1 bg-white/[0.08]" />
+            </div>
+            <h4 className="mt-6 text-[10.5px] font-medium uppercase tracking-[0.16em] text-white/35">
+              GitOps deployment
+            </h4>
+            <div className="mt-5">
+              <Chain steps={project.gitopsChain} tone={tone} />
+            </div>
+          </>
+        ) : null}
+      </Panel>
+
+      {/* infra + observability */}
+      <div className="grid gap-6 sm:grid-cols-2">
+        <Panel className="p-6">
+          <h4 className="text-[10.5px] font-medium uppercase tracking-[0.16em] text-white/35">
+            Terraform
+          </h4>
+          <ul className="mt-4 space-y-1.5">
+            {project.terraform.map((t) => (
+              <li key={t} className="flex items-center gap-2 text-[12.5px] text-white/60">
+                <span className="h-1 w-1 rounded-full" style={{ background: tone }} />
+                {t}
+              </li>
+            ))}
+          </ul>
+        </Panel>
+
+        <Panel className="p-6">
+          <h4 className="text-[10.5px] font-medium uppercase tracking-[0.16em] text-white/35">
+            Observability
+          </h4>
+          <ul className="mt-4 space-y-1.5">
+            {project.observability.map((o) => (
+              <li key={o.name} className="flex items-baseline gap-2 text-[12.5px]">
+                <span className="text-white/75">{o.name}</span>
+                <span className="text-[11px] text-white/35">{o.role}</span>
+              </li>
+            ))}
+          </ul>
+        </Panel>
+      </div>
+
+      {"k8sPrepared" in project && project.k8sPrepared ? (
+        <Panel className="p-6">
+          <h4 className="text-[10.5px] font-medium uppercase tracking-[0.16em] text-white/35">
+            Kubernetes prepared
+          </h4>
+          <ul className="mt-4 flex flex-wrap gap-1.5">
+            {project.k8sPrepared.map((k) => (
+              <li
+                key={k}
+                className="rounded-md border border-white/[0.08] bg-white/[0.02] px-2.5 py-1 text-[11px] text-white/55"
+              >
+                {k}
+              </li>
+            ))}
+          </ul>
+        </Panel>
+      ) : null}
+    </div>
+  );
+}
+
 export default function CloudDevOpsPage() {
   return (
     <>
@@ -388,19 +559,25 @@ export default function CloudDevOpsPage() {
               </h2>
             </Reveal>
 
-            <div className="mt-12 grid gap-6 lg:grid-cols-2">
+            <div className="mt-12 space-y-6">
               {projects.map((project, i) => (
                 <Reveal key={project.slug} delay={i * 110} distance={26}>
-                  <Panel className="h-full">
+                  <Panel>
                     <div
                       className="h-1 w-full"
-                      style={{ background: project.accent, boxShadow: `0 0 22px ${project.accent}` }}
+                      style={{
+                        background: project.accent,
+                        boxShadow: `0 0 22px ${project.accent}`,
+                      }}
                     />
                     <div className="p-7 lg:p-9">
                       <div className="flex flex-wrap items-baseline justify-between gap-3">
-                        <h3 className="text-[clamp(1.3rem,2.4vw,1.8rem)] font-semibold tracking-[-0.03em] text-white">
-                          {project.name}
-                        </h3>
+                        <div>
+                          <h3 className="text-[clamp(1.3rem,2.4vw,1.9rem)] font-semibold tracking-[-0.03em] text-white">
+                            {project.name}
+                          </h3>
+                          <p className="mt-2 text-[13px] italic text-white/45">{project.tagline}</p>
+                        </div>
                         <span
                           className="rounded-full border px-3 py-1 font-mono text-[10.5px]"
                           style={{
@@ -412,42 +589,75 @@ export default function CloudDevOpsPage() {
                           {project.deploy}
                         </span>
                       </div>
-                      <p className="mt-2.5 text-[13px] italic text-white/45">{project.tagline}</p>
-                      <p className="mt-5 max-w-[520px] text-[14px] leading-[1.65] text-white/65">
+
+                      <p className="mt-5 max-w-[640px] text-[14px] leading-[1.65] text-white/65">
                         {project.summary}
                       </p>
 
-                      <div className="mt-8">
-                        <h4 className="text-[10.5px] font-medium uppercase tracking-[0.16em] text-white/35">
-                          Built
-                        </h4>
-                        <ul className="mt-3 space-y-2">
-                          {project.highlights.map((h) => (
-                            <li key={h} className="flex gap-2.5 text-[13px] leading-[1.5] text-white/70">
-                              <Check
-                                className="mt-0.5 h-3.5 w-3.5 shrink-0"
-                                style={{ color: project.accent }}
-                              />
-                              {h}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                      <ul className="mt-5 flex flex-wrap gap-1.5">
+                        {project.badges.map((b) => (
+                          <li
+                            key={b}
+                            className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-[11px] font-medium text-white/60"
+                          >
+                            {b}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
 
-                      <div className="mt-8">
-                        <h4 className="text-[10.5px] font-medium uppercase tracking-[0.16em] text-white/35">
-                          Infrastructure
-                        </h4>
-                        <ul className="mt-3 flex flex-wrap gap-1.5">
-                          {project.infra.map((t) => (
-                            <li
-                              key={t}
-                              className="rounded-md border border-white/[0.08] bg-white/[0.02] px-2.5 py-1 text-[11px] text-white/55"
-                            >
-                              {t}
-                            </li>
-                          ))}
-                        </ul>
+                    <div className="border-t border-white/[0.07] p-7 lg:p-9">
+                      <div className="grid gap-8 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-10">
+                        {"features" in project && project.features ? (
+                          <div>
+                            <h4 className="text-[10.5px] font-medium uppercase tracking-[0.16em] text-white/35">
+                              Key features
+                            </h4>
+                            <ul className="mt-4 space-y-2">
+                              {project.features.map((f) => (
+                                <li
+                                  key={f}
+                                  className="flex gap-2.5 text-[13px] leading-[1.5] text-white/70"
+                                >
+                                  <Check
+                                    className="mt-0.5 h-3.5 w-3.5 shrink-0"
+                                    style={{ color: project.accent }}
+                                  />
+                                  {f}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ) : (
+                          <div>
+                            <h4 className="text-[10.5px] font-medium uppercase tracking-[0.16em] text-white/35">
+                              Verified results
+                            </h4>
+                            <ul className="mt-4 space-y-2">
+                              {[
+                                "0 bugs and 0 vulnerabilities in SonarQube, 1 code smell",
+                                "Immutable Git SHA image tags in place of latest",
+                                "Envoy Gateway routing / and /api, verified with curl",
+                                "HPA scaling 2 to 5 replicas on a 70% CPU target",
+                                "Prometheus to Alertmanager alert flow tested",
+                                "GitOps Argo CD with sync, self-heal and prune",
+                              ].map((f) => (
+                                <li
+                                  key={f}
+                                  className="flex gap-2.5 text-[13px] leading-[1.5] text-white/70"
+                                >
+                                  <Check
+                                    className="mt-0.5 h-3.5 w-3.5 shrink-0"
+                                    style={{ color: project.accent }}
+                                  />
+                                  {f}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+
+                        <Architecture project={project} />
                       </div>
                     </div>
                   </Panel>
