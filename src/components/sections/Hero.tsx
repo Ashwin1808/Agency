@@ -33,8 +33,8 @@ export default function Hero() {
     <section id="top" className="relative overflow-hidden bg-paper">
       <HeroWash />
 
-      <div className="relative mx-auto max-w-[1440px] px-5 pb-24 pt-28 sm:px-8 lg:px-10 lg:pb-32 lg:pt-36">
-        <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-4">
+      <div className="relative mx-auto max-w-[1440px] px-5 pb-28 pt-28 sm:px-8 lg:px-10 lg:pb-40 lg:pt-36">
+        <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-10 xl:gap-16">
           <div className="relative z-10">
             <Eyebrow n="01" label={hero.eyebrow} />
 

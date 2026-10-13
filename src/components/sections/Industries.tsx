@@ -35,7 +35,7 @@ export default function Industries() {
           </Reveal>
         </div>
 
-        <ul className="mt-12 grid grid-cols-3 gap-x-4 gap-y-8 sm:grid-cols-6 lg:mt-16">
+        <ul className="mt-14 grid grid-cols-3 gap-x-4 gap-y-8 sm:grid-cols-6 lg:mt-24">
           {industries.items.map((item, i) => {
             const Icon = icons[item.icon];
             return (

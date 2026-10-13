@@ -48,7 +48,7 @@ export default function Process() {
           </Reveal>
         </div>
 
-        <div className="relative mt-14 lg:mt-20">
+        <div className="relative mt-16 lg:mt-28">
           {/* wavy connector, aligned to the grid centres (10/30/50/70/90%) */}
           <svg
             className="pointer-events-none absolute inset-x-0 top-0 hidden h-[72px] w-full md:block"
