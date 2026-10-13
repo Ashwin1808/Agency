@@ -50,14 +50,11 @@ export function SpaceBackdrop() {
 }
 
 /** Spinning 3D wireframe gyroscope with orbiting satellites. */
-export function Gyroscope() {
+export function Gyroscope({ className = "" }: { className?: string }) {
   return (
-    <div className="gyro-scene relative mx-auto aspect-square w-full max-w-[460px] select-none">
+    <div className={`gyro-scene relative aspect-square w-full ${className}`}>
       <div className="gyro absolute inset-0">
-        <span
-          className="gyro-ring"
-          style={{ transform: "rotateX(72deg)" }}
-        />
+        <span className="gyro-ring" style={{ transform: "rotateX(72deg)" }} />
         <span
           className="gyro-ring gyro-ring-2"
           style={{ transform: "rotateY(72deg)" }}
@@ -82,9 +79,7 @@ export function Gyroscope() {
           <span
             key={`${sat.r}-${sat.t}`}
             className="gyro-sat"
-            style={{
-              transform: `rotate(${sat.t}deg) translateX(${sat.r}%)`,
-            }}
+            style={{ transform: `rotate(${sat.t}deg) translateX(${sat.r}%)` }}
           />
         ))}
       </div>
@@ -95,45 +90,50 @@ export function Gyroscope() {
 /** Commit-to-production rail with a packet travelling stage to stage. */
 export function PipelineRail({
   steps,
-  seconds = 16,
+  seconds = 20,
 }: {
   steps: { n: string; label: string; note: string }[];
   seconds?: number;
 }) {
-  const last = steps.length - 1;
   return (
-    <div style={{ "--rail": `${seconds}s`, "--step": `${seconds / steps.length}s` } as CSSProperties}>
-      <div className="relative h-[132px]">
+    <div
+      style={
+        {
+          "--rail": `${seconds}s`,
+          // four gaps between five nodes across 80% of the track
+          "--step": `${seconds / 4}s`,
+        } as CSSProperties
+      }
+    >
+      <div className="relative pt-9">
         <span className="rail-track" />
         <span className="rail-packet" />
 
-        {steps.map((s, i) => (
-          <div
-            key={s.n}
-            className="absolute top-0"
-            style={{ left: `${(i / last) * 100}%` }}
-          >
-            <span
-              className="rail-node-dot -ml-[3.5px] block h-[7px] w-[7px] rounded-full bg-white/25"
-              style={{ "--i": i } as CSSProperties}
-            />
-            <div
-              className={`mt-5 w-[128px] ${
-                i === last ? "-translate-x-full" : ""
-              } ${i === 0 ? "" : i === last ? "" : ""}`}
-            >
-              <p className="text-[10px] font-medium tabular-nums text-white/30">{s.n}</p>
-              <p className="mt-1.5 text-[14px] font-semibold tracking-[-0.01em] text-white">
+        {/* grid keeps every node centred under its own column, so the
+            packet and the labels cannot drift out of alignment */}
+        <ol className="grid grid-cols-5">
+          {steps.map((s, i) => (
+            <li key={s.n} className="flex flex-col items-center text-center">
+              <span
+                className="rail-node-dot -mt-[3.5px] block h-[7px] w-[7px] rounded-full bg-white/25"
+                style={{ "--i": i } as CSSProperties}
+              />
+              <span className="mt-5 block text-[10px] font-medium tabular-nums text-white/30">
+                {s.n}
+              </span>
+              <span className="mt-2 block text-[15px] font-semibold tracking-[-0.015em] text-white">
                 {s.label}
-              </p>
-              <p className="mt-1 text-[11px] leading-tight text-white/35">{s.note}</p>
-            </div>
-          </div>
-        ))}
+              </span>
+              <span className="mt-1.5 block text-[11.5px] leading-tight text-white/35">
+                {s.note}
+              </span>
+            </li>
+          ))}
+        </ol>
       </div>
 
       {/* live stage readout, kept in step with the travelling packet */}
-      <div className="flex flex-wrap items-center gap-x-2.5 border-t border-white/[0.07] pt-4 font-mono text-[11.5px]">
+      <div className="mt-10 flex flex-wrap items-center gap-x-2.5 border-t border-white/[0.07] pt-4 font-mono text-[11.5px]">
         <span className="text-white/30">$</span>
         <span className="text-white/50">deploy --watch</span>
         <span className="stage-readout text-accent" />

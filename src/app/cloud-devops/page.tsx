@@ -79,9 +79,17 @@ export default function CloudDevOpsPage() {
         <SpaceBackdrop />
 
         {/* ============================ hero ============================ */}
-        <section className="relative">
-          <div className="mx-auto max-w-[1440px] px-5 pb-20 pt-16 sm:px-8 lg:px-10 lg:pb-24 lg:pt-24">
-            <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-8">
+        <section className="relative isolate overflow-hidden">
+          {/* large atmospheric 3D layer, behind the content */}
+          <div
+            className="pointer-events-none absolute -right-[18%] top-1/2 hidden w-[820px] -translate-y-1/2 opacity-[0.45] lg:block"
+            aria-hidden="true"
+          >
+            <Gyroscope />
+          </div>
+
+          <div className="relative mx-auto max-w-[1440px] px-5 pb-20 pt-16 sm:px-8 lg:px-10 lg:pb-24 lg:pt-24">
+            <div className="grid gap-12 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:items-center lg:gap-12">
               <div>
                 <div className="flex items-center gap-3">
                   <span className="h-px w-7 bg-white/20" aria-hidden="true" />
@@ -118,25 +126,26 @@ export default function CloudDevOpsPage() {
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
+
+                <dl className="mt-12 grid max-w-[520px] grid-cols-3 gap-6 border-t border-white/[0.08] pt-7">
+                  {hero.proof.map((item) => (
+                    <div key={item.label}>
+                      <dd className="text-[clamp(1.1rem,2vw,1.45rem)] font-semibold leading-none tracking-[-0.03em] text-white">
+                        {item.value}
+                      </dd>
+                      <dt className="mt-2.5 text-[10px] font-medium uppercase leading-[1.5] tracking-[0.12em] text-white/35">
+                        {item.label}
+                      </dt>
+                    </div>
+                  ))}
+                </dl>
               </div>
 
-              <div className="relative">
-                <Gyroscope />
-              </div>
+              {/* the console carries the right half, so the hero is never half empty */}
+              <Reveal delay={100} distance={22}>
+                <DeployConsole />
+              </Reveal>
             </div>
-
-            <dl className="mt-16 grid max-w-[560px] grid-cols-3 gap-6 lg:mt-20">
-              {hero.proof.map((item) => (
-                <div key={item.label} className="border-t border-white/10 pt-3.5">
-                  <dd className="text-[clamp(1.1rem,2vw,1.5rem)] font-semibold leading-none tracking-[-0.03em] text-white">
-                    {item.value}
-                  </dd>
-                  <dt className="mt-2.5 text-[10px] font-medium uppercase leading-[1.5] tracking-[0.12em] text-white/35">
-                    {item.label}
-                  </dt>
-                </div>
-              ))}
-            </dl>
           </div>
         </section>
 
@@ -160,26 +169,26 @@ export default function CloudDevOpsPage() {
             </Reveal>
 
             <Reveal delay={80} distance={20}>
-              <div className="pipeline-grid mt-14 overflow-hidden rounded-[1.5rem] border border-white/[0.07] px-6 py-10 lg:px-10">
+              <div className="pipeline-grid mt-12 overflow-hidden rounded-[1.5rem] border border-white/[0.07] px-6 py-12 lg:px-12">
                 <PipelineRail steps={path.steps} />
               </div>
             </Reveal>
 
             <Reveal delay={140}>
-              <div className="mt-6 grid gap-6 lg:grid-cols-2">
-                <DeployConsole />
-                <div className="grid gap-px overflow-hidden rounded-[1.25rem] border border-white/[0.07]">
-                  {observe.map((o) => (
-                    <div
-                      key={o.label}
-                      className="flex items-baseline justify-between gap-4 bg-white/[0.018] px-5 py-4"
-                    >
-                      <span className="text-[13px] font-medium text-white/80">{o.label}</span>
-                      <span className="text-[11.5px] text-white/35">{o.note}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <ul className="mt-6 grid gap-px overflow-hidden rounded-[1.25rem] border border-white/[0.07] sm:grid-cols-2 lg:grid-cols-3">
+                {observe.map((o) => (
+                  <li
+                    key={o.label}
+                    className="flex items-baseline justify-between gap-4 bg-white/[0.018] px-5 py-4"
+                  >
+                    <span className="flex items-center gap-2.5 text-[13px] font-medium text-white/80">
+                      <span className="h-1 w-1 rounded-full bg-accent/70" />
+                      {o.label}
+                    </span>
+                    <span className="text-[11.5px] text-white/35">{o.note}</span>
+                  </li>
+                ))}
+              </ul>
             </Reveal>
           </div>
         </section>
