@@ -7,3 +7,6 @@ build
 .env*
 next-env.d.ts
 tsconfig.tsbuildinfo
+
+# 300MB+ case-study deck; too large for git (GitHub caps at 100MB)
+design/*.pdf

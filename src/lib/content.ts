@@ -1,15 +1,5 @@
 export type NavLink = { label: string; href: string; caret?: boolean };
 
-export type WorkCard = {
-  id: string;
-  index: string;
-  total: string;
-  tag: string;
-  title: string;
-  desc: string;
-  art: "dashboard" | "ivr" | "fintech" | "web";
-};
-
 export type Service = {
   id: string;
   title: string;
@@ -62,53 +52,6 @@ export const work = {
   hints: ["Move to explore", "Hover to inspect", "Click to view"],
   tabs: ["All", "Banking", "Insurance", "Fintech", "Enterprise", "Web", "Others"],
   counter: "01 / 08",
-  cards: [
-    {
-      id: "work-1",
-      index: "02",
-      total: "08",
-      tag: "Enterprise",
-      title: "Enterprise Dashboards",
-      desc: "Turning complex data into clear decisions.",
-      art: "dashboard",
-    },
-    {
-      id: "work-2",
-      index: "01",
-      total: "08",
-      tag: "Customer Experience",
-      title: "Visual IVR",
-      desc: "Customer service made simple.",
-      art: "ivr",
-    },
-    {
-      id: "work-3",
-      index: "03",
-      total: "08",
-      tag: "Fintech",
-      title: "Fintech Journeys",
-      desc: "Designing financial products people actually understand.",
-      art: "fintech",
-    },
-    {
-      id: "work-4",
-      index: "05",
-      total: "08",
-      tag: "Web Experience",
-      title: "Insurance Experience",
-      desc: "Claims journeys built around real customer needs.",
-      art: "web",
-    },
-    {
-      id: "work-5",
-      index: "07",
-      total: "08",
-      tag: "Web Experience",
-      title: "Binance Experience",
-      desc: "A clearer way to trade digital assets.",
-      art: "web",
-    },
-  ] satisfies WorkCard[],
 };
 
 export const expertise = {

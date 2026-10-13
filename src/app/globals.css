@@ -78,8 +78,14 @@
 
   /* the work rail should sit still rather than drift on its own */
   .work-marquee,
-  .work-progress {
+  .work-progress,
+  .work-card,
+  .work-card::after {
     animation: none !important;
+  }
+
+  .work-card::after {
+    opacity: 0 !important;
   }
 
   *,
@@ -137,6 +143,61 @@
 .work-viewport:hover .work-marquee,
 .work-viewport:hover .work-progress,
 .work-viewport:focus-within .work-marquee,
-.work-viewport:focus-within .work-progress {
+.work-viewport:focus-within .work-progress,
+.work-viewport:hover .work-card,
+.work-viewport:focus-within .work-card {
   animation-play-state: paused;
+}
+
+/* ---------- travelling highlight ---------- */
+/* Every card runs the same 48s cycle, offset by one slot each, so a
+   single card is lit at a time and the light travels down the rail.
+   Slot = 48s / 10 cards = 4.8s, which keeps the light locked to the
+   card's actual position as the rail moves. */
+
+.work-card {
+  animation: work-card-edge 48s linear infinite;
+  animation-delay: calc(var(--n, 0) * -4.8s);
+}
+
+.work-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 2rem;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(255, 255, 255, 0.13), transparent 68%),
+    linear-gradient(to top, rgba(212, 243, 74, 0.07), transparent 55%);
+  animation: work-card-glow 48s linear infinite;
+  animation-delay: calc(var(--n, 0) * -4.8s);
+}
+
+@keyframes work-card-edge {
+  0%,
+  2% {
+    border-color: rgba(255, 255, 255, 0.11);
+  }
+  5% {
+    border-color: rgba(212, 243, 74, 0.85);
+  }
+  11%,
+  100% {
+    border-color: rgba(255, 255, 255, 0.11);
+  }
+}
+
+@keyframes work-card-glow {
+  0%,
+  1% {
+    opacity: 0;
+  }
+  4% {
+    opacity: 1;
+  }
+  12%,
+  100% {
+    opacity: 0;
+  }
 }
