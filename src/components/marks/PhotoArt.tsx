@@ -1,5 +1,76 @@
 import { expertise } from "@/lib/content";
 
+/** Soft periwinkle/cream wash + large arc behind the hero. */
+export function HeroBackdrop() {
+  return (
+    <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(112deg, #fbfbfd 0%, #f5f5f6 26%, #f1eee6 58%, #e6ecef 82%, #dbe4e9 100%)",
+        }}
+      />
+
+      {/* warm cream bloom behind the devices */}
+      <div
+        className="absolute right-[12%] top-[-10%] h-[86%] w-[58%]"
+        style={{
+          background:
+            "radial-gradient(closest-side, rgba(238,229,203,0.75), rgba(240,233,213,0.35) 58%, transparent 78%)",
+        }}
+      />
+
+      {/* cool blue-grey on the right */}
+      <div
+        className="absolute right-[-14%] top-[6%] h-[96%] w-[52%]"
+        style={{
+          background:
+            "radial-gradient(closest-side, rgba(198,214,223,0.7), rgba(208,221,228,0.3) 60%, transparent 80%)",
+        }}
+      />
+
+      {/* cool grey behind the headline */}
+      <div
+        className="absolute left-[-16%] top-[16%] h-[80%] w-[54%]"
+        style={{
+          background:
+            "radial-gradient(closest-side, rgba(228,231,234,0.65), transparent 76%)",
+        }}
+      />
+
+      {/* blurred green accent, bottom-left */}
+      <div
+        className="absolute -left-[8%] bottom-[-14%] h-[52%] w-[34%]"
+        style={{
+          background:
+            "radial-gradient(closest-side, rgba(203,216,152,0.55), rgba(203,216,152,0.18) 58%, transparent 78%)",
+        }}
+      />
+
+      {/* large soft arcs */}
+      <span
+        className="absolute rounded-full border border-white/90"
+        style={{ width: 1180, height: 1180, right: -300, top: -430 }}
+      />
+      <span
+        className="absolute rounded-full border border-white/60"
+        style={{ width: 900, height: 900, right: -60, top: -190 }}
+      />
+      <span
+        className="absolute rounded-full border border-white/45"
+        style={{ width: 640, height: 640, right: 120, top: 40 }}
+      />
+
+      {/* fade into the next section */}
+      <div
+        className="absolute inset-x-0 bottom-0 h-28"
+        style={{ background: "linear-gradient(to bottom, transparent, #fafafa)" }}
+      />
+    </div>
+  );
+}
+
 /** Sticky-note + wireframe stand-in for the expertise photo. */
 export function WireframePhoto() {
   return (
