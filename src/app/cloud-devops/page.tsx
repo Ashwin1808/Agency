@@ -3,7 +3,7 @@ import Link from "next/link";
 import { cta, hero, process, services, tools, work, why } from "@/lib/devops";
 import Logo from "@/components/marks/Logo";
 import Reveal from "@/components/Reveal";
-import { Gyroscope, SpaceBackdrop } from "@/components/marks/Space";
+import { Gyroscope, HeroSceneExport, SpaceBackdrop } from "@/components/marks/Space";
 import ToolLogo from "@/components/marks/ToolLogos";
 import {
   ArrowRight,
@@ -44,56 +44,6 @@ function Badge({ children }: { children: React.ReactNode }) {
     <span className="inline-flex items-center rounded-full border border-white/12 px-4 py-1.5 text-[10.5px] font-medium uppercase tracking-[0.16em] text-white/45">
       {children}
     </span>
-  );
-}
-
-function Console() {
-  return (
-    <div className="overflow-hidden rounded-[1.1rem] border border-white/[0.09] bg-[#06070e]/90 font-mono text-[11.5px] shadow-[0_30px_70px_-34px_rgba(0,0,0,0.95)]">
-      <div className="flex items-center gap-3 border-b border-white/[0.06] px-4 py-2.5">
-        <span className="flex gap-1.5">
-          <span className="h-2 w-2 rounded-full bg-white/10" />
-          <span className="h-2 w-2 rounded-full bg-white/10" />
-          <span className="h-2 w-2 rounded-full bg-white/10" />
-        </span>
-        <span className="text-white/25">~/prod</span>
-      </div>
-      <div className="space-y-1.5 px-4 py-4">
-        <p className="flex gap-2">
-          <span className="text-accent/70">&gt;</span>
-          <span className="text-white/75">kubectl apply -f infrastructure/</span>
-        </p>
-        <p className="flex gap-2 text-white/35">
-          <span>&nbsp;</span>
-          <span>Deploying...</span>
-        </p>
-        <p className="flex gap-2">
-          <span className="text-accent/70">&gt;</span>
-          <span className="text-white/70">All services are healthy</span>
-          <span className="text-accent">✓</span>
-        </p>
-      </div>
-    </div>
-  );
-}
-
-/** Compact pipeline rail that lives inside the header. */
-function HeaderRail() {
-  const stops = ["commit", "build", "scan", "ship", "reconcile"];
-  return (
-    <div className="header-rail hidden xl:block" aria-hidden="true">
-      <span className="rail-track" />
-      <span className="rail-packet" />
-      {stops.map((stop, i) => (
-        <span key={stop} className="header-node" style={{ left: `${10 + i * 20}%` }}>
-          <span
-            className="rail-node-dot absolute -inset-[1px] rounded-full"
-            style={{ "--i": i } as React.CSSProperties}
-          />
-          <span className="header-node-label">{stop}</span>
-        </span>
-      ))}
-    </div>
   );
 }
 
@@ -146,10 +96,6 @@ export default function CloudDevOpsPage() {
           <Link href="/" aria-label="nexly home">
             <Logo className="text-[21px] leading-none text-white" />
           </Link>
-          <div className="hidden flex-1 justify-center xl:flex">
-            <HeaderRail />
-          </div>
-
           <nav className="hidden items-center gap-7 lg:flex" aria-label="Section">
             {[
               ["Services", "#services"],
@@ -242,8 +188,8 @@ export default function CloudDevOpsPage() {
                 <div className="pointer-events-none absolute left-1/2 top-1/2 -z-0 w-[720px] -translate-x-1/2 -translate-y-1/2 opacity-70">
                   <Gyroscope />
                 </div>
-                <div className="relative z-10 ml-auto w-full max-w-[380px] space-y-3">
-                  <Console />
+                <div className="relative z-10 ml-auto w-full max-w-[430px]">
+                  <HeroSceneExport flow={hero.flow} terminal={hero.terminal} />
                 </div>
               </div>
             </div>
@@ -466,86 +412,32 @@ export default function CloudDevOpsPage() {
           </div>
 
           <footer className="relative border-t border-white/[0.06]">
-            <div className="relative mx-auto max-w-[1440px] px-5 py-14 sm:px-8 lg:px-10 lg:py-20">
-              <div className="grid gap-12 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)] lg:gap-10">
-                <div>
-                  <div className="flex items-center gap-3">
-                    <Logo className="text-[21px] leading-none text-white" />
-                    <span className="footer-orbit" aria-hidden="true">
-                      <span className="footer-orbit-ring" />
-                      <span className="footer-orbit-ring footer-orbit-ring-2" />
-                      <span className="footer-orbit-dot" />
-                    </span>
-                  </div>
-                  <p className="mt-5 max-w-[280px] text-[13px] leading-[1.7] text-white/45">
-                    Infrastructure that gets out of the way, so the product stays the point.
-                  </p>
-                  <p className="mt-6 inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/[0.06] px-3 py-1.5 font-mono text-[10.5px] text-emerald-300/85">
-                    <span className="footer-signal h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                    cluster healthy · drift none
-                  </p>
-                </div>
-
-                <nav aria-label="Practice">
-                  <h3 className="text-[10.5px] font-medium uppercase tracking-[0.16em] text-white/30">
-                    Practice
-                  </h3>
-                  <ul className="mt-5 space-y-3">
-                    {["Cloud infrastructure", "CI/CD automation", "Containerization", "Observability"].map(
-                      (item) => (
-                        <li key={item}>
-                          <a href="#services" className="footer-link text-[13px]">
-                            {item}
-                          </a>
-                        </li>
-                      ),
-                    )}
-                  </ul>
-                </nav>
-
-                <nav aria-label="Stack">
-                  <h3 className="text-[10.5px] font-medium uppercase tracking-[0.16em] text-white/30">
-                    Stack
-                  </h3>
-                  <ul className="mt-5 space-y-3">
-                    {["AWS", "Kubernetes", "Terraform", "Argo CD"].map((item) => (
-                      <li key={item} className="flex items-center gap-2.5">
-                        <ToolLogo name={item} className="h-4 w-4 text-white/40" />
-                        <span className="text-[13px] text-white/45">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </nav>
-
-                <nav aria-label="Studio">
-                  <h3 className="text-[10.5px] font-medium uppercase tracking-[0.16em] text-white/30">
-                    Studio
-                  </h3>
-                  <ul className="mt-5 space-y-3">
-                    {[
-                      ["Our work", "#work"],
-                      ["Process", "#process"],
-                      ["Why us", "#why"],
-                      ["Back to nexly", "/"],
-                    ].map(([label, href]) => (
-                      <li key={label}>
-                        <a href={href} className="footer-link text-[13px]">
-                          {label}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </nav>
-              </div>
-
-              <div className="mt-14 flex flex-col gap-4 border-t border-white/[0.06] pt-7 sm:flex-row sm:items-center sm:justify-between">
-                <p className="text-[11.5px] text-white/25">
-                  © {new Date().getFullYear()} nexly · Product Design Studio
-                </p>
-                <p className="font-mono text-[11px] text-white/25">
-                  built with care · shipped with CI/CD
+            <div className="mx-auto flex max-w-[1440px] flex-col gap-8 px-5 py-12 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-10">
+              <div>
+                <Logo className="text-[21px] leading-none text-white" />
+                <p className="mt-3 text-[12.5px] text-white/35">
+                  Infrastructure that gets out of the way.
                 </p>
               </div>
+
+              <nav className="flex flex-wrap items-center gap-x-7 gap-y-2" aria-label="Footer">
+                {[
+                  ["Services", "#services"],
+                  ["Process", "#process"],
+                  ["Work", "#work"],
+                  ["Studio", "/"],
+                ].map(([label, href]) => (
+                  <a key={label} href={href} className="footer-link text-[13px]">
+                    {label}
+                  </a>
+                ))}
+              </nav>
+            </div>
+
+            <div className="mx-auto max-w-[1440px] border-t border-white/[0.05] px-5 py-6 sm:px-8 lg:px-10">
+              <p className="text-[11.5px] text-white/25">
+                © {new Date().getFullYear()} nexly · Product Design Studio
+              </p>
             </div>
           </footer>
         </section>
