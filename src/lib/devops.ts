@@ -1,108 +1,131 @@
 export const hero = {
-  eyebrow: "Cloud and DevOps",
-  heading: ["Infrastructure that", "gets out of", "the way."],
-  lede: "Containers, CI/CD and GitOps on AWS, wired so a merge is the only thing between an idea and a running service.",
-  primary: { label: "Start a conversation", href: "mailto:hello@nexly.studio" },
-  secondary: { label: "See the path", href: "#path" },
-  proof: [
-    { value: "2", label: "Platforms shipped" },
-    { value: "Self-healing", label: "in production" },
-    { value: "0", label: "Bugs, 0 vulnerabilities" },
+  badge: "DevOps and Cloud",
+  heading: ["Build. Deploy.", "Scale. Repeat."],
+  lede: "I help teams ship reliable, secure and scalable infrastructure — so you can stay focused on the product.",
+  primary: { label: "Start a project", href: "mailto:hello@nexly.studio" },
+  secondary: { label: "View our work", href: "#work" },
+  marks: [
+    { icon: "trend", title: "Faster", note: "time to market" },
+    { icon: "lock", title: "Secure", note: "by design" },
+    { icon: "scale", title: "Scalable", note: "infrastructure" },
+  ],
+  flow: ["Code", "Build", "Deploy", "Scale"],
+  terminal: [
+    { cmd: "kubectl apply -f infrastructure/", tone: "text-accent" },
+    { cmd: "Deploying...", tone: "text-white/40" },
+    { cmd: "All services are healthy", tone: "text-white/70", ok: true },
   ],
 };
 
-/** Real pipeline output, rendered as a deploy console in the hero. */
-export const console = {
-  title: "deploy · task-manager",
-  image: "ghcr.io/nexly/backend",
-  tag: "sha-4f2a9c1",
-  lines: [
-    { step: "build", time: "12.4s", note: "3 targets", ok: true },
-    { step: "trivy scan", time: "8.1s", note: "0 critical · 0 high", ok: true },
-    { step: "sonar", time: "21.7s", note: "0 bugs · 1 smell", ok: true },
-    { step: "sbom", time: "1.9s", note: "118 components", ok: true },
-    { step: "push → ghcr", time: "4.2s", note: "immutable tag", ok: true },
-    { step: "argo sync", time: "0.8s", note: "cluster healthy", ok: true },
-    { step: "helm upgrade", time: "1.1s", note: "backend 2/2 ready", ok: true },
-  ],
-  footer: [
-    { k: "replicas", v: "2 → 3" },
-    { k: "hpa", v: "70% cpu" },
-    { k: "drift", v: "none" },
+export const trusted = ["AWS", "Kubernetes", "Docker", "GitHub", "Terraform", "Grafana"];
+
+export const services = {
+  badge: "What I do",
+  heading: "End-to-end DevOps for modern products",
+  lede: "From cloud infrastructure to CI/CD pipelines, monitoring and security, I design and run everything needed to build and scale with confidence.",
+  items: [
+    {
+      title: "Cloud infrastructure",
+      note: "AWS, EC2, S3 and IAM, set up as code and sized for the traffic you actually have.",
+      icon: "cloud",
+    },
+    {
+      title: "CI/CD automation",
+      note: "GitHub Actions pipelines that test, scan, build and publish on every merge.",
+      icon: "scale",
+    },
+    {
+      title: "Containerization",
+      note: "Docker and Kubernetes images built in multi-stage, running non-root in production.",
+      icon: "container",
+    },
+    {
+      title: "Monitoring and observability",
+      note: "Prometheus, Grafana and Alertmanager so problems surface before customers notice.",
+      icon: "chart",
+    },
+    {
+      title: "Security and compliance",
+      note: "Gitleaks, Trivy and SonarQube wired into the pipeline as gates, not afterthoughts.",
+      icon: "lock",
+    },
+    {
+      title: "Infrastructure as code",
+      note: "Terraform, Helm and GitOps so every environment is reproducible and reviewable.",
+      icon: "server",
+    },
   ],
 };
 
-export const observe = [
-  { label: "Prometheus", note: "metrics" },
-  { label: "Grafana", note: "dashboards" },
-  { label: "Alertmanager", note: "alerting" },
-  { label: "Loki", note: "logs" },
-  { label: "Metrics Server", note: "HPA input" },
-  { label: "Envoy Gateway", note: "routing" },
+export const process = {
+  badge: "The path",
+  heading: ["From idea to production,", "without the chaos."],
+  lede: "One commit travels a single path to production. Git is the record of what is running, and anything that drifts is corrected automatically.",
+  steps: [
+    { n: "01", label: "Commit", note: "Your branch is the only entry point" },
+    { n: "02", label: "Build", note: "Multi-stage images, built every time" },
+    { n: "03", label: "Scan", note: "Secrets, CVEs and code quality gate the merge" },
+    { n: "04", label: "Ship", note: "Immutable tags, pushed to a registry" },
+    { n: "05", label: "Reconcile", note: "Argo CD makes the cluster match Git" },
+  ],
+};
+
+export const tools = [
+  "AWS",
+  "Kubernetes",
+  "Docker",
+  "Terraform",
+  "GitHub Actions",
+  "Argo CD",
+  "Helm",
+  "Prometheus",
+  "Grafana",
+  "Trivy",
 ];
 
-export const projects = {
-  eyebrow: "Shipped",
-  heading: "Two platforms, both verified.",
-  lede: "Enough detail to judge, not enough to bore you.",
+export const work = {
+  badge: "Selected work",
+  heading: "Real projects. Real results.",
+  lede: "Two platforms built and verified end to end, not diagrams.",
   items: [
     {
       name: "RideMatch AI",
-      line: "AI-powered vehicle discovery and recommendation platform",
-      badge: "AWS EC2 · Docker Compose",
-      summary:
-        "A full-stack product for finding the right vehicle, with AI recommendations, comparison and favourites. Shipped as a containerised stack on EC2 rather than a Kubernetes cluster, because at that scale it was the honest answer.",
-      built: [
-        "Next.js and React frontend",
-        "Node.js and Express API",
-        "PostgreSQL 16 database",
-        "Gemini recommendations and news API",
-        "JWT authentication",
-        "Docker Compose on EC2",
-        "Terraform for AWS infrastructure",
-        "Prometheus and Grafana monitoring",
-      ],
+      desc: "AI vehicle recommendation platform deployed on AWS EC2 with Docker Compose, Terraform and Prometheus.",
+      chips: ["AWS", "Docker", "Terraform", "Prometheus"],
+      stack: "Next.js, Express and PostgreSQL behind a containerised stack on EC2.",
       result: "Automated build and deploy on every merge, with metrics from day one.",
-      accent: "#d4f34a",
     },
     {
       name: "Task Manager",
-      line: "DevSecOps and GitOps reference platform",
-      badge: "Kubernetes · Argo CD · Helm",
-      summary:
-        "A three-tier application built specifically to prove the pipeline. Nothing reaches the cluster without passing tests and security scans, and nothing deploys except by merging to the GitOps repository.",
-      built: [
-        "GitHub Actions with tests and builds",
-        "Trivy, Gitleaks and SonarQube scanning",
-        "SBOM generation per image",
-        "Immutable Git SHA image tags",
-        "Argo CD with self-healing",
-        "Full Helm chart",
-        "HPA scaling 2 to 5 replicas",
-        "Envoy Gateway and Grafana alerting",
-      ],
+      desc: "DevSecOps and GitOps platform on Kubernetes, reconciled by Argo CD and templated with Helm.",
+      chips: ["Kubernetes", "Argo CD", "Helm", "Grafana"],
+      stack: "React, Spring Boot and PostgreSQL, shipped through GitHub Actions into a self-healing cluster.",
       result: "Verified at zero bugs, zero vulnerabilities and one code smell.",
-      accent: "#e4e4e7",
     },
   ],
 };
 
-export const path = {
-  eyebrow: "The path",
-  heading: "One commit. One path to production.",
-  lede: "No manual deploys and no SSH into a live box. Git is the record of what is running, and anything that drifts is corrected automatically.",
-  steps: [
-    { n: "01", label: "Commit", note: "Git" },
-    { n: "02", label: "Build", note: "CI" },
-    { n: "03", label: "Scan", note: "Security" },
-    { n: "04", label: "Ship", note: "Registry" },
-    { n: "05", label: "Reconcile", note: "Kubernetes" },
+export const why = {
+  badge: "Why work with me",
+  heading: "An infrastructure partner who understands the product",
+  lede: "Technical expertise only helps if it supports the people building the thing. I design infrastructure around your constraints, your team and your roadmap.",
+  items: [
+    { title: "Product mindset", note: "Infrastructure shaped by how the product actually ships, not by defaults." },
+    { title: "End-to-end ownership", note: "From the first Dockerfile to the Grafana dashboard that watches it." },
+    { title: "Cost conscious", note: "Right-sized for your traffic, and honest about when you do not need Kubernetes." },
+    { title: "Reliable and scalable", note: "Autoscaling, health checks and rollbacks that behave under load." },
   ],
 };
 
 export const cta = {
-  heading: ["Want a pipeline", "you can trust", "at 2am?"],
-  lede: "Tell me how you ship today. I will find where it breaks under load and put the guardrails in before it reaches production.",
-  primary: { label: "hello@nexly.studio", href: "mailto:hello@nexly.studio" },
-  secondary: { label: "Back to the studio", href: "/" },
+  badge: "Let's build together",
+  heading: "Ready to build your cloud infrastructure?",
+  lede: "Tell me what you are shipping and where it currently breaks. I will map the path from there.",
+  stats: [
+    { value: "2", label: "Platforms delivered" },
+    { value: "99.9%", label: "Uptime focus" },
+    { value: "50%", label: "Faster deployments" },
+  ],
+  primary: { label: "Start a project", href: "mailto:hello@nexly.studio" },
+  secondary: { label: "Book a call", href: "#contact" },
 };

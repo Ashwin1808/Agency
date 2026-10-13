@@ -49,7 +49,100 @@ export function SpaceBackdrop() {
   );
 }
 
-/** Spinning 3D wireframe gyroscope with orbiting satellites. */
+/** Kubernetes-style hexagon badge used in the hero scene. */
+function K8sBadge() {
+  return (
+    <div className="absolute -right-2 top-0 z-20 flex h-[86px] w-[76px] items-center justify-center sm:h-[104px] sm:w-[92px]">
+      <span className="hero-glow" aria-hidden="true" />
+      <svg viewBox="0 0 60 68" className="relative h-full w-full drop-shadow-[0_10px_24px_rgba(0,0,0,0.6)]">
+        <path d="M30 1 58 17v34L30 67 2 51V17Z" fill="#0f1320" stroke="rgba(255,255,255,0.22)" strokeWidth="1" />
+        <g stroke="#d4f34a" strokeWidth="1.6" fill="none" strokeLinecap="round">
+          <circle cx="30" cy="34" r="12.5" />
+          <path d="M30 12v9M30 47v9M11 34h8M41 34h8M17 21l6 6M43 21l-6 6M17 47l6-6M43 47l-6-6" />
+          <path d="M30 24.5 38 40h-16Z" />
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+/** Soft volumetric cloud used in the hero scene. */
+function CloudShape({ className = "" }: { className?: string }) {
+  return (
+    <div className={`relative ${className}`}>
+      <span className="hero-cloud" aria-hidden="true" />
+      <svg viewBox="0 0 120 66" className="relative h-auto w-full" aria-hidden="true">
+        <path
+          d="M28 62a20 20 0 0 1 1.5-39.9A26 26 0 0 1 79 15.4a21 21 0 0 1 13 45.6Z"
+          fill="rgba(255,255,255,0.07)"
+          stroke="rgba(255,255,255,0.18)"
+          strokeWidth="1"
+        />
+      </svg>
+    </div>
+  );
+}
+
+/** Code -> Build -> Deploy -> Scale card plus a terminal, like the reference. */
+function HeroScene({ flow, terminal }: { flow: string[]; terminal: { cmd: string; tone: string; ok?: boolean }[] }) {
+  return (
+    <div className="relative w-full">
+      {/* server stack behind */}
+      <div className="pointer-events-none absolute -left-6 top-6 hidden h-[230px] w-[110px] flex-col justify-between opacity-60 sm:flex">
+        {[0, 1, 2].map((i) => (
+          <span
+            key={i}
+            className="block h-[52px] rounded-lg border border-white/10 bg-white/[0.03]"
+            style={{ animation: `space-twinkle ${4 + i}s ease-in-out infinite`, animationDelay: `${i}s` }}
+          />
+        ))}
+      </div>
+
+      <div className="relative z-10 ml-auto w-full max-w-[440px] sm:ml-6">
+        <div className="absolute -right-2 -top-12 z-20">
+          <K8sBadge />
+        </div>
+        <div className="absolute -left-4 -top-14 z-20 w-[130px] sm:left-2 sm:w-[170px]">
+          <CloudShape />
+        </div>
+
+        <div className="hero-panel relative overflow-hidden rounded-[1.25rem] border border-white/[0.09] bg-white/[0.03] p-5 backdrop-blur-sm">
+          <span className="hero-scan" aria-hidden="true" />
+          <ol className="relative flex items-center gap-2">
+            {flow.map((step, i) => (
+              <li key={step} className="flex flex-1 items-center gap-2">
+                <span className="flex h-[52px] flex-1 flex-col items-center justify-center gap-1.5 rounded-[0.7rem] border border-white/[0.09] bg-white/[0.04]">
+                  <span className="h-3 w-3 rounded-full bg-white/25" />
+                  <span className="text-[10.5px] font-medium text-white/75">{step}</span>
+                </span>
+                {i < flow.length - 1 ? (
+                  <span className="text-[11px] text-accent/70">→</span>
+                ) : null}
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        <div className="relative mt-3 overflow-hidden rounded-[1rem] border border-white/[0.09] bg-[#080a12]/90 p-4 font-mono text-[11.5px] shadow-[0_28px_60px_-30px_rgba(0,0,0,0.9)]">
+          {terminal.map((line, i) => (
+            <p key={line.cmd} className={`flex items-center gap-1.5 ${i > 0 ? "mt-1.5" : ""}`}>
+              {i === 0 ? <span className="text-accent/70">&gt;</span> : <span>&nbsp;</span>}
+              <span className={line.tone}>{line.cmd}</span>
+              {line.ok ? <span className="text-accent">✓</span> : null}
+            </p>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function HeroSceneExport(props: {
+  flow: string[];
+  terminal: { cmd: string; tone: string; ok?: boolean }[];
+}) {
+  return <HeroScene {...props} />;
+}
 export function Gyroscope({ className = "" }: { className?: string }) {
   return (
     <div className={`gyro-scene relative aspect-square w-full ${className}`}>

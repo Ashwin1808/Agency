@@ -360,3 +360,94 @@ export function Quote(props: IconProps) {
   );
 }
 
+
+export function CloudMark(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="M7.2 18.5h9.6a4.2 4.2 0 0 0 .6-8.37A6 6 0 0 0 6 9.6a4.45 4.45 0 0 0 1.2 8.9Z" />
+    </Svg>
+  );
+}
+
+export function Server(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <rect x="3.5" y="4" width="17" height="6" rx="1.6" />
+      <rect x="3.5" y="14" width="17" height="6" rx="1.6" />
+      <path d="M7 7h.01M7 17h.01" />
+      <path d="M11 7h4M11 17h4" />
+    </Svg>
+  );
+}
+
+export function Container(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="M3.5 12.8 12 8l8.5 4.8v-3L12 5 3.5 9.8Z" />
+      <path d="m7 14.6 5-2.8 5 2.8" />
+      <path d="M12 20.4v-3.4" />
+    </Svg>
+  );
+}
+
+export function Chart(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="M4 20V4" />
+      <path d="M4 20h16" />
+      <path d="M8 20v-6M13 20v-10M18 20v-4" />
+    </Svg>
+  );
+}
+
+export function Lock(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <rect x="4.8" y="10.5" width="14.4" height="9.2" rx="2" />
+      <path d="M8.2 10.5V7.8a3.8 3.8 0 0 1 7.6 0v2.7" />
+      <path d="M12 14.2v2.4" />
+    </Svg>
+  );
+}
+
+export function Money(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <ellipse cx="12" cy="6.6" rx="7.4" ry="3" />
+      <path d="M4.6 6.6v10.8c0 1.66 3.31 3 7.4 3s7.4-1.34 7.4-3V6.6" />
+      <path d="M4.6 12c0 1.66 3.31 3 7.4 3s7.4-1.34 7.4-3" />
+    </Svg>
+  );
+}
+
+export function Trend(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="M3.5 16.5 9 11l3.6 3.6L20.5 6.7" />
+      <path d="M15.6 6.7h4.9v4.9" />
+    </Svg>
+  );
+}
+
+export function Scale(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="M12 4v16" />
+      <path d="M5 8h14" />
+      <path d="M8 8 4.5 15h7L8 8Z" />
+      <path d="m16 8-3.5 7h7L16 8Z" />
+      <path d="M8.5 20h7" />
+    </Svg>
+  );
+}
+
+export function Headset(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="M4 14v-2a8 8 0 0 1 16 0v2" />
+      <rect x="2.8" y="13.6" width="4" height="5.6" rx="1.6" />
+      <rect x="17.2" y="13.6" width="4" height="5.6" rx="1.6" />
+      <path d="M19.4 19.2a3 3 0 0 1-3 2.2H13" />
+    </Svg>
+  );
+}
