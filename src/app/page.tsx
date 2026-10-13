@@ -14,8 +14,8 @@ export default function Page() {
       <Nav />
       <main>
         <Hero />
-        <Clients />
         <Work />
+        <Clients />
         <Expertise />
         <Process />
         <Industries />

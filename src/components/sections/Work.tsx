@@ -71,7 +71,7 @@ export default function Work() {
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-10">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)_auto] lg:items-end lg:gap-8">
           <div>
-            <Eyebrow n="03" label={work.eyebrow} dark />
+            <Eyebrow n="02" label={work.eyebrow} dark />
             <h2 className="mt-6 text-[clamp(2.2rem,6.4vw,4.6rem)] font-semibold leading-[0.95] tracking-[-0.035em]">
               <span className="block text-white">{work.heading[0]}</span>
               <span className="block text-white/50">{work.heading[1]}</span>

@@ -1,5 +1,48 @@
 import { expertise } from "@/lib/content";
 
+/** Cool/warm wash so the banner never reads as flat white. */
+export function HeroWash() {
+  return (
+    <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(116deg, #fdfdfc 0%, #f7f7f4 34%, #eef0f1 66%, #e3e8ec 100%)",
+        }}
+      />
+
+      {/* cool bloom behind the device cluster */}
+      <div
+        className="absolute right-[-8%] top-[-16%] h-[112%] w-[54%]"
+        style={{
+          background:
+            "radial-gradient(closest-side, rgba(200,213,224,0.6), rgba(210,221,229,0.28) 58%, transparent 78%)",
+        }}
+      />
+
+      {/* warm bloom bottom-left */}
+      <div
+        className="absolute -left-[12%] bottom-[-16%] h-[70%] w-[46%]"
+        style={{
+          background:
+            "radial-gradient(closest-side, rgba(247,238,210,0.62), transparent 76%)",
+        }}
+      />
+
+      {/* large soft arcs */}
+      <span
+        className="absolute rounded-full border border-white/80"
+        style={{ width: 1080, height: 1080, right: -280, top: -400 }}
+      />
+      <span
+        className="absolute rounded-full border border-white/55"
+        style={{ width: 780, height: 780, right: -40, top: -180 }}
+      />
+    </div>
+  );
+}
+
 /** Sticky-note + wireframe stand-in for the expertise photo. */
 export function WireframePhoto() {
   return (

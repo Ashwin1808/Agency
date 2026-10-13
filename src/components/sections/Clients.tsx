@@ -84,24 +84,34 @@ function Stats() {
 
 export default function Clients() {
   return (
-    <section id="clients" className="relative overflow-hidden bg-paper py-20 lg:py-28">
+    <section
+      id="clients"
+      className="relative overflow-hidden border-t border-black/[0.06] bg-[#f6f2e9] py-20 lg:py-28"
+    >
       {/* soft corner glow + arc */}
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         <div
-          className="absolute -bottom-40 -left-24 h-[420px] w-[520px] opacity-70"
+          className="absolute -bottom-40 -left-24 h-[420px] w-[520px] opacity-80"
           style={{
             background:
-              "radial-gradient(closest-side, rgba(250,231,168,0.55), rgba(250,231,168,0.18) 60%, transparent 78%)",
+              "radial-gradient(closest-side, rgba(243,214,133,0.5), rgba(243,214,133,0.16) 58%, transparent 78%)",
           }}
         />
-        <span className="absolute -top-40 right-[-120px] h-[520px] w-[520px] rounded-full border border-black/[0.05]" />
-        <span className="absolute -top-24 right-[-40px] h-[400px] w-[400px] rounded-full border border-black/[0.04]" />
+        <div
+          className="absolute -right-20 top-[-18%] h-[62%] w-[46%] opacity-70"
+          style={{
+            background:
+              "radial-gradient(closest-side, rgba(226,232,236,0.75), transparent 76%)",
+          }}
+        />
+        <span className="absolute -top-40 right-[-120px] h-[520px] w-[520px] rounded-full border border-white/55" />
+        <span className="absolute -top-24 right-[-40px] h-[400px] w-[400px] rounded-full border border-white/45" />
       </div>
 
       <div className="relative mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-10">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-12">
           <Reveal>
-            <Eyebrow n="02" label={clients.eyebrow} />
+            <Eyebrow n="03" label={clients.eyebrow} />
             <h2 className="mt-6 text-[clamp(2.1rem,5.4vw,3.9rem)] font-semibold leading-[0.95] tracking-[-0.035em]">
               <span className="block">{clients.heading[0]}</span>
               <span className="block">

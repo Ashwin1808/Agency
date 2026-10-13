@@ -20,7 +20,10 @@ const icons = {
 
 export default function Process() {
   return (
-    <section id="process" className="bg-paper pb-20 lg:pb-28">
+    <section
+      id="process"
+      className="border-t border-black/[0.05] bg-[#f1f2f2] pb-20 lg:pb-28"
+    >
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-10">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:gap-12">
           <Reveal>
