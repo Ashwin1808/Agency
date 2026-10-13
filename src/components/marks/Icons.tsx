@@ -342,3 +342,12 @@ export function Activity(props: IconProps) {
   );
 }
 
+export function Plus(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="M12 5.5v13" />
+      <path d="M5.5 12h13" />
+    </Svg>
+  );
+}
+

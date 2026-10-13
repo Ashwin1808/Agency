@@ -1,6 +1,5 @@
 import { hero } from "@/lib/content";
 import DeviceCluster from "@/components/marks/DeviceMock";
-import Marquee from "@/components/marks/Marquee";
 import { Eyebrow, LimeDot } from "@/components/marks/Ui";
 import { ArrowRight, Play } from "@/components/marks/Icons";
 
@@ -80,26 +79,6 @@ export default function Hero() {
               <Rail />
             </div>
           </div>
-        </div>
-      </div>
-
-      <div className="mx-auto mt-16 max-w-[1440px] px-5 sm:px-8 lg:mt-24 lg:px-10">
-        <p className="text-[10.5px] font-medium uppercase tracking-[0.16em] text-ink/40">
-          {hero.marqueeEyebrow}
-        </p>
-        <div className="relative mt-7">
-          <Marquee />
-          <div
-            className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-paper via-paper/85 to-transparent sm:w-32"
-            aria-hidden="true"
-          />
-          <a
-            href="#contact"
-            className="group absolute right-0 top-1/2 flex -translate-y-1/2 items-center gap-1.5 pl-3 text-[12.5px] font-medium text-ink/60 transition-colors hover:text-ink"
-          >
-            And more
-            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
-          </a>
         </div>
       </div>
     </section>

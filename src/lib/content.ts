@@ -53,17 +53,6 @@ export const hero = {
     { n: "03", title: "Deliver", desc: "Impact at scale" },
   ],
   annotation: ["Interfaces", "that move", "businesses", "forward."],
-  marqueeEyebrow: "Trusted experience across",
-  brands: [
-    "HDFC ERGO",
-    "AXIS BANK",
-    "BAJAJ FRYNSER",
-    "TATA AIG",
-    "STAR HEALTH",
-    "HABITA BHIYA",
-    "UnitedHealthcare",
-    "IPC.TC",
-  ],
 };
 
 export const work = {
@@ -221,6 +210,51 @@ export const cta = {
   sub: "Let's discuss your goals and explore how design can make a real impact.",
   button: { label: "Start a conversation", href: "mailto:hello@nexly.studio" },
   panel: ["Ideas", "Interfaces", "People", "Impact"],
+};
+
+export const clients = {
+  eyebrow: "Our client experience through Ubona",
+  heading: ["As UX Designers at", "Ubona Technologies"],
+  subLead: "During our time at Ubona Technologies, we worked as UX/UI designers across",
+  subLink: "Visual IVR, customer service experiences",
+  subTail:
+    "and digital product interfaces — designing experiences for leading brands across banking, insurance, fintech and healthcare.",
+  sub:
+    "These are some of the clients we designed experiences for at Ubona — creating intuitive, accessible and impactful user journeys that help millions of users.",
+  stats: [
+    { value: "50+", label: "Brands" },
+    { value: "100+", label: "Flows & Screens" },
+    { value: "5+", label: "Industries" },
+  ],
+  note: ["Designing", "experiences", "people love."],
+  avatars: ["AK", "RM", "SV"],
+  cta: { label: "View all clients", href: "#" },
+  brands: [
+    "Paytm",
+    "FedEx",
+    "Airtel",
+    "NPCI",
+    "Icici Direct",
+    "MakeMyTrip",
+    "BigBasket",
+    "Axis Bank",
+    "Croma",
+    "Bajaj Finserv",
+    "Tata AIG",
+    "HDFC ERGO",
+    "Adani",
+    "Tata",
+    "Flipkart",
+    "PhonePe",
+    "PolicyBazaar",
+    "HDB Financial",
+    "Kotak",
+    "IndusInd Bank",
+    "SBI Card",
+    "IIFL Finance",
+    "L&T Financial",
+    "Mastercard",
+  ],
 };
 
 export const footer = {

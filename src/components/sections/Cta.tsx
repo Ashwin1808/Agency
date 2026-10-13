@@ -11,7 +11,7 @@ export default function Cta() {
       <div className="relative mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-10 lg:py-32">
         <div className="flex flex-col gap-14 lg:flex-row lg:items-center lg:justify-between lg:gap-16">
           <Reveal>
-            <Eyebrow n="06" label={cta.eyebrow} dark />
+            <Eyebrow n="07" label={cta.eyebrow} dark />
             <h2 className="mt-6 text-[clamp(2.2rem,6.2vw,4.4rem)] font-semibold leading-[0.95] tracking-[-0.035em] text-white">
               <span className="block">{cta.heading[0]}</span>
               <span className="block">{cta.heading[1]}</span>
