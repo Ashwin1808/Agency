@@ -88,8 +88,8 @@
     opacity: 0 !important;
   }
 
-  /* Without rotation the orbit would collapse into one stack, so the
-     rings and satellites flatten out into a plain inline row. */
+  /* Rings and satellites cannot rotate, so they flatten into an
+     inline row beneath the planet rather than stacking in one spot. */
   .space-planet {
     display: flex;
     flex-wrap: wrap;
@@ -98,20 +98,9 @@
     gap: 8px;
   }
   .space-planet-glow,
-  .space-planet-rings {
-    display: none;
-  }
-  .space-planet-body {
-    flex-basis: 100%;
-    margin-bottom: 18px;
-  }
+  .space-planet-rings,
   .space-sat {
-    position: static;
-    animation: none !important;
-  }
-  .space-sat > span {
-    position: static;
-    transform: none;
+    display: none;
   }
 
   *,
