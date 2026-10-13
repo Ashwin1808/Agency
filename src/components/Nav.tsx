@@ -66,7 +66,7 @@ export default function Nav() {
             <Swap className="h-3.5 w-3.5 opacity-60" />
           </a>
           <a
-            href="#process"
+            href="/cloud-devops"
             className="hidden items-center gap-1.5 rounded-full bg-black/[0.06] px-4 py-2.5 text-[12.5px] font-medium text-ink transition-colors hover:bg-black/10 xl:inline-flex"
           >
             Cloud + DevOps

@@ -54,7 +54,7 @@ export default function Footer() {
             <Swap className="h-3.5 w-3.5 opacity-60" />
           </a>
           <a
-            href="#process"
+            href="/cloud-devops"
             className="flex items-center gap-1.5 rounded-full bg-white/10 px-4 py-2 text-[12.5px] font-medium transition-colors hover:bg-white/15"
           >
             Cloud + DevOps
