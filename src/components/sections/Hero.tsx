@@ -1,31 +1,28 @@
 import { hero } from "@/lib/content";
 import DeviceCluster from "@/components/marks/DeviceMock";
-import { HeroBackdrop } from "@/components/marks/PhotoArt";
 import { Eyebrow, LimeDot } from "@/components/marks/Ui";
 import { ArrowRight, Play } from "@/components/marks/Icons";
 
-function Note() {
+function Rail() {
   return (
-    <div className="absolute right-0 top-1/2 hidden -translate-y-1/2 text-right 2xl:block">
-      <p className="-rotate-[3deg] text-[clamp(14px,1.35vw,19px)] font-medium italic leading-[1.25] tracking-[-0.02em] text-ink/80">
-        {hero.note[0]}
-        <br />
-        {hero.note[1]}
-        <br />
-        {hero.note[2]}
-      </p>
-      <svg
-        viewBox="0 0 58 54"
-        className="ml-auto mt-3 h-auto w-[54px] text-ink/40"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={1.3}
-        strokeLinecap="round"
+    <div className="relative hidden xl:block">
+      <span
+        className="absolute left-[3px] top-3 h-[calc(100%-24px)] w-px bg-black/15"
         aria-hidden="true"
-      >
-        <path d="M54 6C54 30 38 46 8 48" />
-        <path d="M8 48 17 42.5M8 48l1.5 9" />
-      </svg>
+      />
+      <ul className="space-y-7">
+        {hero.rail.map((item) => (
+          <li key={item.n} className="relative pl-6">
+            <span
+              className="absolute left-0 top-[5px] h-[7px] w-[7px] rounded-full bg-accent ring-4 ring-paper"
+              aria-hidden="true"
+            />
+            <p className="text-[10px] font-medium tabular-nums text-ink/40">{item.n}</p>
+            <p className="mt-0.5 text-[13px] font-semibold tracking-[-0.01em]">{item.title}</p>
+            <p className="text-[11.5px] text-ink/45">{item.desc}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
@@ -33,14 +30,12 @@ function Note() {
 export default function Hero() {
   return (
     <section id="top" className="relative overflow-hidden bg-paper">
-      <HeroBackdrop />
-
-      <div className="relative mx-auto max-w-[1440px] px-5 pb-16 pt-28 sm:px-8 lg:px-10 lg:pb-24 lg:pt-36">
+      <div className="mx-auto max-w-[1440px] px-5 pt-28 sm:px-8 lg:px-10 lg:pt-36">
         <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-4">
           <div className="relative z-10">
             <Eyebrow n="01" label={hero.eyebrow} />
 
-            <h1 className="mt-6 text-[clamp(2.5rem,6.9vw,5.2rem)] font-semibold leading-[0.96] tracking-[-0.035em]">
+            <h1 className="mt-6 text-[clamp(2.6rem,8.6vw,5.5rem)] font-semibold leading-[0.94] tracking-[-0.035em]">
               {hero.heading.map((line, i) => (
                 <span key={line} className="block">
                   {line}
@@ -49,7 +44,7 @@ export default function Hero() {
               ))}
             </h1>
 
-            <p className="mt-6 max-w-[340px] text-[14.5px] leading-[1.55] text-ink/70">
+            <p className="mt-6 max-w-[330px] text-[14.5px] leading-[1.55] text-ink/70">
               {hero.sub}
             </p>
 
@@ -77,8 +72,12 @@ export default function Hero() {
           </div>
 
           <div className="relative">
-            <DeviceCluster />
-            <Note />
+            <div className="xl:mr-[186px]">
+              <DeviceCluster />
+            </div>
+            <div className="absolute right-0 top-1/2 -translate-y-1/2">
+              <Rail />
+            </div>
           </div>
         </div>
       </div>

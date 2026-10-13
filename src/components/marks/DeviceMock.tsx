@@ -1,6 +1,5 @@
 import {
   Activity,
-  Check,
   ChevronDown,
   FileText,
   Grid,
@@ -9,6 +8,8 @@ import {
   Search,
   User,
 } from "@/components/marks/Icons";
+
+const barHeights = [24, 36, 28, 48, 40, 60, 52, 70, 62, 82];
 
 /** Pure-CSS phone screen: no image files. */
 function PhoneScreen({ compact = false }: { compact?: boolean }) {
@@ -184,81 +185,27 @@ export function PhoneFrame({
   );
 }
 
-function VehicleCard({ className = "" }: { className?: string }) {
+function DashboardPanel({ className = "" }: { className?: string }) {
   return (
     <div
-      className={`rounded-[1.1rem] border border-white/70 bg-white/85 p-[7%] shadow-[0_30px_60px_-24px_rgba(90,100,130,0.45)] backdrop-blur-md ${className}`}
+      className={`rounded-[1rem] border border-white/10 bg-[#101011] p-[6%] shadow-[0_30px_60px_-20px_rgba(10,10,10,0.6)] ${className}`}
     >
-      <p className="text-[clamp(7px,0.85vw,10px)] font-medium text-ink/45">Vehicle insurance</p>
-      <p className="mt-[6%] text-[clamp(10px,1.25vw,15px)] font-semibold leading-[1.15] tracking-[-0.02em]">
-        Drive with
-        <br />
-        confidence
-      </p>
-
-      <div className="relative mt-[9%] aspect-[16/10] overflow-hidden rounded-[0.65rem] bg-gradient-to-br from-[#e6e9f2] to-[#cdd4e6]">
-        <svg viewBox="0 0 160 100" className="absolute inset-0 h-full w-full" aria-hidden="true">
-          <circle cx="42" cy="30" r="34" fill="#ffffff" opacity="0.45" />
-          {/* car body */}
-          <path
-            d="M14 70c0-5 3-8 8-8h7l10-15c2.4-3.6 5.4-5 9.6-5h34c4 0 7.4 1.8 10 5.4l9 14.6h6c5 0 8 3 8 8v6c0 2.6-2 4.4-4.6 4.4h-8.8a9.6 9.6 0 0 0-19.2 0H52.8a9.6 9.6 0 0 0-19.2 0H18.6C16 80 14 78.2 14 75.6Z"
-            fill="#7d86b5"
-          />
-          {/* cabin */}
-          <path
-            d="M46 47h30c3 0 5.2 1.2 7 3.6l7.4 12H39l6-15.6Z"
-            fill="#b9c1e0"
-          />
-          {/* wheels */}
-          <circle cx="44" cy="80" r="8" fill="#33364f" />
-          <circle cx="44" cy="80" r="3" fill="#b9bed4" />
-          <circle cx="112" cy="80" r="8" fill="#33364f" />
-          <circle cx="112" cy="80" r="3" fill="#b9bed4" />
-          {/* headlight */}
-          <path d="M146 62h8v6h-8z" fill="#e8ecff" opacity="0.85" />
-        </svg>
-      </div>
-
-      <span className="mt-[8%] inline-flex items-center rounded-full bg-[#3d6fe0] px-[10px] py-[5px] text-[clamp(7px,0.8vw,9.5px)] font-semibold text-white">
-        Renew Now
-      </span>
-    </div>
-  );
-}
-
-function UsageCard({ className = "" }: { className?: string }) {
-  const violet = [46, 64, 40, 72, 54, 86, 62, 78, 50, 68];
-
-  return (
-    <div
-      className={`rounded-[1rem] border border-white/10 bg-[#14151d] p-[7%] shadow-[0_34px_70px_-24px_rgba(20,22,35,0.85)] ${className}`}
-    >
-      <div className="flex items-center justify-between">
-        <span className="flex items-center gap-[5px] text-[clamp(6.5px,0.72vw,9px)] text-white/40">
-          <span className="grid grid-cols-2 gap-[2px]">
-            <span className="block h-[3px] w-[3px] rounded-[1px] bg-white/40" />
-            <span className="block h-[3px] w-[3px] rounded-[1px] bg-white/25" />
-            <span className="block h-[3px] w-[3px] rounded-[1px] bg-white/25" />
-            <span className="block h-[3px] w-[3px] rounded-[1px] bg-white/25" />
-          </span>
-          Callmy Data Usage
-        </span>
-        <span className="text-[clamp(6px,0.65vw,8px)] text-white/25">This Month</span>
-      </div>
-
-      <div className="mt-[7%] flex items-baseline gap-[6px]">
-        <span className="text-[clamp(15px,2.4vw,26px)] font-semibold tracking-[-0.035em] text-white">
+      <div className="flex items-baseline gap-[6px]">
+        <span className="text-[clamp(11px,2.6vw,20px)] font-semibold tracking-[-0.02em] text-white">
           24,532
         </span>
-        <span className="text-[clamp(7px,0.8vw,10px)] font-semibold text-accent">+17%</span>
+        <span className="text-[clamp(6px,1.1vw,9px)] font-semibold text-accent">+17%</span>
       </div>
-
-      <div className="mt-[9%] flex h-[clamp(44px,6vw,84px)] items-end gap-[4%]">
-        {violet.map((height, i) => (
+      <div className="mt-[8%] flex h-[clamp(38px,7vw,62px)] items-end gap-[3.5%]">
+        {barHeights.map((height, i) => (
           <span
             key={i}
             style={{ height: `${height}%` }}
-            className="flex-1 rounded-t-[2px] bg-gradient-to-t from-[#6d4de0]/30 to-[#8b6bf5]"
+            className={`flex-1 rounded-t-[2px] ${
+              i < 5
+                ? "bg-gradient-to-t from-accent/25 to-accent"
+                : "bg-gradient-to-t from-[#7c5cff]/25 to-[#8f6bff]"
+            }`}
           />
         ))}
       </div>
@@ -266,23 +213,25 @@ function UsageCard({ className = "" }: { className?: string }) {
   );
 }
 
-function RenewedToast({ className = "" }: { className?: string }) {
+function TabletPanel({ className = "" }: { className?: string }) {
   return (
     <div
-      className={`rounded-[0.85rem] border border-black/[0.05] bg-white/95 p-[7%] shadow-[0_24px_50px_-20px_rgba(70,80,110,0.5)] backdrop-blur-md ${className}`}
+      className={`rounded-[1.4rem] border border-black/[0.07] bg-[#e9eaee] p-[5%] ${className}`}
     >
-      <div className="flex items-start gap-[7%]">
-        <span className="flex aspect-square w-[16%] shrink-0 items-center justify-center rounded-full bg-[#d6f0bd]">
-          <Check className="h-[58%] w-[58%] text-[#4c9a3f]" strokeWidth={2.6} />
-        </span>
-        <div className="min-w-0">
-          <p className="text-[clamp(8px,0.95vw,11.5px)] font-semibold leading-tight tracking-[-0.01em]">
-            Policy renewed!
-          </p>
-          <p className="mt-[4%] text-[clamp(6.5px,0.78vw,9.5px)] leading-[1.35] text-ink/50">
-            Your vehicle policy has been successfully renewed.
-          </p>
-        </div>
+      <div className="mx-auto h-[9%] w-[58%] rounded-full bg-white" />
+      <div className="mt-[7%] space-y-[6%]">
+        {[0, 1, 2].map((row) => (
+          <div key={row} className="flex items-center gap-[5%]">
+            <span className="aspect-square w-[13%] rounded-full bg-black/[0.07]" />
+            <span className="h-[6%] flex-1 rounded-full bg-black/[0.07]" />
+            <span className="h-[6%] w-[22%] rounded-full bg-black/[0.05]" />
+          </div>
+        ))}
+      </div>
+      <div className="mt-[7%] h-[26%] rounded-[0.6rem] bg-black/[0.06]" />
+      <div className="mt-[6%] flex gap-[4%]">
+        <span className="h-[7%] flex-1 rounded-full bg-black/[0.06]" />
+        <span className="h-[7%] flex-1 rounded-full bg-black/[0.06]" />
       </div>
     </div>
   );
@@ -290,11 +239,34 @@ function RenewedToast({ className = "" }: { className?: string }) {
 
 export default function DeviceCluster() {
   return (
-    <div className="relative h-[clamp(330px,40vw,540px)] w-full select-none">
-      <VehicleCard className="absolute left-[1%] top-[13%] z-10 w-[37%] -rotate-[3deg]" />
-      <PhoneFrame className="absolute left-[25%] top-0 z-20 w-[32%]" />
-      <UsageCard className="absolute right-[-1%] top-[45%] z-10 w-[45%] rotate-[7deg]" />
-      <RenewedToast className="absolute right-[2%] top-[1%] z-30 w-[41%]" />
+    <div className="relative aspect-[5/4] w-full select-none">
+      <TabletPanel className="absolute left-[1%] top-[13%] z-10 w-[43%] -rotate-[9deg]" />
+      <DashboardPanel className="absolute right-[0%] top-[41%] z-10 w-[45%] rotate-[8deg]" />
+      <PhoneFrame className="absolute left-[27%] top-[3%] z-20 w-[35%]" />
+
+      {/* annotation with curved arrow */}
+      <div className="absolute bottom-[4%] left-0 z-30 w-[132px] max-w-[34%] sm:w-[152px]">
+        <p className="text-right text-[11px] font-medium leading-[1.35] tracking-[-0.01em] text-ink sm:text-[12.5px]">
+          Interfaces
+          <br />
+          that move
+          <br />
+          businesses
+          <br />
+          forward.
+        </p>
+        <svg
+          viewBox="0 0 90 56"
+          className="mt-1 h-auto w-[86px] text-ink/35"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={1.2}
+          aria-hidden="true"
+        >
+          <path d="M4 52C4 30 22 14 44 10" />
+          <path d="M44 10 36 6M44 10l1 9" />
+        </svg>
+      </div>
     </div>
   );
 }

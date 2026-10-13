@@ -43,11 +43,16 @@ export const navLinks: NavLink[] = [
 
 export const hero = {
   eyebrow: "Ideas × Interfaces × Human Experiences",
-  heading: ["We design", "digital products", "people choose", "to use."],
-  sub: "We turn complex business problems into digital experiences that are intuitive, accessible and make a real impact.",
+  heading: ["Design", "products", "people use."],
+  sub: "We turn complex ideas into simple, meaningful digital experiences through research, design and product thinking.",
   primaryCta: { label: "See our work", href: "#work" },
   showreel: { label: "Watch showreel", time: "01:12" },
-  note: ["Intuitive", "experiences.", "Real impact."],
+  rail: [
+    { n: "01", title: "Research", desc: "Understand users" },
+    { n: "02", title: "Design", desc: "Create experiences" },
+    { n: "03", title: "Deliver", desc: "Impact at scale" },
+  ],
+  annotation: ["Interfaces", "that move", "businesses", "forward."],
 };
 
 export const work = {

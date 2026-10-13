@@ -11,6 +11,15 @@
   --radius-card: 2rem;
 }
 
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -74,6 +83,18 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
+}
+
+/* ---------- hero logo marquee ---------- */
+
+.marquee-track {
+  animation: marquee 42s linear infinite;
+  will-change: transform;
+}
+
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
 }
 
 /* ---------- carousel progress, driven by scroll position (no JS) ---------- */
