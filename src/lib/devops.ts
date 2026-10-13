@@ -1,286 +1,46 @@
 export const hero = {
   eyebrow: "Cloud and DevOps",
-  heading: ["From commit to", "cluster, without", "the manual work."],
-  lede: "I design the pipeline as carefully as the interface. Containers, CI/CD, GitOps, Kubernetes and observability wired together so a merged branch is the only thing standing between an idea and a running service.",
-  stats: [
+  heading: ["Infrastructure that", "gets out of", "the way."],
+  lede: "Containers, CI/CD and GitOps on AWS, wired so a merge is the only thing between an idea and a running service.",
+  primary: { label: "Start a conversation", href: "mailto:hello@nexly.studio" },
+  secondary: { label: "See the path", href: "#path" },
+  proof: [
     { value: "2", label: "Platforms shipped" },
-    { value: "12", label: "Pipeline stages" },
-    { value: "30+", label: "Tools in the stack" },
-  ],
-  console: [
-    { k: "cluster", v: "task-manager-prod" },
-    { k: "region", v: "local / floci" },
-    { k: "gitops", v: "synced, self-heal on" },
-    { k: "autoscale", v: "2 → 5 pods @ 70% cpu" },
-    { k: "scanning", v: "gitleaks · trivy · sonarqube" },
-    { k: "status", v: "0 bugs · 0 vulns · 1 smell" },
+    { value: "Self-healing", label: "in production" },
+    { value: "0", label: "Bugs, 0 vulnerabilities" },
   ],
 };
 
-export const stack: string[] = [
-  "Docker",
-  "Kubernetes",
-  "AWS",
-  "EC2",
-  "Terraform",
-  "GitHub Actions",
-  "CI/CD",
-  "Helm",
-  "Prometheus",
-  "Grafana",
-  "Loki",
-  "PostgreSQL",
-  "Linux",
-  "Bash",
-  "Git",
-  "GitHub",
-  "Docker Hub",
-  "GHCR",
-  "Trivy",
-  "SonarCloud",
-  "SonarQube",
-  "Argo CD",
-  "Envoy Gateway",
-  "Alertmanager",
-  "Node.js",
-  "Express.js",
-  "Next.js",
-  "React",
-  "REST APIs",
-  "JWT",
-  "Infrastructure as Code",
-];
-
-export const pipeline: { label: string; kind: string }[] = [
-  { label: "Git Push", kind: "trigger" },
-  { label: "Checkout", kind: "step" },
-  { label: "Backend Tests", kind: "test" },
-  { label: "Frontend Build", kind: "test" },
-  { label: "Gitleaks", kind: "security" },
-  { label: "Trivy", kind: "security" },
-  { label: "SonarQube", kind: "security" },
-  { label: "Docker Build", kind: "build" },
-  { label: "Trivy Image Scan", kind: "security" },
-  { label: "SBOM", kind: "security" },
-  { label: "GHCR", kind: "registry" },
-  { label: "GitOps Repo", kind: "gitops" },
-  { label: "Argo CD Sync", kind: "gitops" },
-  { label: "Kubernetes", kind: "cluster" },
-];
-
-/** The shipped runtime topology, rendered as nested stations. */
-export const topology = {
-  ci: {
-    title: "GitHub Actions",
-    caption: "Every stage runs before an image can move",
-    steps: ["Tests", "Gitleaks", "Trivy", "SonarQube", "SBOM", "Docker Build"],
-  },
-  cluster: {
-    title: "Kubernetes",
-    caption: "Backend runs 2 replicas with rolling updates",
-    workloads: [
-      { name: "Frontend", tech: "React + Nginx", detail: "Multi-stage build, non-root" },
-      { name: "Backend", tech: "Spring Boot", detail: "2 replicas, probes, limits" },
-      { name: "PostgreSQL", tech: "StatefulSet", detail: "Persistent volume" },
-    ],
-    resources: [
-      "Namespace",
-      "Deployments",
-      "ReplicaSets",
-      "Services",
-      "ConfigMaps",
-      "Secrets",
-      "Resource limits",
-      "Readiness probes",
-      "Liveness probes",
-      "Rolling updates",
-      "HPA",
-    ],
-  },
-  gateway: {
-    title: "Envoy Gateway",
-    caption: "Kubernetes Gateway API instead of legacy Ingress",
-    routes: [
-      { path: "/", target: "Frontend" },
-      { path: "/api", target: "Backend" },
-      { path: "/api/health", target: "HTTP 200" },
-    ],
-  },
-  observe: {
-    title: "Observability",
-    caption: "Metrics, dashboards, logs and alerting",
-    stack: ["Prometheus", "Grafana", "Alertmanager", "Loki", "Metrics Server"],
-  },
+export const path = {
+  eyebrow: "The path",
+  heading: "One commit. One path to production.",
+  lede: "No manual deploys, no SSH into a live box. Git is the record of what is running, and anything that drifts is corrected automatically.",
+  steps: [
+    { n: "01", label: "Commit", note: "Git" },
+    { n: "02", label: "Build", note: "CI" },
+    { n: "03", label: "Scan", note: "Security" },
+    { n: "04", label: "Ship", note: "Registry" },
+    { n: "05", label: "Reconcile", note: "Kubernetes" },
+  ],
 };
 
-export const capabilities: {
-  n: string;
-  title: string;
-  body: string;
-  icon: "container" | "pipeline" | "shield" | "cluster" | "helm" | "gitops" | "scale" | "gateway" | "chart" | "terminal" | "terraform" | "server";
-}[] = [
-  {
-    n: "01",
-    title: "Containers",
-    body: "Multi-stage Docker builds for the frontend and backend, running as non-root with a separate image per service and a Compose stack for local parity with production.",
-    icon: "container",
-  },
-  {
-    n: "02",
-    title: "CI/CD",
-    body: "A single GitHub Actions pipeline that tests, scans, builds and publishes. Images are tagged with the immutable Git SHA, never just latest, so any running container can be traced back to a commit.",
-    icon: "pipeline",
-  },
-  {
-    n: "03",
-    title: "DevSecOps",
-    body: "Gitleaks for committed secrets, Trivy for filesystem and image vulnerabilities, SBOM generation and SonarQube for static analysis. The Task Manager verified clean: zero bugs, zero vulnerabilities, one code smell.",
-    icon: "shield",
-  },
-  {
-    n: "04",
-    title: "Kubernetes",
-    body: "Namespace, deployments, replica sets, services, config maps and secrets with resource requests and limits, readiness and liveness probes, and rolling updates for zero-downtime-style deploys.",
-    icon: "cluster",
-  },
-  {
-    n: "05",
-    title: "Helm",
-    body: "The whole deployment templated into one chart covering frontend, backend, PostgreSQL, services, config, secrets, HPA, resource limits and image versions, all driven from values.yaml instead of hand-edited YAML.",
-    icon: "helm",
-  },
-  {
-    n: "06",
-    title: "GitOps with Argo CD",
-    body: "A separate GitOps repository is the only path to production. Argo CD watches it continuously with automated sync, self-healing and pruning, so Git is the source of truth for deployment state.",
-    icon: "gitops",
-  },
-  {
-    n: "07",
-    title: "Autoscaling",
-    body: "Horizontal Pod Autoscaler driven by Metrics Server, holding a minimum of 2 replicas, scaling to 5 on a 70% CPU target so the backend grows with real load.",
-    icon: "scale",
-  },
-  {
-    n: "08",
-    title: "Gateway API",
-    body: "Envoy Gateway via GatewayClass, Gateway and HTTPRoute, routing / to the frontend and /api to the backend. Verified end to end with curl against both paths.",
-    icon: "gateway",
-  },
-  {
-    n: "09",
-    title: "Observability",
-    body: "Prometheus scraping into Grafana dashboards, Alertmanager routing, Loki for centralised logs and PostgreSQL Exporter for database metrics. The Prometheus to Alertmanager path was tested, not assumed.",
-    icon: "chart",
-  },
-  {
-    n: "10",
-    title: "Jenkins",
-    body: "An alternative enterprise-style pipeline running checkout, tests, build, GHCR login, push and GitOps update, demonstrating GitHub Actions and Jenkins without letting either become the deployment controller.",
-    icon: "terminal",
-  },
-  {
-    n: "11",
-    title: "Infrastructure as Code",
-    body: "Terraform driving an AWS-compatible local environment through Floci, with init, validate, plan and apply all verified and an S3-compatible remote state bucket created.",
-    icon: "terraform",
-  },
-  {
-    n: "12",
-    title: "Production troubleshooting",
-    body: "Real debugging across Linux, Docker, networking, application health, database connectivity, ports, logs and resource utilisation, rather than assuming the happy path holds.",
-    icon: "server",
-  },
-];
-
-export const projects = [
-  {
-    slug: "ridematch-ai",
-    name: "RideMatch AI",
-    tagline: "AI-powered vehicle recommendation and DevOps platform",
-    accent: "#4cc9f0",
-    summary:
-      "A full-stack application that helps users discover, compare and find the right vehicle with AI-powered recommendations, real-time insights and a seamless experience.",
-    badges: ["Next.js", "Node.js", "PostgreSQL", "AWS EC2", "Terraform"],
-    features: [
-      "Vehicle search and advanced filtering",
-      "AI-powered recommendations via Gemini",
-      "Vehicle comparison",
-      "Favourites and user authentication with JWT",
-      "Automotive news integration",
-      "Real-time fuel price information",
-      "Application statistics and insights",
-    ],
-    /** real ports and topology from the shipped build */
-    services: [
-      { name: "Frontend", tech: "Next.js + React", port: "3000" },
-      { name: "Backend", tech: "Node.js + Express", port: "5001" },
-      { name: "PostgreSQL 16", tech: "Database", port: "5432" },
-    ],
-    externals: [
-      { name: "Gemini API", role: "AI recommendations" },
-      { name: "News APIs", role: "Automotive news" },
-    ],
-    ciChain: [
-      { label: "Code push", sub: "GitHub" },
-      { label: "Build", sub: "Frontend & backend" },
-      { label: "Terraform validate", sub: "Infrastructure check" },
-      { label: "Docker build & push", sub: "Docker Hub" },
-      { label: "Security scan", sub: "Trivy" },
-      { label: "Code quality", sub: "SonarCloud" },
-      { label: "Deploy to EC2", sub: "SSH + Docker Compose" },
-    ],
-    terraform: ["VPC networking", "Security groups", "IAM permissions", "Launch templates", "CloudWatch monitoring"],
-    k8sPrepared: ["Deployments", "Services", "ConfigMaps & secrets", "Ingress", "HPA", "StatefulSet + PVC", "RBAC & service accounts", "Helm chart"],
-    observability: [
-      { name: "Prometheus", role: "Metrics collection" },
-      { name: "Grafana", role: "Dashboards" },
-      { name: "Loki", role: "Centralised logging" },
-      { name: "PostgreSQL Exporter", role: "Database metrics" },
-      { name: "ServiceMonitor", role: "Metrics configuration" },
-    ],
-    deploy: "AWS EC2 · Docker Compose",
-  },
-  {
-    slug: "task-manager",
-    name: "Task Manager",
-    tagline: "DevSecOps and GitOps platform",
-    accent: "#a855f7",
-    summary:
-      "A production-style, cloud-native three-tier application used to demonstrate modern DevOps practice end to end, from a Git push to a self-healing Kubernetes cluster.",
-    badges: ["CI/CD", "DevSecOps", "Kubernetes", "GitOps"],
-    services: [
-      { name: "Frontend", tech: "React + Nginx", port: "3000" },
-      { name: "Backend", tech: "Spring Boot", port: "8080" },
-      { name: "PostgreSQL", tech: "Database", port: "5432" },
-    ],
-    externals: [],
-    ciChain: [
-      { label: "GitHub", sub: "Code push" },
-      { label: "GitHub Actions", sub: "Build, test, scan, push to GHCR" },
-      { label: "Trivy", sub: "Vulnerability scan" },
-      { label: "Gitleaks", sub: "Secret detection" },
-      { label: "SonarQube", sub: "Code quality" },
-      { label: "GHCR", sub: "Container registry" },
-    ],
-    gitopsChain: [
-      { label: "GitOps repo", sub: "Helm charts, K8s manifests" },
-      { label: "Argo CD", sub: "Sync and self-healing" },
-      { label: "Kubernetes", sub: "Deploy and manage" },
-    ],
-    terraform: ["VPC", "EKS", "IAM", "S3"],
-    observability: [
-      { name: "Prometheus", role: "Metrics collection" },
-      { name: "Grafana", role: "Visualisation" },
-      { name: "Alertmanager", role: "Alerting" },
-      { name: "Metrics Server", role: "Resource metrics" },
-      { name: "HPA", role: "Auto scaling" },
-    ],
-    deploy: "Kubernetes · Argo CD · Helm",
-  },
-];
+export const proof = {
+  eyebrow: "In production",
+  items: [
+    {
+      name: "RideMatch AI",
+      note: "AI vehicle platform on AWS. Docker Compose, Terraform and Prometheus on EC2.",
+    },
+    {
+      name: "Task Manager",
+      note: "DevSecOps and GitOps platform on Kubernetes. Argo CD, Helm and Grafana.",
+    },
+  ],
+};
 
 export const cta = {
-  heading: ["Need a pipeline", "that survives", "contact with reality?"],
-  sub: "I can map your current release process, find where it breaks under load, and put observability around it before it reaches production.",
+  heading: ["Want a pipeline", "you can trust", "at 2am?"],
+  lede: "Tell me how you ship today. I will find where it breaks under load and put the guardrails in before it reaches production.",
+  primary: { label: "hello@nexly.studio", href: "mailto:hello@nexly.studio" },
+  secondary: { label: "Back to the studio", href: "/" },
 };

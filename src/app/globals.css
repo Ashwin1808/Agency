@@ -89,28 +89,27 @@
   }
 
   /* Without rotation the orbit would collapse into one stack, so the
-     whole thing degrades to a plain chip cloud. */
-  .space-orbit {
-    aspect-ratio: auto !important;
+     rings and satellites flatten out into a plain inline row. */
+  .space-planet {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 8px;
   }
-  .space-orbit .space-ring,
-  .space-orbit .space-core-glow {
+  .space-planet-glow,
+  .space-planet-rings {
     display: none;
   }
-  .space-orbit-core {
-    position: static !important;
+  .space-planet-body {
     flex-basis: 100%;
+    margin-bottom: 18px;
   }
-  .space-orbit .space-node {
+  .space-sat {
     position: static;
     animation: none !important;
   }
-  .space-orbit .space-node > span {
+  .space-sat > span {
     position: static;
     transform: none;
   }
@@ -176,7 +175,7 @@
   animation-play-state: paused;
 }
 
-/* ---------- cloud / devops space ---------- */
+/* ---------- cloud / devops: quiet space ---------- */
 
 .space-stars {
   position: absolute;
@@ -189,214 +188,84 @@
 }
 
 .space-stars-far {
-  opacity: 0.55;
-  animation: space-drift 320s linear infinite;
+  opacity: 0.4;
+  animation: space-drift 340s linear infinite;
 }
-.space-stars-mid {
-  opacity: 0.8;
-  animation: space-drift 210s linear infinite;
-}
+
 .space-stars-near {
-  opacity: 1;
-  animation: space-twinkle 5.5s ease-in-out infinite;
+  opacity: 0.85;
+  animation: space-twinkle 6s ease-in-out infinite;
 }
 
 @keyframes space-drift {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(-900px, 0, 0);
-  }
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-900px, 0, 0); }
 }
 
 @keyframes space-twinkle {
-  0%,
-  100% {
-    opacity: 0.35;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-.space-nebula {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(70px);
-  will-change: transform, opacity;
-}
-
-.space-nebula-a {
-  top: -22%;
-  right: -10%;
-  width: 70%;
-  height: 80%;
-  background: radial-gradient(closest-side, rgba(124, 92, 255, 0.45), transparent 72%);
-  animation: space-float 34s ease-in-out infinite;
-}
-
-.space-nebula-b {
-  top: 18%;
-  left: -18%;
-  width: 62%;
-  height: 72%;
-  background: radial-gradient(closest-side, rgba(76, 201, 240, 0.32), transparent 72%);
-  animation: space-float 46s ease-in-out infinite reverse;
-}
-
-.space-nebula-c {
-  bottom: -18%;
-  left: 24%;
-  width: 58%;
-  height: 60%;
-  background: radial-gradient(closest-side, rgba(217, 70, 239, 0.22), transparent 74%);
-  animation: space-float 40s ease-in-out infinite;
-}
-
-.space-nebula-d {
-  top: 34%;
-  right: 28%;
-  width: 34%;
-  height: 38%;
-  background: radial-gradient(closest-side, rgba(212, 243, 74, 0.12), transparent 72%);
-  animation: space-float 52s ease-in-out infinite reverse;
-}
-
-@keyframes space-float {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0) scale(1);
-    opacity: 0.75;
-  }
-  50% {
-    transform: translate3d(2%, -3%, 0) scale(1.08);
-    opacity: 1;
-  }
-}
-
-.space-horizon {
-  position: absolute;
-  inset: -60% -50% -60% -50%;
-  background-image:
-    repeating-linear-gradient(
-      to right,
-      rgba(140, 190, 255, 0.16) 0 1px,
-      transparent 1px 90px
-    ),
-    repeating-linear-gradient(
-      to bottom,
-      rgba(140, 190, 255, 0.14) 0 1px,
-      transparent 1px 90px
-    );
-  transform: perspective(420px) rotateX(74deg);
-  transform-origin: 50% 100%;
-  mask-image: linear-gradient(to bottom, transparent, #000 55%, #000 88%, transparent);
-  animation: space-grid-drift 9s linear infinite;
-}
-
-@keyframes space-grid-drift {
-  from {
-    background-position:
-      0 0,
-      0 0;
-  }
-  to {
-    background-position:
-      0 0,
-      0 90px;
-  }
+  0%, 100% { opacity: 0.3; }
+  50%      { opacity: 0.85; }
 }
 
 .space-ring {
   position: absolute;
   border-radius: 50%;
-  border: 1px solid rgba(160, 200, 255, 0.12);
-  animation: space-spin linear infinite;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-@keyframes space-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.space-planet {
+  position: relative;
+  display: grid;
+  place-items: center;
 }
 
-.space-node {
+.space-planet-glow {
   position: absolute;
-  inset: 0;
+  inset: -60%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(212, 243, 74, 0.13), transparent 68%);
+  animation: space-pulse 6s ease-in-out infinite;
+}
+
+.space-planet-body {
+  border-radius: 50%;
+  background:
+    radial-gradient(120% 120% at 32% 28%, #1d1e22 0%, #131317 38%, #0a0a0c 68%, #060607 100%);
+  box-shadow:
+    inset -18px -14px 46px rgba(0, 0, 0, 0.85),
+    inset 8px 6px 24px rgba(255, 255, 255, 0.05),
+    0 0 80px -30px rgba(255, 255, 255, 0.12);
+}
+
+.space-sat {
   animation: space-spin linear infinite;
 }
 
-.space-node > span {
+.space-sat > span {
   position: absolute;
   top: 50%;
   left: 0;
   transform: translate(-50%, -50%);
 }
 
-.space-core-glow {
-  position: absolute;
-  inset: -70%;
-  border-radius: 50%;
-  background: radial-gradient(
-    closest-side,
-    rgba(76, 201, 240, 0.4),
-    transparent 70%
-  );
-  animation: space-pulse 5s ease-in-out infinite;
+@keyframes space-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
 
 @keyframes space-pulse {
-  0%,
-  100% {
-    opacity: 0.45;
-    transform: scale(0.92);
-  }
-  50% {
-    opacity: 0.9;
-    transform: scale(1.06);
-  }
-}
-
-.space-flow {
-  position: absolute;
-  inset: 0;
-  animation: space-flow 2.4s linear infinite;
-}
-
-@keyframes space-flow {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(100%);
-  }
+  0%, 100% { opacity: 0.5; transform: scale(0.94); }
+  50%      { opacity: 1;   transform: scale(1.04); }
 }
 
 .space-scan {
-  background: repeating-linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.03) 0 1px,
-    transparent 1px 4px
-  );
+  background: repeating-linear-gradient(to bottom, rgba(255,255,255,0.025) 0 1px, transparent 1px 4px);
 }
 
-@keyframes space-sweep {
-  0% {
-    transform: translateX(-120%);
-  }
-  100% {
-    transform: translateX(220%);
-  }
-}
 /* Every card runs the same 48s cycle, offset by one slot each, so a
    single card is lit at a time and the light travels down the rail.
    Slot = 48s / 10 cards = 4.8s, which keeps the light locked to the
    card's actual position as the rail moves. */
-
 .work-card {
   animation: work-card-edge 48s linear infinite;
   animation-delay: calc(var(--n, 0) * -4.8s);
