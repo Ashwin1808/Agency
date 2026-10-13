@@ -20,6 +20,16 @@ function shadowLayer(count: number, seed: number, span: number, alpha: number) {
   return out.join(",");
 }
 
+export function Nebula() {
+  return (
+    <div className="absolute inset-0" aria-hidden="true">
+      <span className="space-nebula space-nebula-a" />
+      <span className="space-nebula space-nebula-b" />
+      <span className="space-nebula space-nebula-c" />
+    </div>
+  );
+}
+
 export function SpaceBackdrop() {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
@@ -27,16 +37,17 @@ export function SpaceBackdrop() {
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(120% 90% at 50% 0%, #121114 0%, #0a0a0c 42%, #060607 72%, #030304 100%)",
+            "radial-gradient(130% 100% at 50% 0%, #0d0d16 0%, #08080f 38%, #05050a 68%, #030305 100%)",
         }}
       />
+      <Nebula />
       <span
         className="space-stars space-stars-far"
-        style={{ "--stars": shadowLayer(160, 8675309, 900, 0.7) } as CSSProperties}
+        style={{ "--stars": shadowLayer(170, 8675309, 900, 0.75) } as CSSProperties}
       />
       <span
         className="space-stars space-stars-near"
-        style={{ "--stars": shadowLayer(70, 90210, 900, 0.95) } as CSSProperties}
+        style={{ "--stars": shadowLayer(80, 90210, 900, 0.95) } as CSSProperties}
       />
       <div
         className="absolute inset-0 opacity-[0.03] mix-blend-overlay"

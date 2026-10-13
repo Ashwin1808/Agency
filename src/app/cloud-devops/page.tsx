@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { cta, hero, process, services, tools, trusted, why, work } from "@/lib/devops";
+import { cta, hero, process, services, tools, work, why } from "@/lib/devops";
 import Logo from "@/components/marks/Logo";
 import Reveal from "@/components/Reveal";
-import { HeroSceneExport, SpaceBackdrop } from "@/components/marks/Space";
+import { Gyroscope, SpaceBackdrop } from "@/components/marks/Space";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -51,17 +51,41 @@ const toolIcons: Record<string, typeof CloudMark> = {
 
 const whyIcons = [Sparkle, Shield, Container, Trend] as const;
 
-function Badge({ children, tone = "light" }: { children: React.ReactNode; tone?: "light" | "dark" }) {
+function Badge({ children }: { children: React.ReactNode }) {
   return (
-    <span
-      className={`inline-flex items-center rounded-full border px-4 py-1.5 text-[10.5px] font-medium uppercase tracking-[0.16em] ${
-        tone === "light"
-          ? "border-white/15 text-white/50"
-          : "border-black/10 text-ink/45"
-      }`}
-    >
+    <span className="inline-flex items-center rounded-full border border-white/12 px-4 py-1.5 text-[10.5px] font-medium uppercase tracking-[0.16em] text-white/45">
       {children}
     </span>
+  );
+}
+
+function Console() {
+  return (
+    <div className="overflow-hidden rounded-[1.1rem] border border-white/[0.09] bg-[#06070e]/90 font-mono text-[11.5px] shadow-[0_30px_70px_-34px_rgba(0,0,0,0.95)]">
+      <div className="flex items-center gap-3 border-b border-white/[0.06] px-4 py-2.5">
+        <span className="flex gap-1.5">
+          <span className="h-2 w-2 rounded-full bg-white/10" />
+          <span className="h-2 w-2 rounded-full bg-white/10" />
+          <span className="h-2 w-2 rounded-full bg-white/10" />
+        </span>
+        <span className="text-white/25">~/prod</span>
+      </div>
+      <div className="space-y-1.5 px-4 py-4">
+        <p className="flex gap-2">
+          <span className="text-accent/70">&gt;</span>
+          <span className="text-white/75">kubectl apply -f infrastructure/</span>
+        </p>
+        <p className="flex gap-2 text-white/35">
+          <span>&nbsp;</span>
+          <span>Deploying...</span>
+        </p>
+        <p className="flex gap-2">
+          <span className="text-accent/70">&gt;</span>
+          <span className="text-white/70">All services are healthy</span>
+          <span className="text-accent">✓</span>
+        </p>
+      </div>
+    </div>
   );
 }
 
@@ -83,7 +107,7 @@ export default function CloudDevOpsPage() {
               <a
                 key={label}
                 href={href}
-                className="text-[13.5px] font-medium text-white/70 transition-colors hover:text-white"
+                className="text-[13.5px] font-medium text-white/60 transition-colors hover:text-white"
               >
                 {label}
               </a>
@@ -91,34 +115,35 @@ export default function CloudDevOpsPage() {
           </nav>
           <a
             href={cta.primary.href}
-            className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-[12.5px] font-semibold text-ink transition-transform hover:-translate-y-px"
+            className="inline-flex items-center gap-1.5 rounded-full bg-accent px-5 py-2.5 text-[12.5px] font-semibold text-ink transition-transform hover:-translate-y-px"
           >
             Start a project
+            <ArrowUpRight className="h-3.5 w-3.5" />
           </a>
         </div>
       </header>
 
-      <main className="relative bg-[#05060a] pt-16 text-white lg:pt-20">
+      {/* one continuous space field behind the whole page, so the star
+          layers are not re-rendered per section. Sibling of main so
+          main's own background can never paint over it. */}
+      <div className="pointer-events-none fixed inset-0 z-0">
+        <SpaceBackdrop />
+      </div>
+
+      <main className="relative z-10 bg-[#030306]/0 pt-16 text-white lg:pt-20">
         {/* ============================ hero ============================ */}
         <section className="relative isolate overflow-hidden">
-          <SpaceBackdrop />
-          <div className="relative mx-auto max-w-[1440px] px-5 pb-20 pt-14 sm:px-8 lg:px-10 lg:pb-24 lg:pt-20">
-            <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:gap-10">
+          <div className="relative mx-auto max-w-[1440px] px-5 pb-24 pt-14 sm:px-8 lg:px-10 lg:pb-32 lg:pt-20">
+            <div className="grid items-center gap-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-10">
               <div>
                 <Badge>{hero.badge}</Badge>
 
-                <h1 className="mt-7 text-[clamp(2.3rem,6.6vw,4.6rem)] font-semibold leading-[0.95] tracking-[-0.04em]">
-                  {hero.heading.map((line, i) => (
-                    <span
-                      key={line}
-                      className={`block ${i === 1 ? "text-accent" : "text-white"}`}
-                    >
-                      {line}
-                    </span>
-                  ))}
+                <h1 className="mt-7 text-[clamp(2.4rem,7vw,5rem)] font-semibold leading-[0.94] tracking-[-0.04em]">
+                  <span className="block text-white">{hero.heading[0]}</span>
+                  <span className="block text-accent">{hero.heading[1]}</span>
                 </h1>
 
-                <p className="mt-6 max-w-[400px] text-[14.5px] leading-[1.65] text-white/55">
+                <p className="mt-7 max-w-[400px] text-[15px] leading-[1.65] text-white/50">
                   {hero.lede}
                 </p>
 
@@ -130,16 +155,16 @@ export default function CloudDevOpsPage() {
                     {hero.primary.label}
                     <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </a>
-                  <Link
+                  <a
                     href={hero.secondary.href}
-                    className="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3.5 text-[13.5px] font-medium text-white/80 transition-colors hover:border-white/35 hover:text-white"
+                    className="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3.5 text-[13.5px] font-medium text-white/75 transition-colors hover:border-white/35 hover:text-white"
                   >
                     {hero.secondary.label}
                     <ArrowRight className="h-4 w-4" />
-                  </Link>
+                  </a>
                 </div>
 
-                <ul className="mt-10 flex flex-wrap items-center gap-x-9 gap-y-4">
+                <ul className="mt-11 flex flex-wrap items-center gap-x-9 gap-y-4">
                   {hero.marks.map((mark) => {
                     const Icon = markIcons[mark.icon as keyof typeof markIcons];
                     return (
@@ -149,7 +174,7 @@ export default function CloudDevOpsPage() {
                           <span className="block text-[12.5px] font-semibold leading-tight text-white">
                             {mark.title}
                           </span>
-                          <span className="block text-[10.5px] leading-tight text-white/40">
+                          <span className="block text-[10.5px] leading-tight text-white/35">
                             {mark.note}
                           </span>
                         </span>
@@ -159,49 +184,32 @@ export default function CloudDevOpsPage() {
                 </ul>
               </div>
 
-              <HeroSceneExport flow={hero.flow} terminal={hero.terminal} />
+              {/* the rig sits between the columns and bleeds past the edge */}
+              <div className="relative -mx-6 lg:mx-0">
+                <div className="pointer-events-none absolute left-1/2 top-1/2 -z-0 w-[720px] -translate-x-1/2 -translate-y-1/2 opacity-70">
+                  <Gyroscope />
+                </div>
+                <div className="relative z-10 ml-auto w-full max-w-[380px] space-y-3">
+                  <Console />
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* ============================ trusted ============================ */}
-        <section className="border-y border-black/[0.07] bg-[#f4f6f9]">
-          <div className="mx-auto max-w-[1440px] px-5 py-10 sm:px-8 lg:px-10">
-            <p className="text-center text-[10.5px] font-medium uppercase tracking-[0.18em] text-ink/40">
-              Trusted by teams building what is next
-            </p>
-            <ul className="mt-7 flex flex-wrap items-center justify-center gap-x-12 gap-y-4">
-              {trusted.map((brand) => (
-                <li
-                  key={brand}
-                  className="text-[15px] font-semibold tracking-[-0.02em] text-ink/45 transition-colors hover:text-ink"
-                >
-                  {brand}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
         {/* ============================ services ============================ */}
-        <section id="services" className="relative scroll-mt-24 bg-[#fafafa]">
-          <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
-            <div className="grid gap-12 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-16">
+        <section id="services" className="relative scroll-mt-24 overflow-hidden">
+          <span className="constellation" aria-hidden="true" />
+          <div className="relative mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-10 lg:py-32">
+            <div className="grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
               <Reveal>
-                <Badge tone="dark">{services.badge}</Badge>
-                <h2 className="mt-6 max-w-[420px] text-[clamp(1.8rem,4.2vw,3rem)] font-semibold leading-[1.02] tracking-[-0.035em] text-ink">
+                <Badge>{services.badge}</Badge>
+                <h2 className="mt-6 max-w-[420px] text-[clamp(1.9rem,4.4vw,3.2rem)] font-semibold leading-[1] tracking-[-0.035em] text-white">
                   {services.heading}
                 </h2>
-                <p className="mt-5 max-w-[360px] text-[14px] leading-[1.7] text-ink/60">
+                <p className="mt-6 max-w-[340px] text-[14px] leading-[1.7] text-white/50">
                   {services.lede}
                 </p>
-                <Link
-                  href="#process"
-                  className="group mt-7 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-[13.5px] font-semibold text-white transition-transform duration-300 hover:-translate-y-px"
-                >
-                  Explore the process
-                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
-                </Link>
               </Reveal>
 
               <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -209,12 +217,14 @@ export default function CloudDevOpsPage() {
                   const Icon = serviceIcons[item.icon as keyof typeof serviceIcons];
                   return (
                     <Reveal key={item.title} delay={i * 60} distance={16}>
-                      <div className="h-full rounded-[1.1rem] border border-black/[0.07] bg-white p-5 transition-colors duration-300 hover:border-black/20">
-                        <Icon className="h-6 w-6 text-ink" strokeWidth={1.4} />
-                        <h3 className="mt-4 text-[13.5px] font-semibold tracking-[-0.015em] text-ink">
+                      <div className="space-card h-full p-5">
+                        <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/[0.08] bg-white/[0.03]">
+                          <Icon className="h-5 w-5 text-accent/85" strokeWidth={1.4} />
+                        </span>
+                        <h3 className="mt-4 text-[13.5px] font-semibold tracking-[-0.015em] text-white">
                           {item.title}
                         </h3>
-                        <p className="mt-2 text-[12px] leading-[1.55] text-ink/55">{item.note}</p>
+                        <p className="mt-2 text-[12px] leading-[1.55] text-white/45">{item.note}</p>
                       </div>
                     </Reveal>
                   );
@@ -225,39 +235,31 @@ export default function CloudDevOpsPage() {
         </section>
 
         {/* ============================ process ============================ */}
-        <section id="process" className="relative scroll-mt-24 overflow-hidden border-y border-white/[0.06]">
-          <div
-            className="pointer-events-none absolute inset-0"
-            aria-hidden="true"
-            style={{
-              background:
-                "radial-gradient(70% 90% at 50% 100%, rgba(124,92,255,0.16), transparent 65%)",
-            }}
-          />
-          <div className="relative mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
-            <div className="grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
-              <Reveal>
-                <Badge>{process.badge}</Badge>
-                <h2 className="mt-6 max-w-[380px] text-[clamp(1.8rem,4.2vw,3rem)] font-semibold leading-[1.02] tracking-[-0.035em]">
-                  {process.heading.map((line) => (
-                    <span key={line} className="block">
-                      {line}
-                    </span>
-                  ))}
-                </h2>
-                <p className="mt-5 max-w-[330px] text-[14px] leading-[1.7] text-white/50">
-                  {process.lede}
-                </p>
-              </Reveal>
+        <section id="process" className="relative scroll-mt-24 overflow-hidden">
+          <div className="relative mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-10 lg:py-32">
+            <Reveal>
+              <div className="grid gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16">
+                <div>
+                  <Badge>{process.badge}</Badge>
+                  <h2 className="mt-6 max-w-[360px] text-[clamp(1.9rem,4.4vw,3.2rem)] font-semibold leading-[1] tracking-[-0.035em] text-white">
+                    {process.heading.map((line) => (
+                      <span key={line} className="block">
+                        {line}
+                      </span>
+                    ))}
+                  </h2>
+                  <p className="mt-6 max-w-[330px] text-[14px] leading-[1.7] text-white/50">
+                    {process.lede}
+                  </p>
+                </div>
 
-              <Reveal delay={90}>
-                <div className="relative pt-2">
+                <div className="relative pt-3">
                   <span className="timeline-line" aria-hidden="true" />
                   <ol className="grid gap-y-10 sm:grid-cols-2 lg:grid-cols-5">
                     {process.steps.map((step, i) => (
                       <li key={step.n} className="flex flex-col items-center text-center">
                         <span className="timeline-dot" style={{ animationDelay: `${i * 0.9}s` }} />
-                        <p className="mt-6 text-[11px] font-medium tabular-nums text-accent/90">
+                        <p className="mt-6 text-[11px] font-medium tabular-nums text-accent/85">
                           {step.n}
                         </p>
                         <p className="mt-1.5 text-[15px] font-semibold tracking-[-0.015em] text-white">
@@ -270,85 +272,75 @@ export default function CloudDevOpsPage() {
                     ))}
                   </ol>
                 </div>
-              </Reveal>
-            </div>
+              </div>
+            </Reveal>
           </div>
         </section>
 
         {/* ============================ tools ============================ */}
-        <section className="relative bg-[#f4f6f9]">
-          <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
+        <section className="relative overflow-hidden">
+          <div className="relative mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
             <Reveal>
-              <div className="text-center">
-                <p className="text-[10.5px] font-medium uppercase tracking-[0.18em] text-ink/40">
-                  Technologies I work with
-                </p>
-                <h2 className="mt-5 text-[clamp(1.7rem,3.8vw,2.6rem)] font-semibold leading-tight tracking-[-0.035em] text-ink">
-                  Modern tools. Real impact.
-                </h2>
-              </div>
+              <p className="text-[10.5px] font-medium uppercase tracking-[0.18em] text-white/30">
+                Technologies I work with
+              </p>
+              <h2 className="mt-5 max-w-[560px] text-[clamp(1.7rem,3.8vw,2.6rem)] font-semibold leading-tight tracking-[-0.035em] text-white">
+                Modern tools. Real impact.
+              </h2>
             </Reveal>
 
-            <div className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+            <ul className="mt-10 flex flex-wrap gap-2.5">
               {tools.map((tool, i) => {
                 const Icon = toolIcons[tool] ?? Server;
                 return (
-                  <Reveal key={tool} delay={i * 40} distance={12}>
-                    <div className="flex flex-col items-center gap-3 rounded-[1rem] border border-black/[0.07] bg-white px-4 py-6 text-center transition-colors duration-300 hover:border-black/20">
-                      <Icon className="h-6 w-6 text-ink/70" strokeWidth={1.4} />
-                      <span className="text-[12.5px] font-medium text-ink/65">{tool}</span>
-                    </div>
+                  <Reveal key={tool} delay={i * 35} distance={10}>
+                    <li className="space-chip">
+                      <Icon className="h-4 w-4 text-accent/80" strokeWidth={1.5} />
+                      {tool}
+                    </li>
                   </Reveal>
                 );
               })}
-            </div>
+            </ul>
           </div>
         </section>
 
         {/* ============================ work ============================ */}
-        <section id="work" className="relative scroll-mt-24">
-          <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
+        <section id="work" className="relative scroll-mt-24 overflow-hidden">
+          <span className="constellation" aria-hidden="true" />
+          <div className="relative mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-10 lg:py-32">
             <Reveal>
-              <div className="flex flex-wrap items-end justify-between gap-6">
-                <div>
-                  <Badge>{work.badge}</Badge>
-                  <h2 className="mt-6 text-[clamp(1.8rem,4.2vw,3rem)] font-semibold leading-[1.02] tracking-[-0.035em]">
-                    {work.heading}
-                  </h2>
-                  <p className="mt-4 max-w-[360px] text-[14px] leading-[1.7] text-white/50">
-                    {work.lede}
-                  </p>
-                </div>
-              </div>
+              <Badge>{work.badge}</Badge>
+              <h2 className="mt-6 text-[clamp(1.9rem,4.4vw,3.2rem)] font-semibold leading-[1] tracking-[-0.035em] text-white">
+                {work.heading}
+              </h2>
             </Reveal>
 
-            <div className="mt-12 grid gap-5 lg:grid-cols-2">
+            <div className="mt-12 grid gap-4 lg:grid-cols-2">
               {work.items.map((item, i) => (
                 <Reveal key={item.name} delay={i * 90} distance={22}>
-                  <article className="group flex h-full flex-col overflow-hidden rounded-[1.4rem] border border-white/[0.08] bg-white/[0.022] transition-colors hover:border-white/20">
-                    <div className="border-b border-white/[0.07] p-6">
-                      <h3 className="text-[19px] font-semibold tracking-[-0.025em] text-white">
-                        {item.name}
-                      </h3>
-                      <p className="mt-2.5 text-[13px] leading-[1.6] text-white/50">{item.desc}</p>
-                      <ul className="mt-5 flex flex-wrap gap-1.5">
-                        {item.chips.map((chip) => (
-                          <li
-                            key={chip}
-                            className="rounded-full border border-white/[0.1] px-2.5 py-0.5 text-[10.5px] text-white/45"
-                          >
-                            {chip}
-                          </li>
-                        ))}
-                      </ul>
+                  <article className="space-card flex h-full flex-col p-7">
+                    <div className="flex flex-wrap items-center gap-2">
+                      {item.chips.map((chip) => (
+                        <span
+                          key={chip}
+                          className="rounded-full border border-white/[0.09] px-2.5 py-0.5 text-[10.5px] text-white/40"
+                        >
+                          {chip}
+                        </span>
+                      ))}
                     </div>
-                    <div className="flex flex-1 flex-col justify-between gap-5 p-6">
-                      <p className="text-[13.5px] leading-[1.6] text-white/60">{item.stack}</p>
-                      <p className="flex items-start gap-2.5 border-t border-white/[0.07] pt-4 text-[13px] leading-[1.55] text-white/75">
-                        <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-accent" />
-                        {item.result}
-                      </p>
-                    </div>
+                    <h3 className="mt-5 text-[clamp(1.2rem,2.2vw,1.6rem)] font-semibold tracking-[-0.03em] text-white">
+                      {item.name}
+                    </h3>
+                    <p className="mt-3 text-[14px] leading-[1.65] text-white/55">{item.desc}</p>
+                    <p className="mt-5 flex-1 text-[13.5px] leading-[1.6] text-white/45">
+                      {item.stack}
+                    </p>
+                    <p className="mt-6 flex items-start gap-2.5 border-t border-white/[0.07] pt-5 text-[13px] leading-[1.55] text-white/75">
+                      <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-accent" />
+                      {item.result}
+                    </p>
                   </article>
                 </Reveal>
               ))}
@@ -357,15 +349,17 @@ export default function CloudDevOpsPage() {
         </section>
 
         {/* ============================ why ============================ */}
-        <section id="why" className="relative scroll-mt-24 bg-[#fafafa]">
-          <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
-            <div className="grid gap-12 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-16">
+        <section id="why" className="relative scroll-mt-24 overflow-hidden">
+          <div className="relative mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
+            <div className="grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
               <Reveal>
-                <Badge tone="dark">{why.badge}</Badge>
-                <h2 className="mt-6 max-w-[400px] text-[clamp(1.7rem,3.8vw,2.6rem)] font-semibold leading-[1.05] tracking-[-0.035em] text-ink">
+                <Badge>{why.badge}</Badge>
+                <h2 className="mt-6 max-w-[400px] text-[clamp(1.9rem,4.4vw,3rem)] font-semibold leading-[1] tracking-[-0.035em] text-white">
                   {why.heading}
                 </h2>
-                <p className="mt-5 max-w-[360px] text-[14px] leading-[1.7] text-ink/60">{why.lede}</p>
+                <p className="mt-6 max-w-[340px] text-[14px] leading-[1.7] text-white/50">
+                  {why.lede}
+                </p>
               </Reveal>
 
               <div className="grid gap-3 sm:grid-cols-2">
@@ -373,10 +367,10 @@ export default function CloudDevOpsPage() {
                   const Icon = whyIcons[i];
                   return (
                     <Reveal key={item.title} delay={i * 60} distance={16}>
-                      <div className="h-full rounded-[1.1rem] border border-black/[0.07] bg-white p-5">
-                        <Icon className="h-5 w-5 text-ink" strokeWidth={1.4} />
-                        <h3 className="mt-4 text-[13.5px] font-semibold text-ink">{item.title}</h3>
-                        <p className="mt-1.5 text-[12px] leading-[1.55] text-ink/55">{item.note}</p>
+                      <div className="space-card h-full p-5">
+                        <Icon className="h-5 w-5 text-accent/85" strokeWidth={1.4} />
+                        <h3 className="mt-4 text-[13.5px] font-semibold text-white">{item.title}</h3>
+                        <p className="mt-2 text-[12px] leading-[1.55] text-white/45">{item.note}</p>
                       </div>
                     </Reveal>
                   );
@@ -390,13 +384,13 @@ export default function CloudDevOpsPage() {
         <section className="relative isolate overflow-hidden border-t border-white/[0.06]">
           <span className="planet-curve" aria-hidden="true" />
           <div className="relative mx-auto max-w-[1440px] px-5 py-24 sm:px-8 lg:px-10 lg:py-36">
-            <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] lg:items-end lg:gap-16">
+            <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)] lg:items-end lg:gap-16">
               <Reveal>
                 <Badge>{cta.badge}</Badge>
-                <h2 className="mt-6 max-w-[560px] text-[clamp(1.9rem,4.6vw,3.4rem)] font-semibold leading-[1] tracking-[-0.035em]">
+                <h2 className="mt-6 max-w-[540px] text-[clamp(1.9rem,4.6vw,3.4rem)] font-semibold leading-[1] tracking-[-0.035em] text-white">
                   {cta.heading}
                 </h2>
-                <p className="mt-5 max-w-[400px] text-[14px] leading-[1.7] text-white/55">{cta.lede}</p>
+                <p className="mt-6 max-w-[400px] text-[14px] leading-[1.7] text-white/50">{cta.lede}</p>
                 <div className="mt-8 flex flex-wrap gap-3">
                   <a
                     href={cta.primary.href}
@@ -407,7 +401,7 @@ export default function CloudDevOpsPage() {
                   </a>
                   <a
                     href={cta.secondary.href}
-                    className="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3.5 text-[13.5px] font-medium text-white/80 transition-colors hover:border-white/35 hover:text-white"
+                    className="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3.5 text-[13.5px] font-medium text-white/75 transition-colors hover:border-white/35 hover:text-white"
                   >
                     {cta.secondary.label}
                     <ArrowRight className="h-4 w-4" />

@@ -170,6 +170,129 @@
   animation-play-state: paused;
 }
 
+/* ---------- deep space ---------- */
+
+.space-nebula {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  will-change: transform, opacity;
+}
+
+.space-nebula-a {
+  top: -18%;
+  right: -6%;
+  width: 62%;
+  height: 72%;
+  background: radial-gradient(closest-side, rgba(124, 92, 255, 0.30), transparent 72%);
+  animation: space-float 38s ease-in-out infinite;
+}
+
+.space-nebula-b {
+  top: 22%;
+  left: -14%;
+  width: 54%;
+  height: 66%;
+  background: radial-gradient(closest-side, rgba(255, 138, 76, 0.16), transparent 74%);
+  animation: space-float 52s ease-in-out infinite reverse;
+}
+
+.space-nebula-c {
+  bottom: -16%;
+  left: 26%;
+  width: 52%;
+  height: 56%;
+  background: radial-gradient(closest-side, rgba(217, 70, 239, 0.15), transparent 74%);
+  animation: space-float 44s ease-in-out infinite;
+}
+
+@keyframes space-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate3d(3%, -4%, 0) scale(1.1);
+    opacity: 1;
+  }
+}
+
+/* faint constellation rules between sections */
+.constellation {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image:
+    radial-gradient(1px 1px at 12% 30%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1px 1px at 34% 72%, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(1px 1px at 62% 22%, rgba(255, 255, 255, 0.45), transparent),
+    radial-gradient(1px 1px at 84% 66%, rgba(255, 255, 255, 0.35), transparent);
+}
+
+/* glowing service card */
+.space-card {
+  position: relative;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.022);
+  transition:
+    transform 0.4s ease,
+    border-color 0.4s ease,
+    background-color 0.4s ease;
+}
+
+.space-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    140deg,
+    rgba(212, 243, 74, 0.5),
+    transparent 42%,
+    transparent 62%,
+    rgba(124, 92, 255, 0.35)
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.space-card:hover::before {
+  opacity: 1;
+}
+
+.space-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.space-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.025);
+  padding: 10px 16px;
+  transition:
+    border-color 0.3s ease,
+    background-color 0.3s ease;
+}
+
+.space-chip:hover {
+  border-color: rgba(212, 243, 74, 0.4);
+  background: rgba(212, 243, 74, 0.06);
+}
+
 /* ---------- hero scene ---------- */
 
 .hero-panel {
