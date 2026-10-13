@@ -49,44 +49,99 @@ export function SpaceBackdrop() {
   );
 }
 
-/** A single ringed planet with a few slow satellites. */
-export function Planet() {
+/** Spinning 3D wireframe gyroscope with orbiting satellites. */
+export function Gyroscope() {
   return (
-    <div className="space-planet relative aspect-square w-full max-w-[460px] mx-auto">
-      <div className="space-planet-rings absolute inset-0">
-        {[0, 1, 2, 3].map((i) => (
+    <div className="gyro-scene relative mx-auto aspect-square w-full max-w-[460px] select-none">
+      <div className="gyro absolute inset-0">
+        <span
+          className="gyro-ring"
+          style={{ transform: "rotateX(72deg)" }}
+        />
+        <span
+          className="gyro-ring gyro-ring-2"
+          style={{ transform: "rotateY(72deg)" }}
+        />
+        <span
+          className="gyro-ring gyro-ring-2"
+          style={{ transform: "rotateX(38deg) rotateY(38deg)" }}
+        />
+        <span
+          className="gyro-ring gyro-ring-3"
+          style={{ transform: "rotateX(88deg) rotateY(20deg)" }}
+        />
+
+        <span className="gyro-core" />
+
+        {[
+          { r: 48, t: 0 },
+          { r: 48, t: 120 },
+          { r: 48, t: 240 },
+          { r: 36, t: 60 },
+        ].map((sat) => (
           <span
-            key={i}
-            className="space-ring"
-            style={{ inset: `${i * 11 + 2}%` }}
+            key={`${sat.r}-${sat.t}`}
+            className="gyro-sat"
+            style={{
+              transform: `rotate(${sat.t}deg) translateX(${sat.r}%)`,
+            }}
           />
         ))}
       </div>
+    </div>
+  );
+}
 
-      <div className="absolute inset-0 grid place-items-center">
-        <span className="space-planet-glow" />
-        <div className="space-planet-body relative aspect-square w-[38%] rounded-full" />
+/** Commit-to-production rail with a packet travelling stage to stage. */
+export function PipelineRail({
+  steps,
+  seconds = 16,
+}: {
+  steps: { n: string; label: string; note: string }[];
+  seconds?: number;
+}) {
+  const last = steps.length - 1;
+  return (
+    <div style={{ "--rail": `${seconds}s`, "--step": `${seconds / steps.length}s` } as CSSProperties}>
+      <div className="relative h-[132px]">
+        <span className="rail-track" />
+        <span className="rail-packet" />
+
+        {steps.map((s, i) => (
+          <div
+            key={s.n}
+            className="absolute top-0"
+            style={{ left: `${(i / last) * 100}%` }}
+          >
+            <span
+              className="rail-node-dot -ml-[3.5px] block h-[7px] w-[7px] rounded-full bg-white/25"
+              style={{ "--i": i } as CSSProperties}
+            />
+            <div
+              className={`mt-5 w-[128px] ${
+                i === last ? "-translate-x-full" : ""
+              } ${i === 0 ? "" : i === last ? "" : ""}`}
+            >
+              <p className="text-[10px] font-medium tabular-nums text-white/30">{s.n}</p>
+              <p className="mt-1.5 text-[14px] font-semibold tracking-[-0.01em] text-white">
+                {s.label}
+              </p>
+              <p className="mt-1 text-[11px] leading-tight text-white/35">{s.note}</p>
+            </div>
+          </div>
+        ))}
       </div>
 
-      {[
-        { d: 46, s: 60 },
-        { d: 68, s: 84 },
-        { d: 100, s: 52 },
-      ].map((sat) => (
-        <span
-          key={sat.d}
-          className="space-sat absolute inset-0"
-          style={{ animationDuration: `${sat.d}s` }}
-        >
-          <span
-            className="block h-[5px] w-[5px] rounded-full bg-white/70"
-            style={{
-              boxShadow: "0 0 10px 2px rgba(255,255,255,0.35)",
-              marginTop: `${sat.s / 2}%`,
-            }}
-          />
+      {/* live stage readout, kept in step with the travelling packet */}
+      <div className="flex flex-wrap items-center gap-x-2.5 border-t border-white/[0.07] pt-4 font-mono text-[11.5px]">
+        <span className="text-white/30">$</span>
+        <span className="text-white/50">deploy --watch</span>
+        <span className="stage-readout text-accent" />
+        <span className="text-white/25">→ prod</span>
+        <span className="ml-auto hidden text-white/25 sm:block">
+          git is the source of truth
         </span>
-      ))}
+      </div>
     </div>
   );
 }

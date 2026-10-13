@@ -32,6 +32,15 @@ export const console = {
   ],
 };
 
+export const observe = [
+  { label: "Prometheus", note: "metrics" },
+  { label: "Grafana", note: "dashboards" },
+  { label: "Alertmanager", note: "alerting" },
+  { label: "Loki", note: "logs" },
+  { label: "Metrics Server", note: "HPA input" },
+  { label: "Envoy Gateway", note: "routing" },
+];
+
 export const projects = {
   eyebrow: "Shipped",
   heading: "Two platforms, both verified.",

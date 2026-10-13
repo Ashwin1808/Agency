@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { console as deploy, cta, hero, path, projects } from "@/lib/devops";
+import { console as deploy, cta, hero, observe, path, projects } from "@/lib/devops";
 import Logo from "@/components/marks/Logo";
 import Reveal from "@/components/Reveal";
-import { SpaceBackdrop } from "@/components/marks/Space";
+import { Gyroscope, PipelineRail, SpaceBackdrop } from "@/components/marks/Space";
 import { ArrowRight, ArrowUpRight, Check } from "@/components/marks/Icons";
 
 export const metadata: Metadata = {
@@ -36,10 +36,7 @@ function DeployConsole() {
 
       <ul className="divide-y divide-white/[0.04] px-4">
         {deploy.lines.map((line) => (
-          <li
-            key={line.step}
-            className="flex items-center gap-3 py-2.5 font-mono text-[11.5px]"
-          >
+          <li key={line.step} className="flex items-center gap-3 py-2.5 font-mono text-[11.5px]">
             <Check className="h-3 w-3 shrink-0 text-accent/70" strokeWidth={3} />
             <span className="min-w-0 flex-1 truncate text-white/75">{line.step}</span>
             <span className="shrink-0 text-white/30">{line.note}</span>
@@ -83,8 +80,8 @@ export default function CloudDevOpsPage() {
 
         {/* ============================ hero ============================ */}
         <section className="relative">
-          <div className="mx-auto max-w-[1440px] px-5 pb-20 pt-20 sm:px-8 lg:px-10 lg:pb-28 lg:pt-28">
-            <div className="grid items-center gap-14 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:gap-14">
+          <div className="mx-auto max-w-[1440px] px-5 pb-20 pt-16 sm:px-8 lg:px-10 lg:pb-24 lg:pt-24">
+            <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-8">
               <div>
                 <div className="flex items-center gap-3">
                   <span className="h-px w-7 bg-white/20" aria-hidden="true" />
@@ -121,25 +118,69 @@ export default function CloudDevOpsPage() {
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
-
-                <dl className="mt-14 grid max-w-[520px] grid-cols-3 gap-6">
-                  {hero.proof.map((item) => (
-                    <div key={item.label} className="border-t border-white/10 pt-3.5">
-                      <dd className="text-[clamp(1.1rem,2vw,1.5rem)] font-semibold leading-none tracking-[-0.03em] text-white">
-                        {item.value}
-                      </dd>
-                      <dt className="mt-2.5 text-[10px] font-medium uppercase leading-[1.5] tracking-[0.12em] text-white/35">
-                        {item.label}
-                      </dt>
-                    </div>
-                  ))}
-                </dl>
               </div>
 
-              <Reveal delay={120} distance={22}>
-                <DeployConsole />
-              </Reveal>
+              <div className="relative">
+                <Gyroscope />
+              </div>
             </div>
+
+            <dl className="mt-16 grid max-w-[560px] grid-cols-3 gap-6 lg:mt-20">
+              {hero.proof.map((item) => (
+                <div key={item.label} className="border-t border-white/10 pt-3.5">
+                  <dd className="text-[clamp(1.1rem,2vw,1.5rem)] font-semibold leading-none tracking-[-0.03em] text-white">
+                    {item.value}
+                  </dd>
+                  <dt className="mt-2.5 text-[10px] font-medium uppercase leading-[1.5] tracking-[0.12em] text-white/35">
+                    {item.label}
+                  </dt>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </section>
+
+        {/* ============================ pipeline ============================ */}
+        <section id="path" className="relative border-t border-white/[0.06]">
+          <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
+            <Reveal>
+              <div className="grid gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-16">
+                <div>
+                  <p className="text-[10.5px] font-medium uppercase tracking-[0.18em] text-white/35">
+                    {path.eyebrow}
+                  </p>
+                  <h2 className="mt-5 text-[clamp(1.9rem,4.4vw,3.2rem)] font-semibold leading-[1] tracking-[-0.035em] text-white">
+                    {path.heading}
+                  </h2>
+                </div>
+                <p className="max-w-[420px] self-end text-[14px] leading-[1.7] text-white/50">
+                  {path.lede}
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={80} distance={20}>
+              <div className="pipeline-grid mt-14 overflow-hidden rounded-[1.5rem] border border-white/[0.07] px-6 py-10 lg:px-10">
+                <PipelineRail steps={path.steps} />
+              </div>
+            </Reveal>
+
+            <Reveal delay={140}>
+              <div className="mt-6 grid gap-6 lg:grid-cols-2">
+                <DeployConsole />
+                <div className="grid gap-px overflow-hidden rounded-[1.25rem] border border-white/[0.07]">
+                  {observe.map((o) => (
+                    <div
+                      key={o.label}
+                      className="flex items-baseline justify-between gap-4 bg-white/[0.018] px-5 py-4"
+                    >
+                      <span className="text-[13px] font-medium text-white/80">{o.label}</span>
+                      <span className="text-[11.5px] text-white/35">{o.note}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
           </div>
         </section>
 
@@ -176,9 +217,7 @@ export default function CloudDevOpsPage() {
                             {project.badge}
                           </span>
                         </div>
-                        <p className="mt-2.5 text-[13.5px] italic text-white/40">
-                          {project.line}
-                        </p>
+                        <p className="mt-2.5 text-[13.5px] italic text-white/40">{project.line}</p>
                         <p className="mt-6 max-w-[480px] text-[14px] leading-[1.7] text-white/60">
                           {project.summary}
                         </p>
@@ -208,43 +247,6 @@ export default function CloudDevOpsPage() {
                 </Reveal>
               ))}
             </div>
-          </div>
-        </section>
-
-        {/* ============================ the path ============================ */}
-        <section id="path" className="relative border-t border-white/[0.06]">
-          <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
-            <Reveal>
-              <div className="grid gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-16">
-                <div>
-                  <p className="text-[10.5px] font-medium uppercase tracking-[0.18em] text-white/35">
-                    {path.eyebrow}
-                  </p>
-                  <h2 className="mt-5 text-[clamp(1.9rem,4.4vw,3.2rem)] font-semibold leading-[1] tracking-[-0.035em] text-white">
-                    {path.heading}
-                  </h2>
-                </div>
-                <p className="max-w-[420px] self-end text-[14px] leading-[1.7] text-white/50">
-                  {path.lede}
-                </p>
-              </div>
-            </Reveal>
-
-            <ol className="mt-14 grid gap-px overflow-hidden rounded-[1.5rem] border border-white/[0.07] sm:grid-cols-3 lg:grid-cols-5">
-              {path.steps.map((step, i) => (
-                <Reveal key={step.n} delay={i * 70} distance={16}>
-                  <li className="h-full bg-[#070708] px-6 py-8">
-                    <span className="text-[11px] font-medium tabular-nums text-white/30">
-                      {step.n}
-                    </span>
-                    <p className="mt-6 text-[17px] font-semibold tracking-[-0.02em] text-white">
-                      {step.label}
-                    </p>
-                    <p className="mt-1.5 text-[11.5px] text-white/35">{step.note}</p>
-                  </li>
-                </Reveal>
-              ))}
-            </ol>
           </div>
         </section>
 
