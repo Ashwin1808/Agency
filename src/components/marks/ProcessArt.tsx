@@ -170,19 +170,36 @@ export default function ProcessArt({ variant }: { variant: string }) {
       return (
         <div className="relative aspect-[4/3] w-full">
           {/* faded screens behind */}
-          <span className="absolute left-[2%] top-[14%] h-[64%] w-[34%] -rotate-[2deg] overflow-hidden rounded-[8px] border border-black/[0.06] bg-white px-[8%] py-[9%] opacity-70">
-            <span className="block text-[7.5px] font-semibold text-ink/70">Car insurance</span>
-            <span className="mt-[4%] block text-[6.5px] leading-tight text-ink/45">
-              Your cover keeps you moving
-            </span>
-            <span className="mt-[10%] block h-[38%] rounded-[4px] bg-gradient-to-br from-[#dfe4ef] to-[#b9c2d4]" />
-            <span className="mt-[9%] block h-[2px] w-[70%] rounded-full bg-black/12" />
-            <span className="mt-[6%] block h-[2px] w-[50%] rounded-full bg-black/10" />
+          <span className="absolute left-0 top-[12%] h-[58%] w-[26%] -rotate-[1deg] overflow-hidden rounded-[8px] border border-black/[0.05] bg-white px-[7%] py-[8%] opacity-40">
+            <span className="block h-[3px] w-[40%] rounded-full bg-black/15" />
+            <span className="mt-[12%] block h-[7px] w-[70%] rounded-full bg-blue-500/40" />
+            <span className="mt-[8%] block h-[3px] w-[90%] rounded-full bg-black/8" />
+            <span className="mt-[6%] block h-[3px] w-[60%] rounded-full bg-black/8" />
           </span>
 
-          <span className="absolute right-[4%] top-[10%] h-[58%] w-[30%] rotate-[2deg] overflow-hidden rounded-[8px] border border-black/[0.06] bg-white opacity-45" />
+          <span className="absolute left-[18%] top-[8%] h-[70%] w-[46%] overflow-hidden rounded-[8px] border border-black/[0.05] bg-white px-[7%] py-[8%] opacity-70">
+            <span className="block text-[7.5px] font-semibold text-ink/70">Car insurance</span>
+            <span className="mt-[5%] block text-[6.5px] leading-tight text-ink/45">
+              Your cover keeps you moving
+            </span>
+            <span className="relative mt-[9%] block h-[34%] overflow-hidden rounded-[4px] bg-gradient-to-br from-[#8d97ab] via-[#5d6779] to-[#3f4757]">
+              <span className="absolute bottom-[18%] left-[16%] h-[26%] w-[62%] rounded-t-[40%] rounded-b-[14%] bg-[#2e3540]" />
+              <span className="absolute bottom-[10%] left-[20%] h-[10%] w-[10%] rounded-full bg-[#20252e]" />
+              <span className="absolute bottom-[10%] right-[20%] h-[10%] w-[10%] rounded-full bg-[#20252e]" />
+            </span>
+            <span className="mt-[9%] flex items-center gap-[4%] text-[6px] text-ink/40">
+              <span className="aspect-square w-[7px] rounded-full bg-black/20" />
+              Renew within 15+5 days
+            </span>
+          </span>
 
-          {/* the phone, centre and forward */}
+          <span className="absolute right-[2%] top-[16%] h-[56%] w-[30%] rotate-[1deg] overflow-hidden rounded-[8px] border border-black/[0.05] bg-white px-[7%] py-[8%] opacity-30">
+            <span className="block h-[3px] w-[50%] rounded-full bg-black/15" />
+            <span className="mt-[14%] block h-[16px] w-full rounded-[3px] bg-black/[0.05]" />
+            <span className="mt-[8%] block h-[3px] w-[80%] rounded-full bg-black/8" />
+          </span>
+
+          {/* the phone, centred and forward */}
           <span className="absolute left-1/2 top-[1%] z-10 w-[58%] -translate-x-1/2">
             <Phone />
           </span>
@@ -193,39 +210,31 @@ export default function ProcessArt({ variant }: { variant: string }) {
     case "validate":
       return (
         <div className="relative aspect-[4/3] w-full">
-          <span className="absolute inset-x-[8%] top-[8%] h-[74%] overflow-hidden rounded-[10px] bg-[#eef7ea] px-[9%] py-[10%]">
-            <span className="flex items-center gap-[7%]">
-              <span className="aspect-square w-[13%] rounded-full bg-gradient-to-br from-neutral-400 to-neutral-700" />
-              <span className="block h-[2px] w-[14%] rounded-full bg-black/15" />
+          <span className="absolute inset-x-[4%] top-[6%] h-[80%] rounded-[10px] border border-black/[0.06] bg-white p-[7%] shadow-[0_18px_40px_-26px_rgba(0,0,0,0.45)]">
+            <span className="flex h-full flex-col rounded-[6px] bg-[#eaf4e4] px-[9%] py-[11%]">
+              <span className="flex items-start gap-[7%]">
+                <span className="aspect-square w-[19%] shrink-0 rounded-full bg-gradient-to-br from-neutral-300 via-neutral-400 to-neutral-600" />
+                <span className="font-hand text-[15px] leading-[1.3] text-ink/85">
+                  &ldquo;The flow feels simple and easy to follow.&rdquo;
+                </span>
+              </span>
+              <span className="mt-auto font-hand text-[11px] text-ink/55">— Test user</span>
             </span>
-            <span className="mt-[9%] block max-w-[78%] text-[10px] font-medium italic leading-[1.4] text-ink/80">
-              &ldquo;The flow feels simple and easy to follow.&rdquo;
-            </span>
-            <span className="mt-[6%] block text-[7.5px] text-ink/45">— Test user</span>
           </span>
 
-          <span className="absolute bottom-[4%] right-0 w-[60%] rounded-[8px] border border-black/[0.06] bg-white px-[8%] py-[9%] shadow-[0_18px_40px_-24px_rgba(0,0,0,0.5)]">
+          <span className="absolute bottom-[2%] right-0 w-[58%] rounded-[8px] border border-black/[0.06] bg-white px-[9%] py-[9%] shadow-[0_18px_40px_-22px_rgba(0,0,0,0.5)]">
             <span className="block text-[10px] font-semibold text-ink/85">Usability test</span>
             <span className="mt-[9%] flex items-center gap-[9%]">
-              <span className="relative flex aspect-square w-[24%] shrink-0 items-center justify-center">
+              <span className="relative flex aspect-square w-[26%] shrink-0 items-center justify-center">
                 <svg viewBox="0 0 36 36" className="absolute inset-0 h-full w-full -rotate-90">
-                  <circle cx="18" cy="18" r="15" fill="none" stroke="rgba(0,0,0,0.08)" strokeWidth="5" />
-                  <circle
-                    cx="18"
-                    cy="18"
-                    r="15"
-                    fill="none"
-                    stroke="#a3d977"
-                    strokeWidth="5"
-                    strokeDasharray="89.5 100"
-                    strokeLinecap="round"
-                  />
+                  <circle cx="18" cy="18" r="15" fill="none" stroke="#d4f34a" strokeWidth="6" strokeDasharray="71 100" />
+                  <circle cx="18" cy="18" r="15" fill="none" stroke="#4caf50" strokeWidth="6" strokeDasharray="29 100" strokeDashoffset="-71" />
                 </svg>
-                <span className="text-[8px] font-bold text-ink">95%</span>
+                <span className="text-[9px] font-bold text-ink">95%</span>
               </span>
               <span className="min-w-0">
-                <span className="block truncate text-[8.5px] font-medium text-ink/75">Task</span>
-                <span className="block truncate text-[7.5px] text-ink/45">Task success rate</span>
+                <span className="block text-[9px] font-semibold text-ink/80">Task</span>
+                <span className="block text-[8px] text-ink/45">Task success rate</span>
               </span>
             </span>
           </span>
