@@ -451,3 +451,58 @@ export function Headset(props: IconProps) {
     </Svg>
   );
 }
+
+export function Cursor(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="M5.5 3.2 19 11.4l-5.8 1.3-2.3 5.6z" strokeLinejoin="round" />
+      <path d="m13.2 12.7 3.4 5.1" />
+    </Svg>
+  );
+}
+
+export function Lightbulb(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="M9 17.5h6M10 20.5h4" />
+      <path d="M12 3.2a6 6 0 0 0-3.6 10.8c.6.5.9 1.1 1 1.8v.7h5.2v-.7c.1-.7.4-1.3 1-1.8A6 6 0 0 0 12 3.2Z" />
+    </Svg>
+  );
+}
+
+export function Hourglass(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="M6.5 3.5h11M6.5 20.5h11" />
+      <path d="M7.5 3.5v3.2c0 2 4.5 3.4 4.5 5.3s-4.5 3.3-4.5 5.3v3.2" />
+      <path d="M16.5 3.5v3.2c0 2-4.5 3.4-4.5 5.3s4.5 3.3 4.5 5.3v3.2" />
+    </Svg>
+  );
+}
+
+export function Filter(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="M3.6 5.5h16.8l-6.4 7.4v5.9l-4 1.7v-7.6z" strokeLinejoin="round" />
+    </Svg>
+  );
+}
+
+export function Box(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="M12 2.8 20.5 7v10L12 21.2 3.5 17V7Z" strokeLinejoin="round" />
+      <path d="M3.5 7 12 11.4 20.5 7M12 11.4v9.8" />
+    </Svg>
+  );
+}
+
+export function TargetRing(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <circle cx="12" cy="12" r="8.6" />
+      <circle cx="12" cy="12" r="3.4" />
+      <circle cx="12" cy="12" r="0.9" fill="currentColor" stroke="none" />
+    </Svg>
+  );
+}
