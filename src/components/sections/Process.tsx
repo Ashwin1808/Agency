@@ -89,36 +89,6 @@ export default function Process() {
             </Reveal>
           ))}
         </ol>
-
-        {/* wavy rail anchored to the column starts, pulsing out from Design.
-            The path stretches, so the dots are real elements rather than SVG
-            circles, which preserveAspectRatio would squash into ellipses. */}
-        <div className="relative mt-12 hidden h-[46px] lg:block" aria-hidden="true">
-          <svg
-            viewBox="0 0 1000 46"
-            fill="none"
-            preserveAspectRatio="none"
-            className="absolute inset-0 h-full w-full"
-          >
-            <path
-              d="M20 23H180c30 0 40 0 40-11s-10-11-10-11M480 12c0 11-10 11-10 11s40 0 40 11-10 11-10 11M900 12c0 11-20 11-80 11"
-              stroke="currentColor"
-              className="text-ink/20"
-              strokeWidth="1.1"
-              vectorEffect="non-scaling-stroke"
-            />
-          </svg>
-
-          {["2%", "22%", "42%", "62%", "82%"].map((left, i) => (
-            <span
-              key={left}
-              className={`absolute top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent ${
-                i === 2 ? "h-3 w-3" : "h-2.5 w-2.5"
-              } ${i === 2 ? "process-origin" : "process-dot"}`}
-              style={{ left, animationDelay: `${Math.abs(i - 2) * 0.7}s` }}
-            />
-          ))}
-        </div>
       </div>
     </section>
   );

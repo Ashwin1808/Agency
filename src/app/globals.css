@@ -680,28 +680,6 @@
   background-size: 44px 44px;
 }
 
-/* ---------- process wave ---------- */
-
-.process-dot {
-  animation: process-pulse 3.6s ease-in-out infinite;
-}
-
-.process-origin {
-  animation: process-pulse 3.6s ease-in-out infinite;
-}
-
-@keyframes process-pulse {
-  0%,
-  100% {
-    opacity: 0.55;
-    r: 4;
-  }
-  50% {
-    opacity: 1;
-    r: 6;
-  }
-}
-
 /* ---------- cloud / devops: quiet space ---------- */
 
 .space-stars {
