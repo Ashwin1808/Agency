@@ -8,13 +8,6 @@ export type Service = {
   icon: "search" | "layers" | "grid" | "code";
 };
 
-export type ProcessStep = {
-  id: string;
-  title: string;
-  desc: string;
-  icon: "users" | "target" | "sparkle" | "shieldCheck" | "rocket";
-  tone: string;
-};
 
 export type Industry = {
   id: string;
@@ -90,47 +83,52 @@ export const expertise = {
 };
 
 export const process = {
-  eyebrow: "Our process",
+  eyebrow: "Our Process",
   heading: ["A clear path", "from idea to impact."],
   sub: "A structured and collaborative process to turn problems into meaningful products.",
   link: { label: "Learn about our process", href: "#contact" },
   steps: [
     {
       id: "p1",
+      n: "01",
       title: "Understand",
-      desc: "Users, business goals and constraints.",
-      icon: "users",
-      tone: "#7c5cff",
+      desc: "We dive deep into user needs, business goals and constraints.",
+      foot: ["Research", "Interviews", "Analysis"],
+      art: "research",
     },
     {
       id: "p2",
+      n: "02",
       title: "Shape",
-      desc: "Ideate and map solution directions.",
-      icon: "target",
-      tone: "#2f6bff",
+      desc: "We ideate and map solutions that solve real problems.",
+      foot: ["Ideation", "Journey mapping", "Wireframes"],
+      art: "shape",
     },
     {
       id: "p3",
+      n: "03",
       title: "Design",
-      desc: "Create intuitive and engaging interfaces.",
-      icon: "sparkle",
-      tone: "#2f6bff",
+      desc: "We create intuitive and engaging interfaces that feel effortless.",
+      foot: ["UI Design", "Prototyping", "Handoff"],
+      art: "design",
     },
     {
       id: "p4",
+      n: "04",
       title: "Validate",
-      desc: "Refine with feedback and usability testing.",
-      icon: "shieldCheck",
-      tone: "#1fa971",
+      desc: "We refine with feedback and usability testing.",
+      foot: ["Feedback", "Testing", "Iteration"],
+      art: "validate",
     },
     {
       id: "p5",
+      n: "05",
       title: "Handoff",
-      desc: "Work with your team or we help build it.",
-      icon: "rocket",
-      tone: "#f0413a",
+      desc: "We work with your team or help build it.",
+      foot: ["Specs", "Collaboration", "Launch"],
+      art: "handoff",
     },
-  ] satisfies ProcessStep[],
+  ],
 };
 
 export const industries = {
