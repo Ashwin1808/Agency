@@ -1,6 +1,6 @@
 import { process } from "@/lib/content";
 import Reveal from "@/components/Reveal";
-import ProcessArt from "@/components/marks/ProcessArt";
+import ProcessArt, { Arrow } from "@/components/marks/ProcessArt";
 import { Eyebrow, LimeDot } from "@/components/marks/Ui";
 import { ArrowRight } from "@/components/marks/Icons";
 
@@ -65,11 +65,19 @@ export default function Process() {
                   {step.desc}
                 </p>
 
-                <div className="mt-5 flex-1">
+                <div className="relative mt-6 flex-1">
                   <ProcessArt variant={step.art} />
+                  {i < process.steps.length - 1 ? (
+                    <span
+                      className="pointer-events-none absolute -right-[22px] top-1/2 hidden -translate-y-1/2 lg:block"
+                      aria-hidden="true"
+                    >
+                      <Arrow />
+                    </span>
+                  ) : null}
                 </div>
 
-                <p className="mt-5 flex flex-wrap items-center gap-x-2 text-[11.5px] italic text-ink/50">
+                <p className="mt-5 flex flex-wrap items-center gap-x-2 font-hand text-[13px] leading-none text-ink/70">
                   {step.foot.map((part, j) => (
                     <span key={part} className="flex items-center gap-2">
                       {j > 0 ? <span className="not-italic text-ink/25">→</span> : null}
