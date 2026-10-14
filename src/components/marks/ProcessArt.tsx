@@ -53,27 +53,27 @@ function Phone() {
     <span className="flex aspect-[1/2.08] w-full flex-col overflow-hidden rounded-[11%/5%] bg-ink p-[2.4%] shadow-[0_22px_44px_-20px_rgba(0,0,0,0.6)]">
       <span className="relative flex h-full w-full flex-col overflow-hidden rounded-[9%/4.6%] bg-white">
         <span className="mx-auto mt-[3.5%] h-[1.6%] w-[30%] rounded-full bg-ink" />
-        <span className="mt-[8%] px-[9%] text-[5px] leading-tight text-ink/45">Good morning,</span>
-        <span className="mt-[1%] px-[9%] text-[8px] font-semibold leading-tight text-ink">Priya</span>
+        <span className="mt-[8%] px-[9%] text-[7px] leading-tight text-ink/45">Good morning,</span>
+        <span className="mt-[1%] px-[9%] text-[11px] font-semibold leading-tight text-ink">Priya</span>
 
         <span className="relative mx-[9%] mt-[7%] overflow-hidden rounded-[6px] bg-gradient-to-br from-[#5b8dfa] to-[#2f55e0] px-[7%] py-[9%]">
           <span className="absolute -right-[14%] -top-[26%] h-[70%] w-[42%] rounded-full bg-white/20" />
-          <span className="block text-[5.5px] font-medium leading-[1.35] text-white">
+          <span className="block text-[7.5px] font-medium leading-[1.35] text-white">
             Your policy is due for renewal.
           </span>
-          <span className="mt-[8%] inline-block rounded-full bg-white px-[7px] py-[2.5px] text-[4.5px] font-semibold text-[#2f55e0]">
+          <span className="mt-[8%] inline-block rounded-full bg-white px-[7px] py-[2.5px] text-[6px] font-semibold text-[#2f55e0]">
             Renew now
           </span>
         </span>
 
-        <span className="mt-[8%] px-[9%] text-[4.5px] font-medium text-ink/50">Quick actions</span>
+        <span className="mt-[8%] px-[9%] text-[6px] font-medium text-ink/50">Quick actions</span>
         <span className="mt-[5%] grid grid-cols-4 gap-[6%] px-[9%]">
           {["Claims", "Policies", "Support", "More"].map((label) => (
             <span key={label} className="flex flex-col items-center gap-[8%]">
               <span className="flex aspect-square w-full items-center justify-center rounded-full bg-black/[0.05]">
                 <span className="block h-[30%] w-[30%] rounded-[2px] bg-black/20" />
               </span>
-              <span className="text-[3.6px] text-ink/40">{label}</span>
+              <span className="text-[4.8px] text-ink/40">{label}</span>
             </span>
           ))}
         </span>
@@ -86,7 +86,7 @@ function Phone() {
                   i === 0 ? "bg-[#3b74f0]" : "bg-black/15"
                 }`}
               />
-              <span className={`text-[3.4px] ${i === 0 ? "text-[#3b74f0]" : "text-ink/35"}`}>
+              <span className={`text-[4.4px] ${i === 0 ? "text-[#3b74f0]" : "text-ink/35"}`}>
                 {tab}
               </span>
             </span>
@@ -122,7 +122,7 @@ export default function ProcessArt({ variant }: { variant: string }) {
           />
 
           <span className="absolute right-0 top-[26%] w-[52%] rounded-[8px] border border-black/[0.06] bg-white px-[8%] py-[9%] shadow-[0_18px_40px_-22px_rgba(0,0,0,0.5)]">
-            <span className="block text-[8px] font-semibold text-ink/85">User insights</span>
+            <span className="block text-[10px] font-semibold text-ink/85">User insights</span>
             <span className="mt-[10%] space-y-[11%]">
               {["#2f6bff", "#e8934a", "#7c5cff"].map((tone) => (
                 <span key={tone} className="flex items-center gap-[8%]">
@@ -170,9 +170,9 @@ export default function ProcessArt({ variant }: { variant: string }) {
       return (
         <div className="relative aspect-[4/3] w-full">
           {/* faded screens behind */}
-          <span className="absolute left-[2%] top-[14%] h-[64%] w-[40%] -rotate-[2deg] overflow-hidden rounded-[8px] border border-black/[0.06] bg-white px-[8%] py-[9%] opacity-70">
-            <span className="block text-[6px] font-semibold text-ink/70">Car insurance</span>
-            <span className="mt-[4%] block text-[5px] leading-tight text-ink/45">
+          <span className="absolute left-[2%] top-[14%] h-[64%] w-[34%] -rotate-[2deg] overflow-hidden rounded-[8px] border border-black/[0.06] bg-white px-[8%] py-[9%] opacity-70">
+            <span className="block text-[7.5px] font-semibold text-ink/70">Car insurance</span>
+            <span className="mt-[4%] block text-[6.5px] leading-tight text-ink/45">
               Your cover keeps you moving
             </span>
             <span className="mt-[10%] block h-[38%] rounded-[4px] bg-gradient-to-br from-[#dfe4ef] to-[#b9c2d4]" />
@@ -180,10 +180,10 @@ export default function ProcessArt({ variant }: { variant: string }) {
             <span className="mt-[6%] block h-[2px] w-[50%] rounded-full bg-black/10" />
           </span>
 
-          <span className="absolute right-[3%] top-[10%] h-[60%] w-[34%] rotate-[2deg] overflow-hidden rounded-[8px] border border-black/[0.06] bg-white opacity-45" />
+          <span className="absolute right-[4%] top-[10%] h-[58%] w-[30%] rotate-[2deg] overflow-hidden rounded-[8px] border border-black/[0.06] bg-white opacity-45" />
 
           {/* the phone, centre and forward */}
-          <span className="absolute left-1/2 top-[2%] z-10 w-[32%] -translate-x-1/2">
+          <span className="absolute left-1/2 top-[1%] z-10 w-[58%] -translate-x-1/2">
             <Phone />
           </span>
         </div>
@@ -201,11 +201,11 @@ export default function ProcessArt({ variant }: { variant: string }) {
             <span className="mt-[9%] block max-w-[78%] text-[10px] font-medium italic leading-[1.4] text-ink/80">
               &ldquo;The flow feels simple and easy to follow.&rdquo;
             </span>
-            <span className="mt-[6%] block text-[6px] text-ink/45">— Test user</span>
+            <span className="mt-[6%] block text-[7.5px] text-ink/45">— Test user</span>
           </span>
 
           <span className="absolute bottom-[4%] right-0 w-[60%] rounded-[8px] border border-black/[0.06] bg-white px-[8%] py-[9%] shadow-[0_18px_40px_-24px_rgba(0,0,0,0.5)]">
-            <span className="block text-[8px] font-semibold text-ink/85">Usability test</span>
+            <span className="block text-[10px] font-semibold text-ink/85">Usability test</span>
             <span className="mt-[9%] flex items-center gap-[9%]">
               <span className="relative flex aspect-square w-[24%] shrink-0 items-center justify-center">
                 <svg viewBox="0 0 36 36" className="absolute inset-0 h-full w-full -rotate-90">
@@ -224,8 +224,8 @@ export default function ProcessArt({ variant }: { variant: string }) {
                 <span className="text-[8px] font-bold text-ink">95%</span>
               </span>
               <span className="min-w-0">
-                <span className="block truncate text-[7px] font-medium text-ink/75">Task</span>
-                <span className="block truncate text-[6.5px] text-ink/45">Task success rate</span>
+                <span className="block truncate text-[8.5px] font-medium text-ink/75">Task</span>
+                <span className="block truncate text-[7.5px] text-ink/45">Task success rate</span>
               </span>
             </span>
           </span>
@@ -264,7 +264,7 @@ export default function ProcessArt({ variant }: { variant: string }) {
 
           <span className="absolute bottom-[3%] right-0 w-[62%] rounded-[8px] border border-black/[0.06] bg-white px-[9%] py-[10%] shadow-[0_18px_40px_-24px_rgba(0,0,0,0.55)]">
             {["Design system", "Dev handoff", "Ongoing support"].map((row) => (
-              <span key={row} className="flex items-center gap-[8%] py-[3%] text-[7.5px] text-ink/75">
+              <span key={row} className="flex items-center gap-[8%] py-[3%] text-[9px] text-ink/75">
                 <svg viewBox="0 0 16 16" className="h-[8px] w-[8px] shrink-0" fill="none" aria-hidden="true">
                   <path d="m3 8.6 3.2 3.2L13 4.8" stroke="#4c9a3f" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>

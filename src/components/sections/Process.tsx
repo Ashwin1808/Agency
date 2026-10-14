@@ -42,7 +42,7 @@ export default function Process() {
         </div>
 
         {/* five columns, divided by hairlines */}
-        <ol className="mt-12 grid grid-cols-1 gap-x-4 gap-y-14 sm:grid-cols-2 lg:mt-16 lg:grid-cols-5 lg:gap-y-0">
+        <ol className="mt-10 flex flex-col gap-y-14 sm:grid sm:grid-cols-2 sm:gap-x-6 lg:mt-14 lg:flex lg:flex-row lg:justify-between lg:gap-y-0">
           {process.steps.map((step, i) => (
             <Reveal
               key={step.id}
@@ -50,22 +50,22 @@ export default function Process() {
               distance={18}
               className={
                 i === 0
-                  ? "lg:pl-0"
-                  : "lg:border-l lg:border-black/[0.09] lg:pl-5"
+                  ? "lg:w-[18%] lg:pl-0"
+                  : "lg:w-[18%] lg:border-l lg:border-black/[0.09] lg:pl-5"
               }
             >
               <li className="flex h-full flex-col">
                 <p className="text-[11.5px] font-medium tabular-nums text-ink/40">{step.n}</p>
 
-                <h3 className="mt-4 text-[clamp(1.15rem,1.9vw,1.5rem)] font-semibold leading-tight tracking-[-0.03em] text-ink">
+                <h3 className="mt-2.5 text-[clamp(1.15rem,1.9vw,1.5rem)] font-semibold leading-tight tracking-[-0.03em] text-ink">
                   {step.title}
                 </h3>
 
-                <p className="mt-3 max-w-[240px] text-[12.5px] leading-[1.55] text-ink/55">
+                <p className="mt-2 max-w-[240px] text-[12.5px] leading-[1.5] text-ink/55">
                   {step.desc}
                 </p>
 
-                <div className="relative mt-6 flex-1">
+                <div className="relative mt-4 flex-1">
                   <ProcessArt variant={step.art} />
                   {i < process.steps.length - 1 ? (
                     <span
@@ -77,7 +77,7 @@ export default function Process() {
                   ) : null}
                 </div>
 
-                <p className="mt-5 flex flex-wrap items-center gap-x-2 font-hand text-[13px] leading-none text-ink/70">
+                <p className="mt-3 flex flex-wrap items-center gap-x-2 font-hand text-[13px] leading-none text-ink/70">
                   {step.foot.map((part, j) => (
                     <span key={part} className="flex items-center gap-2">
                       {j > 0 ? <span className="not-italic text-ink/25">→</span> : null}
