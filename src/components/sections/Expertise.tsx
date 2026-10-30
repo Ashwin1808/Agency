@@ -16,31 +16,30 @@ export default function Expertise() {
     <section id="expertise" className="relative overflow-hidden bg-paper py-24 lg:py-32">
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-10">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
-          <Reveal className="lg:col-span-5">
-            <Eyebrow n="04" label={expertise.eyebrow} />
-            <h2 className="mt-6 text-[clamp(2.1rem,5.6vw,4rem)] font-semibold leading-[0.95] tracking-[-0.035em]">
-              {expertise.heading.map((line, i) => (
-                <span key={line} className="block">
-                  {line}
-                  {i === expertise.heading.length - 1 ? <LimeDot /> : null}
-                </span>
-              ))}
-            </h2>
-          </Reveal>
+          <div className="lg:col-span-8">
+            <Reveal>
+              <Eyebrow n="04" label={expertise.eyebrow} />
+              <h2 className="mt-6 text-[clamp(2.1rem,5.6vw,4rem)] font-semibold leading-[0.95] tracking-[-0.035em]">
+                {expertise.heading.map((line, i) => (
+                  <span key={line} className="block">
+                    {line}
+                    {i === expertise.heading.length - 1 ? <LimeDot /> : null}
+                  </span>
+                ))}
+              </h2>
+            </Reveal>
 
-          <Reveal
-            delay={100}
-            className="flex flex-col gap-7 lg:col-span-3 lg:justify-end"
-          >
-            <p className="max-w-[320px] text-[13.5px] leading-[1.6] text-ink/65">
-              {expertise.sub}
-            </p>
-            <div>
-              <Pill href={expertise.cta.href} variant="outline" withArrow>
-                {expertise.cta.label}
-              </Pill>
-            </div>
-          </Reveal>
+            <Reveal delay={100} className="mt-7 flex flex-col gap-6">
+              <p className="max-w-[360px] text-[13.5px] leading-[1.6] text-ink/65">
+                {expertise.sub}
+              </p>
+              <div>
+                <Pill href={expertise.cta.href} variant="outline" withArrow>
+                  {expertise.cta.label}
+                </Pill>
+              </div>
+            </Reveal>
+          </div>
 
           <Reveal delay={180} distance={30} className="lg:col-span-4 lg:-mt-4">
             <WireframePhoto />

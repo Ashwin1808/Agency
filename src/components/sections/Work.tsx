@@ -1,14 +1,16 @@
 import Image from "next/image";
 import type { CSSProperties } from "react";
 import { work } from "@/lib/content";
-import { projects, type Project } from "@/lib/projects";
+import { behanceProfile, projects, type Project } from "@/lib/projects";
 import { Eyebrow } from "@/components/marks/Ui";
 import { ArrowUpRight, Bolt } from "@/components/marks/Icons";
 
 function Card({ project, n }: { project: Project; n: number }) {
   return (
     <a
-      href={`/work/${project.slug}`}
+      href={project.behance ?? behanceProfile}
+      target="_blank"
+      rel="noopener noreferrer"
       className="work-card group relative block w-[80vw] max-w-[400px] shrink-0 overflow-hidden rounded-[2rem] border border-white/[0.11] bg-gradient-to-b from-white/[0.07] to-white/[0.02] transition-[transform,box-shadow] duration-500 hover:-translate-y-2 hover:shadow-[0_34px_70px_-34px_rgba(212,243,74,0.45)] sm:w-[400px]"
       style={{ "--n": n } as CSSProperties}
     >
@@ -36,7 +38,7 @@ function Card({ project, n }: { project: Project; n: number }) {
             aria-hidden="true"
           />
           <span className="pointer-events-none absolute bottom-3 left-3 flex items-center gap-1 rounded-full bg-black/55 px-2.5 py-1 text-[9px] font-medium text-white/85 backdrop-blur-sm">
-            View case study
+            View on Behance
             <ArrowUpRight className="h-2.5 w-2.5" />
           </span>
         </div>
@@ -118,39 +120,6 @@ export default function Work() {
           <div className="pointer-events-none absolute inset-0" aria-hidden="true">
             <span className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-ink to-transparent sm:w-32" />
             <span className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-ink to-transparent sm:w-32" />
-          </div>
-        </div>
-
-        <div className="mx-auto mt-12 max-w-[1440px] px-5 sm:px-8 lg:px-10">
-          <div className="flex flex-col gap-6 border-t border-white/[0.08] pt-6 lg:flex-row lg:items-center lg:justify-between lg:gap-8">
-            <div className="flex items-center gap-4">
-              <span className="text-[12px] tabular-nums text-white/70">01 / 10</span>
-              <span className="relative block h-px w-[130px] bg-white/15 sm:w-[190px]">
-                <span className="work-progress absolute inset-0 block bg-accent" />
-              </span>
-            </div>
-
-            <ul className="-mx-1 flex items-center gap-1 overflow-x-auto px-1 no-scrollbar">
-              {["All", "Visual IVR", "Insurance", "Fintech", "Enterprise", "Web"].map((tab, i) => (
-                <li key={tab} className="shrink-0">
-                  <span
-                    aria-current={i === 0 ? "true" : undefined}
-                    className={`relative block px-3 py-1.5 text-[12.5px] transition-colors ${
-                      i === 0 ? "font-medium text-white" : "text-white/45"
-                    }`}
-                  >
-                    {tab}
-                    {i === 0 ? (
-                      <span className="absolute inset-x-3 -bottom-px h-px bg-accent" />
-                    ) : null}
-                  </span>
-                </li>
-              ))}
-            </ul>
-
-            <p className="text-[11.5px] leading-tight text-white/45">
-              Hover to pause the rail
-            </p>
           </div>
         </div>
       </div>

@@ -12,11 +12,11 @@ import {
 } from "@/components/marks/Icons";
 
 const badges = {
-  users: { Icon: Users, tone: "#7c5cff" },
-  layers: { Icon: Layers, tone: "#2f6bff" },
-  cursor: { Icon: Cursor, tone: "#2f6bff" },
-  shieldCheck: { Icon: ShieldCheck, tone: "#1fa971" },
-  rocket: { Icon: Rocket, tone: "#f0413a" },
+  users: Users,
+  layers: Layers,
+  cursor: Cursor,
+  shieldCheck: ShieldCheck,
+  rocket: Rocket,
 } as const;
 
 /** Geometry measured off the reference, in percent of the layout box. */
@@ -39,12 +39,11 @@ const badgeTop = box.badgeC.map((c) => c - (badge / 2 / box.height) * 100);
 const badgeCx = box.left.map((l) => l + (badge / 2 / 1360) * 100);
 const badgeCy = box.badgeC;
 
-/** the curve runs through the badges, dips after 04, then falls away to the arrow */
+/** the curve runs through the badges and continues straight out to the arrow */
 const curvePoints: [number, number][] = [
   [0.4, 64],
   ...badgeCx.map((x, i) => [x, badgeCy[i]] as [number, number]),
-  [77, 44],
-  [97, 41],
+  [97, 31],
 ];
 
 function catmullRom(points: [number, number][], samples = 26) {
@@ -69,13 +68,6 @@ function catmullRom(points: [number, number][], samples = 26) {
 const samples = catmullRom(curvePoints);
 const path = samples.map(([x, y], i) => `${i ? "L" : "M"}${(x * 10).toFixed(2)} ${(y * 10).toFixed(2)}`).join(" ");
 
-const dots = [
-  { i: 34, fill: "#2f6bff" },
-  { i: 84, fill: "#7c5cff" },
-  { i: 150, fill: "#a8d94f" },
-  { i: 205, fill: "#c6e85a" },
-].map((d) => ({ ...d, xy: samples[d.i] ?? samples[0] }));
-
 export default function Process() {
   return (
     <section id="process" className="relative overflow-hidden border-t border-black/[0.05] bg-[#f5f5f2] py-20 lg:pb-10 lg:pt-24">
@@ -92,10 +84,10 @@ export default function Process() {
       />
 
       <div className="relative mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-10">
-        <div className="max-w-[560px]">
+        <div className="max-w-[780px]">
           <Reveal>
             <Eyebrow n="05" label={process.eyebrow} />
-            <h2 className="mt-5 text-[clamp(1.9rem,3.05vw,2.75rem)] font-semibold leading-[1.02] tracking-[-0.035em]">
+            <h2 className="mt-6 text-[clamp(2.1rem,5.6vw,4rem)] font-semibold leading-[0.95] tracking-[-0.035em]">
               <span className="block">{process.heading[0]}</span>
               <span className="block">
                 {process.heading[1]}
@@ -117,26 +109,6 @@ export default function Process() {
 
         {/* ---------- desktop: measured composition ---------- */}
         <div className="relative -mt-24 hidden lg:block" style={{ height: box.height }}>
-          {/* soft colour behind the run, sitting under the 05 badge and the 01 panel */}
-          <span
-            className="pointer-events-none absolute h-[300px] w-[300px] rounded-full"
-            style={{
-              left: `calc(${(box.left[4] + 2.2).toFixed(2)}% - 150px)`,
-              top: -58,
-              background: "radial-gradient(circle, rgba(233,244,190,0.85) 0%, rgba(233,244,190,0) 70%)",
-            }}
-            aria-hidden="true"
-          />
-          <span
-            className="pointer-events-none absolute h-[150px] w-[150px] rounded-full"
-            style={{
-              left: "calc(1% - 48px)",
-              top: 316,
-              background: "radial-gradient(circle, rgba(210,204,244,0.8) 0%, rgba(210,204,244,0) 70%)",
-            }}
-            aria-hidden="true"
-          />
-
           <svg
             className="absolute inset-0 h-full w-full overflow-visible"
             viewBox="0 0 1000 1000"
@@ -144,15 +116,18 @@ export default function Process() {
             fill="none"
             aria-hidden="true"
           >
-            <path d={path} stroke="#0a0a0a" strokeOpacity="0.32" strokeWidth="1.3" strokeDasharray="5 5" vectorEffect="non-scaling-stroke" />
-            {dots.map((d, i) => (
-              <circle key={i} cx={d.xy[0] * 10} cy={d.xy[1] * 10} r="3.4" fill={d.fill} vectorEffect="non-scaling-stroke" />
-            ))}
             <path
-              d={`M${samples[samples.length - 1][0] * 10 - 6} ${samples[samples.length - 1][1] * 10 - 5} l9 5 l-9 5`}
+              d={path}
+              stroke="#0a0a0a"
+              strokeOpacity="0.22"
+              strokeWidth="1"
+              vectorEffect="non-scaling-stroke"
+            />
+            <path
+              d={`M${samples[samples.length - 1][0] * 10 - 7} ${samples[samples.length - 1][1] * 10 - 5} l10 5 l-10 5`}
               stroke="#0a0a0a"
               strokeOpacity="0.45"
-              strokeWidth="1.6"
+              strokeWidth="1.4"
               vectorEffect="non-scaling-stroke"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -160,8 +135,7 @@ export default function Process() {
           </svg>
 
           {process.steps.map((step, i) => {
-            const badgeTone = badges[step.icon as keyof typeof badges];
-            const Icon = badgeTone.Icon;
+            const Icon = badges[step.icon as keyof typeof badges];
             return (
               <div
                 key={step.id}
@@ -182,13 +156,8 @@ export default function Process() {
                   className="absolute flex items-center justify-center"
                   style={{ top: `${badgeTop[i]}%`, left: 0, height: badge, width: badge }}
                 >
-                  <span
-                    className="absolute inset-[-7px] rounded-full blur-[15px]"
-                    style={{ background: badgeTone.tone, opacity: 0.2 }}
-                    aria-hidden="true"
-                  />
-                  <span className="relative flex h-full w-full items-center justify-center rounded-full bg-white shadow-[0_10px_26px_-12px_rgba(0,0,0,0.35)]">
-                    <Icon className="h-[23px] w-[23px]" style={{ color: badgeTone.tone }} strokeWidth={1.7} />
+                  <span className="relative flex h-full w-full items-center justify-center rounded-full border border-black/[0.10] bg-white shadow-[0_10px_24px_-18px_rgba(0,0,0,0.4)]">
+                    <Icon className="h-[22px] w-[22px] text-ink/65" strokeWidth={1.5} />
                   </span>
                 </span>
 
@@ -199,7 +168,7 @@ export default function Process() {
                   {step.desc}
                 </p>
 
-                <div className="absolute" style={{ top: `${box.art[i]}%`, left: "-4%", width: 158, height: 125 }}>
+                <div className="absolute" style={{ top: `${box.art[i]}%`, left: "-4%", width: 170, height: 135 }}>
                   <ProcessArt variant={step.art} />
                 </div>
               </div>
@@ -210,25 +179,17 @@ export default function Process() {
         {/* ---------- mobile: stacked ---------- */}
         <ol className="mt-14 flex flex-col gap-14 lg:hidden">
           {process.steps.map((step, i) => {
-            const badgeTone = badges[step.icon as keyof typeof badges];
-            const Icon = badgeTone.Icon;
+            const Icon = badges[step.icon as keyof typeof badges];
             return (
               <Reveal key={step.id} delay={i * 80} distance={16}>
                 <li className="flex flex-col">
                   <p className="text-[11px] font-medium tabular-nums text-ink/45">{step.n}</p>
                   <h3 className="mt-1 text-[19px] font-semibold tracking-[-0.03em]">{step.title}</h3>
-                  <span className="relative mt-4 flex h-14 w-14 items-center justify-center">
-                    <span
-                      className="absolute inset-[-6px] rounded-full blur-[14px]"
-                      style={{ background: badgeTone.tone, opacity: 0.18 }}
-                      aria-hidden="true"
-                    />
-                    <span className="relative flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-[0_10px_26px_-12px_rgba(0,0,0,0.35)]">
-                      <Icon className="h-[23px] w-[23px]" style={{ color: badgeTone.tone }} strokeWidth={1.7} />
-                    </span>
+                  <span className="relative mt-4 flex h-14 w-14 items-center justify-center rounded-full border border-black/[0.10] bg-white shadow-[0_10px_24px_-18px_rgba(0,0,0,0.4)]">
+                    <Icon className="h-[22px] w-[22px] text-ink/65" strokeWidth={1.5} />
                   </span>
                   <p className="mt-4 max-w-[240px] text-[13px] leading-[1.5] text-ink/55">{step.desc}</p>
-                  <div className="mt-6 h-[125px] w-[158px]">
+                  <div className="mt-6 h-[135px] w-[170px]">
                     <ProcessArt variant={step.art} />
                   </div>
                 </li>

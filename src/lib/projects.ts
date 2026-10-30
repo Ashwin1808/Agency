@@ -1,3 +1,5 @@
+export const behanceProfile = "https://www.behance.net/";
+
 export type Metric = { value: string; label: string };
 export type FlowStep = { n: string; title: string; desc: string };
 export type DesignDecision = { title: string; body: string };
@@ -7,6 +9,7 @@ export type ResearchMethod = { title: string; body: string };
 export type Project = {
   slug: string;
   num: string;
+  behance?: string;
   title: string;
   kicker: string;
   summary: string;

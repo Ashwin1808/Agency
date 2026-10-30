@@ -12,7 +12,9 @@ export type Service = {
 export type Industry = {
   id: string;
   label: string;
-  icon: "columns" | "shield" | "heart" | "gauge" | "users" | "plane";
+  desc: string;
+  icon: "banking" | "insurance" | "healthcare" | "finance" | "enterprise" | "travel";
+  art: "card" | "shield" | "pulse" | "bars" | "nodes" | "route";
   active?: boolean;
 };
 
@@ -43,13 +45,11 @@ export const work = {
   heading: ["Explore", "our projects."],
   sub: "A collection of products, journeys and systems we've shaped for ambitious teams.",
   hints: ["Move to explore", "Hover to inspect", "Click to view"],
-  tabs: ["All", "Banking", "Insurance", "Fintech", "Enterprise", "Web", "Others"],
-  counter: "01 / 08",
 };
 
 export const expertise = {
   eyebrow: "Our expertise",
-  heading: ["Design", "expertise", "for complex", "products."],
+  heading: ["Design expertise", "for complex products."],
   sub: "End-to-end product design for web, mobile and enterprise applications with a focus on usability, clarity and measurable business impact.",
   cta: { label: "Explore all services", href: "#process" },
   sticky: ["Research", "Ideate", "Design", "Iterate"],
@@ -134,14 +134,53 @@ export const process = {
 export const industries = {
   eyebrow: "Industries",
   heading: ["Experience", "across sectors."],
-  sub: "Different domains. A common approach. Designing for real people and real impact.",
+  statement: "The sector changes. The standard doesn’t.",
+  sub: "We design complex, high-trust products where clarity and speed decide whether people stay.",
+  traits: ["Regulated", "Complex workflows", "High-trust"],
   items: [
-    { id: "i1", label: "Banking", icon: "columns", active: true },
-    { id: "i2", label: "Insurance", icon: "shield" },
-    { id: "i3", label: "Healthcare", icon: "heart" },
-    { id: "i4", label: "Finance", icon: "gauge" },
-    { id: "i5", label: "Enterprise", icon: "users" },
-    { id: "i6", label: "Travel", icon: "plane" },
+    {
+      id: "i1",
+      label: "Banking",
+      desc: "High-trust accounts, cards and payment journeys.",
+      icon: "banking",
+      art: "card",
+      active: true,
+    },
+    {
+      id: "i2",
+      label: "Insurance",
+      desc: "Clear policy, claims and renewal experiences.",
+      icon: "insurance",
+      art: "shield",
+    },
+    {
+      id: "i3",
+      label: "Healthcare",
+      desc: "Accessible care journeys and patient tools.",
+      icon: "healthcare",
+      art: "pulse",
+    },
+    {
+      id: "i4",
+      label: "Finance",
+      desc: "Wealth, trading and data-heavy products.",
+      icon: "finance",
+      art: "bars",
+    },
+    {
+      id: "i5",
+      label: "Enterprise",
+      desc: "Complex workflows made simple for teams.",
+      icon: "enterprise",
+      art: "nodes",
+    },
+    {
+      id: "i6",
+      label: "Travel",
+      desc: "Booking, itinerary and service touchpoints.",
+      icon: "travel",
+      art: "route",
+    },
   ] satisfies Industry[],
 };
 
