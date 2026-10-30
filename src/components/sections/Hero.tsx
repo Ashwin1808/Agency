@@ -1,17 +1,17 @@
+import Image from "next/image";
 import { hero } from "@/lib/content";
-import DeviceCluster from "@/components/marks/DeviceMock";
 import { HeroWash } from "@/components/marks/PhotoArt";
 import { Eyebrow, LimeDot } from "@/components/marks/Ui";
 import { ArrowRight, Play } from "@/components/marks/Icons";
 
 function Rail() {
   return (
-    <div className="relative hidden xl:block">
+    <div className="relative">
       <span
         className="absolute left-[3px] top-3 h-[calc(100%-24px)] w-px bg-black/15"
         aria-hidden="true"
       />
-      <ul className="space-y-7">
+      <ul className="space-y-12">
         {hero.rail.map((item) => (
           <li key={item.n} className="relative pl-6">
             <span
@@ -28,17 +28,31 @@ function Rail() {
   );
 }
 
+function Annotation() {
+  return (
+    <div className="pointer-events-none absolute bottom-[36%] left-[4%] z-30 hidden w-[140px] text-right xl:block">
+      <p className="text-[12.5px] font-medium leading-[1.35] tracking-[-0.01em] text-ink/70">
+        {hero.annotation.map((line) => (
+          <span key={line} className="block">
+            {line}
+          </span>
+        ))}
+      </p>
+    </div>
+  );
+}
+
 export default function Hero() {
   return (
     <section id="top" className="relative overflow-hidden bg-paper">
       <HeroWash />
 
-      <div className="relative mx-auto max-w-[1440px] px-5 pb-28 pt-28 sm:px-8 lg:px-10 lg:pb-40 lg:pt-36">
-        <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-10 xl:gap-16">
-          <div className="relative z-10">
+      <div className="relative mx-auto max-w-[1440px] px-5 pb-16 pt-28 sm:px-8 lg:px-10 lg:pb-0 lg:pt-36">
+        <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-6">
+          <div className="relative z-20">
             <Eyebrow n="01" label={hero.eyebrow} />
 
-            <h1 className="mt-6 text-[clamp(2.6rem,8.6vw,5.5rem)] font-semibold leading-[0.94] tracking-[-0.035em]">
+            <h1 className="mt-6 text-[clamp(2.6rem,8.6vw,5.25rem)] min-[1360px]:text-[5.5rem] font-semibold leading-[0.94] tracking-[-0.035em]">
               {hero.heading.map((line, i) => (
                 <span key={line} className="block">
                   {line}
@@ -74,11 +88,21 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="relative">
-            <div className="xl:mr-[186px]">
-              <DeviceCluster />
+          <div className="relative min-h-[300px] sm:min-h-[420px] md:min-h-[520px] lg:min-h-[500px] xl:min-h-[620px]">
+            <div className="absolute bottom-0 right-0 w-[125%] max-w-none lg:w-[112%] xl:w-[125%]">
+              <Image
+                src="/hero/nexly-ui-mockup.webp"
+                alt="Mobile, tablet and dashboard UI mockups for a product design studio"
+                width={1673}
+                height={940}
+                priority
+                sizes="(min-width: 1280px) 1040px, (min-width: 1024px) 720px, 125vw"
+                className="h-auto w-full select-none"
+              />
+              <Annotation />
             </div>
-            <div className="absolute right-0 top-1/2 -translate-y-1/2">
+
+            <div className="absolute right-0 top-[16%] z-30 hidden xl:block">
               <Rail />
             </div>
           </div>
